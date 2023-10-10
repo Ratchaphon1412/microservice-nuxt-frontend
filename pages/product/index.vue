@@ -17,29 +17,26 @@
           </ol>
         </nav>
         
-        <section class="flex mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8 gap-10 justify-center items-center">
+        <section class="flex mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8 gap-10 ">
             <!-- Image gallery -->
-            <div id="selected" class="m-4 w-24">
-              <div class="lg:col-span-3 lg:row-end-1">
+            <aside id="selected" class="m-4 w-24 p-6">
                 <div class="lg:flex lg:items-start">
                   <div class="mt-2 w-full lg:order-1 lg:w-32 lg:flex-shrink-0">
-                    <div class="flex flex-row items-start lg:flex-col">
-                      <button type="button" class="flex-0 aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2 border-gray-900 text-center">
-                        <img class="h-full w-full object-cover" src="https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-01.jpg" alt="" />
-                      </button>
-                      <button type="button" class="flex-0 aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2 border-transparent text-center">
-                        <img class="h-full w-full object-cover" src="https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-02.jpg" alt="" />
-                      </button>
-                      <button type="button" class="flex-0 aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2 border-transparent text-center">
-                        <img class="h-full w-full object-cover" src="https://tailwindui.com/img/ecommerce-images/product-page-02-featured-product-shot.jpg" alt="" />
-                      </button>
+                    <div v-for="image in product.images" :key="image.src" class="flex items-center lg:flex-col">
+                      <div>
+                        <button @click="change(image.src)" type="button" class="flex-0 aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2">
+                          <img class="h-full w-full object-cover" :src="image.src" :alt="image.alt">
+                        </button>
+                      </div>
+                      <!-- <button @click="change(product.images[0].src)" type="button" class="flex-0 aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2 border-gray-900">
+                        <img  class="h-full w-full object-cover" :src="product.images[0].src " :alt="product.images[0].alt" />
+                      </button> -->
                     </div>
                   </div>
-                </div>
               </div>
-            </div>
-            <div id="preview" class="p-6">
-                <img class="m-5 border-2" src="https://image.uniqlo.com/UQ/ST3/th/imagesgoods/454315/item/thgoods_00_454315.jpg?width=750" alt="">
+            </aside>
+            <div id="preview" class="p-6 items-center">
+                <img style="width: 750px; height: 750px;" class="" :src="previewImage" alt="">
             </div>
             <!-- <div class="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
                 <div class="aspect-h-4 aspect-w-3 hidden overflow-hidden rounded-lg lg:block">
@@ -95,7 +92,7 @@
                             <a href="#" class="text-sm font-medium text-[#3F72AF] hover:text-[3F72AF] hover:text-opacity-60">Size guide</a>
                         </div>
             
-                        <RadioGroup v-model="selectedSize" class="mt-4">
+                        <RadioGroup class="mt-4">
                             <RadioGroupLabel class="sr-only">Choose a size</RadioGroupLabel>
                             <div class="grid grid-cols-4 gap-4 sm:grid-cols-8 lg:grid-cols-4">
                             <RadioGroupOption as="template" v-for="size in product.sizes" :key="size.name" :value="size" :disabled="!size.inStock" v-slot="{ active, checked }">
@@ -164,89 +161,24 @@
                 </div>
             </section>
         </div>
+        
         <section id="Category Related" class="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8 gap-10 justify-center items-center">
           <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-3xl">Related Product</h1>
           <!-- card1 -->
-          <div class="relative min-h-screen flex flex-col mt-10 w-1/2 h-1/2">
-            <div class="container">
-              <div class="max-w-md w-full bg-[#DBE2EF] shadow-lg rounded-xl p-6">
-                <div class="flex flex-col ">
-                  <div class="">
-                    <div class="relative h-62 w-full mb-3">
-                      <!-- image -->
-                      <img src="https://image.uniqlo.com/UQ/ST3/th/imagesgoods/450535/item/thgoods_66_450535.jpg?width=750" alt="Just a flower" class=" w-full   object-fill  rounded-2xl">
-                      
-                      <div class="flex mt-4">
-                        <!-- color -->
-                        <div class="flex-1 inline-flex items-center">
-                          <div class="w-full flex-none text-sm flex items-center text-gray-600">
-                            <ul class="flex flex-row justify-center items-center space-x-2">
-                              <li class="">
-                                <span class="block border-2 border-gray-900 hover:border-blue-600 rounded-full transition ease-in duration-300">
-                                  <a href="#blue" class="block w-3 h-3 bg-blue-600 rounded-full"></a>
-                                </span>
-                              </li>
-                              <li class="">
-                                <span class="block border-2 border-gray-900 hover:border-yellow-400 rounded-full transition ease-in duration-300">
-                                  <a href="#yellow" class="block w-3 h-3  bg-yellow-400 rounded-full"></a>
-                                </span>
-                              </li>
-                              <li class="">
-                                <span class="block border-2 border-gray-900 hover:border-red-500 rounded-full transition ease-in duration-300">
-                                  <a href="#red" class="block w-3 h-3  bg-red-500 rounded-full"></a>
-                                </span>
-                              </li>
-                              <li class="">
-                                <span class="block border-2 border-gray-900 hover:border-green-500 rounded-full transition ease-in duration-300">
-                                  <a href="#green" class="block w-3 h-3  bg-green-500 rounded-full"></a>
-                                </span>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                        <!-- Size -->
-                        <div class="lg:flex text-lg text-black">
-                          <div class="flex-1 inline-flex items-center mb-3">
-                            <span class="text-secondary whitespace-nowrap mr-3">Size</span>
-                            <div class="cursor-pointer text-black ">
-                              <span class="hover:text-purple-500 p-1 py-0">S</span>
-                              <span class="hover:text-purple-500 p-1 py-0">M</span>
-                              <span class="hover:text-purple-500 p-1 py-0">L</span>
-                              <span class="hover:text-purple-500 p-1 py-0">XL</span>
-                              </div>
-                            </div>
-                          </div>
-                        </div> 
-                    </div>
-                    <div class="flex-auto justify-evenly">
-                      <div class="flex flex-wrap ">
-                        <div class="w-full flex-none text-lg flex items-center text-gray-600">
-                          <span class="mr-2 mb-2 text-black bg-[#FFFFFF] px-1 border-white rounded-full">Unisex</span>
-                        </div>
-                        <div class="flex items-center w-full justify-between min-w-0 ">
-                          <h2 class="text-xl mr-auto cursor-pointer text-[#112D4E] hover:text-black ">เสื้อสเวตเตอร์ Extra Fine Merino คอกลม แขนยาว</h2>
-                          <div class="flex items-center bg-green-400 text-white text-xs px-2 py-1 ml-3 rounded-lg"> INSTOCK </div>
-                        </div>
-                      </div>
-                      <div class="text-2xl text-black font-semibold mt-1">฿ 240.00</div>
-                      
-                      <div class="flex space-x-2 text-sm font-medium justify-start mt-4">
-                        <button class=" transition ease-in duration-300 inline-flex items-center text-sm font-medium mb-2 md:mb-0 bg-[#b54545] px-5 py-2 hover:shadow-lg tracking-wider text-white rounded-full hover:bg-[#FF0000]">
-                          <span>Add Cart</span>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div class="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16">
+            <SectionsCard/>
+            <SectionsCard/>
+            <SectionsCard/>
+            <SectionsCard/>
+            <SectionsCard/>
+            <SectionsCard/>
           </div>
         </section>
     </div>
 
 
 </template>
-  <script setup>
+  <script setup lang="ts">
   import { ref } from 'vue'
   import { StarIcon } from '@heroicons/vue/20/solid'
   import { RadioGroup, RadioGroupLabel, RadioGroupOption ,Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
@@ -261,20 +193,24 @@
     ],
     images: [
       {
-        src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-secondary-product-shot.jpg',
+        src: 'https://image.uniqlo.com/UQ/ST3/th/imagesgoods/454315/sub/thgoods_454315_sub1.jpg?width=750',
         alt: 'Two each of gray, white, and black shirts laying flat.',
       },
       {
-        src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-01.jpg',
+        src: 'https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/454315/sub/goods_454315_sub14.jpg?width=750',
         alt: 'Model wearing plain black basic tee.',
       },
       {
-        src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-02.jpg',
+        src: 'https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/454315/item/goods_11_454315.jpg?width=750',
         alt: 'Model wearing plain gray basic tee.',
       },
       {
-        src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-featured-product-shot.jpg',
+        src: 'https://image.uniqlo.com/UQ/ST3/th/imagesgoods/454315/item/thgoods_69_454315.jpg?width=750',
         alt: 'Model wearing plain white basic tee.',
+      },
+      {
+        src: 'https://image.uniqlo.com/UQ/ST3/th/imagesgoods/454315/item/thgoods_00_454315.jpg?width=750',
+        alt:  'static image'
       },
     ],
     colors: [
@@ -310,5 +246,11 @@
   const reviews = { href: '#', average: 4, totalCount: 117 }
   
   const selectedColor = ref(product.colors[0])
-  const selectedSize = ref(product.sizes[2])
+  const previewImage = useState<string>(undefined)
+  previewImage.value = product.images[4].src
+  const change = function (_image:  string) {
+    previewImage.value = _image
+  } 
   </script>
+
+  
