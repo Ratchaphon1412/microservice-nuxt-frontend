@@ -38,7 +38,7 @@
                             <div class="sm:flex justify-between items-center border-gray-100">
                                 <div class="flex w-2/3">
                                     <div class="flex items-center justify-center mr-3">
-                                        <Counter :counter="item.counter" @update-counter="updateCounster(item, $event)"></Counter>
+                                        <Counter :counter="item.counter" @update-counter="updateCounter(item, $event)"></Counter>
                                     </div>
                                     <select name="" id="" class="mr-3 border-[#DBE2EF] text-[#0074FF] rounded-lg">
                                         <option value="" selected disabled>Color</option>
