@@ -1,7 +1,7 @@
 <template>
     <div class="animate-fade-down flex-col w-full p-2">
          <div class="flex-shrink max-w-full px-4 w-full">   
-                                 <p class="text-4xl text-gray-900 font-poppin mt-3 mb-5">Edit Profile</p>
+                                 <p class="text-4xl text-gray-900 font-poppin mt-3 mb-5">Edit Coupon</p>
          </div>     
  <!-- start -->
  
@@ -12,8 +12,8 @@
                  <div class="grid grid-cols-6 gap-6 font-poppin">
                     
                      <div class="col-span-6 sm:col-span-3">
-                         <label for="first-name" class="block mb-2 text-lg font-medium text-gray-900 dark:text-white">Full Name</label>
-                         <input placeholder="Saran wongkum" class="peer w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-pink-500 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
+                         <label for="first-name" class="block mb-2 text-lg font-medium text-gray-900 dark:text-white">Coupon code Name</label>
+                         <input placeholder="type here ...." class="peer w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-pink-500 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
                          name="name" id="name"/>
                              <label class="after:content[' '] pointer-events-none absolute left-0 -top-2.5 flex w-full select-none text-sm font-normal leading-tight text-blue-gray-500 transition-all after:absolute after:-bottom-2.5 after:block after:w-full after:scale-x-0 after:border-b-2 after:border-pink-500 after:transition-transform after:duration-300 peer-placeholder-shown:leading-tight peer-placeholder-shown:text-blue-gray-500 peer-focus:text-sm peer-focus:leading-tight peer-focus:text-pink-500 peer-focus:after:scale-x-100 peer-focus:after:border-pink-500 peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
                            
@@ -21,22 +21,35 @@
                      </div>
                      
                      <div class="col-span-6 sm:col-span-3">
-                         <label for="email" class="block mb-2 text-lg font-medium text-gray-900 dark:text-white w-10">Email</label>
-                         <input placeholder="wongkum55@gmail.com" class="peer w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-pink-500 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
+                         <label for="email" class="block mb-2 text-lg font-medium text-gray-900 dark:text-white">Coupon code</label>
+                         <input placeholder="code..." class="peer w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-pink-500 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
                          name="email" id="email"/>
                      </div>
  
                      
+                     <div class="col-span-6 sm:col-span-3 grid grid-cols-4 gap-2 rounded">
+                            <div class="col-span-3 grid grid-cols-2">
+                            <label for="role " class="col-span-1 block mb-2 text-lg font-medium sm:col-span-1 text-gray-900  w-full">Type of Coupon</label>
+                                </div>
+                          
+                            <div></div>
+                            <!-- 1 -->
+                            
+                            <select id="type" name="type"
+                                class="col-span-2 grid grid-cols-2 appearance-none bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                                <option value="">choose type discount</option>
+                                <option value="percen" >percen</option>
+                                <option value="number">number</option>
+
+                            </select>
+
+
+                        </div>
                      <div class="col-span-6 sm:col-span-3">
-                         <label for="phone_number" class="block mb-2  text-lg font-medium text-gray-900 ">Phone number</label>
-                         <input placeholder="0618204866" class="peer w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-pink-500 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
-                         name="phone_number" id="phone_number"/>
-                             
-                     </div>
-                     <div class="col-span-6 sm:col-span-3">
-                         <label for="gender" class="block mb-2  text-lg font-medium text-gray-900 ">Gender  </label>
+                         <label v-if="selectedType === 'percen'" for="count" class="block mb-2  text-lg font-medium text-gray-900 "> %DisCount  </label>
+                         <label v-else for="count" class="block mb-2  text-lg font-medium text-gray-900 "> DisCount  </label>
                          <input placeholder="men" class="peer w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-pink-500 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
-                         name="gender" id="gender"/>
+                         name="count" id="count"/>
                              
                      </div>
                      <div class="col-span-6 sm:col-span-3">
@@ -100,5 +113,8 @@
  definePageMeta({
    layout: "admin-layout",
  });
+
+
+const selectedType = ref("");
  
  </script>
