@@ -132,7 +132,7 @@
 									<a href="#" class="hover:text-indigo-500">
 										<div class="flex items-center">
 										<div class="flex-shrink-0 h-10 w-10">
-											<img class="h-10 w-10 rounded-full" src="src/img/products/product1.jpg" alt="product images">
+											<img class="h-10 w-10 rounded-full" src="" alt="product images">
 										</div>
 										<div class="ltr:ml-4 rtl:mr-4">
 											<div class="leading-5">
@@ -154,7 +154,7 @@
 									<a href="#" class="hover:text-indigo-500">
 										<div class="flex items-center">
 										<div class="flex-shrink-0 h-10 w-10">
-											<img class="h-10 w-10 rounded-full" src="src/img/products/product2.jpg" alt="product images">
+											<img class="h-10 w-10 rounded-full" src="" alt="product images">
 										</div>
 										<div class="ltr:ml-4 rtl:mr-4">
 											<div class="leading-5">
@@ -176,7 +176,7 @@
 									<a href="#" class="hover:text-indigo-500">
 										<div class="flex items-center">
 										<div class="flex-shrink-0 h-10 w-10">
-											<img class="h-10 w-10 rounded-full" src="src/img/products/product3.jpg" alt="product images">
+											<img class="h-10 w-10 rounded-full" src="" alt="product images">
 										</div>
 										<div class="ltr:ml-4 rtl:mr-4">
 											<div class="leading-5">
@@ -198,7 +198,7 @@
 								<a href="#" class="hover:text-indigo-500">
 									<div class="flex items-center">
 									<div class="flex-shrink-0 h-10 w-10">
-										<img class="h-10 w-10 rounded-full" src="src/img/products/product4.jpg" alt="product images">
+										<img class="h-10 w-10 rounded-full" src="" alt="product images">
 									</div>
 									<div class="ltr:ml-4 rtl:mr-4">
 										<div class="leading-5">

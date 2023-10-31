@@ -77,7 +77,7 @@
                           <tbody><tr><td><input type="checkbox" class="checkedall form-checkbox w-4 h-4 text-indigo-500 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-700"></td><td>
                                 <a href="#">
                                   <div class="flex flex-wrap flex-row items-center">
-                                    <div class="self-center"><img class="h-8 w-8" src="../src/img/products/product1.jpg"></div>
+                                    <div class="self-center"><img class="h-8 w-8" src=""></div>
                                     <div class="leading-5 dark:text-gray-300 flex-1 ltr:ml-2 rtl:mr-2 mb-1">  
                                       Nike Women's Race Running Shoe
                                       <div class="pt-1 text-sm italic text-gray-500 w-full">
@@ -102,7 +102,7 @@
                               </td></tr><tr><td><input type="checkbox" class="checkedall form-checkbox w-4 h-4 text-indigo-500 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-700"></td><td>
                                 <a href="#">
                                   <div class="flex flex-wrap flex-row items-center">
-                                    <div class="self-center"><img class="h-8 w-8" src="../src/img/products/product2.jpg"></div>
+                                    <div class="self-center"><img class="h-8 w-8" src=""></div>
                                     <div class="leading-5 dark:text-gray-300 flex-1 ltr:ml-2 rtl:mr-2 mb-1">  
                                       Nike Womens Free RN Flyknit 2018
                                       <div class="pt-3 text-sm italic text-gray-500 w-full">
@@ -127,7 +127,7 @@
                               </td></tr><tr><td><input type="checkbox" class="checkedall form-checkbox w-4 h-4 text-indigo-500 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-700"></td><td>
                                 <a href="#">
                                   <div class="flex flex-wrap flex-row items-center">
-                                    <div class="self-center"><img class="h-8 w-8" src="../src/img/products/product3.jpg"></div>
+                                    <div class="self-center"><img class="h-8 w-8" src=""></div>
                                     <div class="leading-5 dark:text-gray-300 flex-1 ltr:ml-2 rtl:mr-2 mb-1">  
                                       Nike Women's Sneaker Running Shoes
                                       <div class="pt-3 text-sm italic text-gray-500 w-full">
@@ -152,7 +152,7 @@
                               </td></tr><tr><td><input type="checkbox" class="checkedall form-checkbox w-4 h-4 text-indigo-500 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-700"></td><td>
                                 <a href="#">
                                   <div class="flex flex-wrap flex-row items-center">
-                                    <div class="self-center"><img class="h-8 w-8" src="../src/img/products/product4.jpg"></div>
+                                    <div class="self-center"><img class="h-8 w-8" src=""></div>
                                     <div class="leading-5 dark:text-gray-300 flex-1 ltr:ml-2 rtl:mr-2 mb-1">  
                                       Nike Women's Air Zoom Pegasus 36 Running Shoes
                                       <div class="pt-3 text-sm italic text-gray-500 w-full">
@@ -177,7 +177,7 @@
                               </td></tr><tr><td><input type="checkbox" class="checkedall form-checkbox w-4 h-4 text-indigo-500 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-700"></td><td>
                                 <a href="#">
                                   <div class="flex flex-wrap flex-row items-center">
-                                    <div class="self-center"><img class="h-8 w-8" src="../src/img/products/product5.jpg"></div>
+                                    <div class="self-center"><img class="h-8 w-8" src=""></div>
                                     <div class="leading-5 dark:text-gray-300 flex-1 ltr:ml-2 rtl:mr-2 mb-1">  
                                       Nike Women's Air Max 270 Running Shoe
                                       <div class="pt-3 text-sm italic text-gray-500 w-full">
@@ -202,7 +202,7 @@
                               </td></tr><tr><td><input type="checkbox" class="checkedall form-checkbox w-4 h-4 text-indigo-500 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-700"></td><td>
                                 <a href="#">
                                   <div class="flex flex-wrap flex-row items-center">
-                                    <div class="self-center"><img class="h-8 w-8" src="../src/img/products/product6.jpg"></div>
+                                    <div class="self-center"><img class="h-8 w-8" src=""></div>
                                     <div class="leading-5 dark:text-gray-300 flex-1 ltr:ml-2 rtl:mr-2 mb-1">  
                                       Nike Women's Flex Trainer 9 Sneaker
                                       <div class="pt-3 text-sm italic text-gray-500 w-full">
@@ -227,7 +227,7 @@
                               </td></tr><tr><td><input type="checkbox" class="checkedall form-checkbox w-4 h-4 text-indigo-500 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-700"></td><td>
                                 <a href="#">
                                   <div class="flex flex-wrap flex-row items-center">
-                                    <div class="self-center"><img class="h-8 w-8" src="../src/img/products/product7.jpg"></div>
+                                    <div class="self-center"><img class="h-8 w-8" src=""></div>
                                     <div class="leading-5 dark:text-gray-300 flex-1 ltr:ml-2 rtl:mr-2 mb-1">  
                                       Nike Women's Gymnastics Tennis Shoes
                                       <div class="pt-3 text-sm italic text-gray-500 w-full">
@@ -252,7 +252,7 @@
                               </td></tr><tr><td><input type="checkbox" class="checkedall form-checkbox w-4 h-4 text-indigo-500 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-700"></td><td>
                                 <a href="#">
                                   <div class="flex flex-wrap flex-row items-center">
-                                    <div class="self-center"><img class="h-8 w-8" src="../src/img/products/product1.jpg"></div>
+                                    <div class="self-center"><img class="h-8 w-8" src=""></div>
                                     <div class="leading-5 dark:text-gray-300 flex-1 ltr:ml-2 rtl:mr-2 mb-1">  
                                     Nike Women's Court Lite 2 Tennis Shoe
                                     <div class="pt-3 text-sm italic text-gray-500 w-full">
@@ -277,7 +277,7 @@
                               </td></tr><tr><td><input type="checkbox" class="checkedall form-checkbox w-4 h-4 text-indigo-500 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-700"></td><td>
                                 <a href="#">
                                   <div class="flex flex-wrap flex-row items-center">
-                                    <div class="self-center"><img class="h-8 w-8" src="../src/img/products/product2.jpg"></div>
+                                    <div class="self-center"><img class="h-8 w-8" src=""></div>
                                     <div class="leading-5 dark:text-gray-300 flex-1 ltr:ml-2 rtl:mr-2 mb-1">  
                                       Nike Women's Low-Top Basketball Shoe
                                       <div class="pt-3 text-sm italic text-gray-500 w-full">
@@ -302,7 +302,7 @@
                               </td></tr><tr><td><input type="checkbox" class="checkedall form-checkbox w-4 h-4 text-indigo-500 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-700"></td><td>
                                 <a href="#">
                                   <div class="flex flex-wrap flex-row items-center">
-                                    <div class="self-center"><img class="h-8 w-8" src="../src/img/products/product3.jpg"></div>
+                                    <div class="self-center"><img class="h-8 w-8" src=""></div>
                                     <div class="leading-5 dark:text-gray-300 flex-1 ltr:ml-2 rtl:mr-2 mb-1">  
                                       Nike Reposto Womens Running Casual Shoe Cz5630-002
                                       <div class="pt-3 text-sm italic text-gray-500 w-full">

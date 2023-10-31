@@ -80,7 +80,7 @@
                             <td>
                               <a href="#">
                                   <div class="flex flex-wrap flex-row items-center">
-                                    <div class="self-center"><img class="h-8 w-8" src="../src/img/products/product6.jpg"></div>
+                                    <div class="self-center"><img class="h-8 w-8" src=""></div>
                                     <div class="leading-5 dark:text-gray-300 flex-1 ltr:ml-2 rtl:mr-2 mb-1">  
                                       Nike Women's Flex Trainer 9 Sneaker
                                       <div class="pt-3 text-sm italic text-gray-500 w-full">
@@ -111,7 +111,7 @@
                                 <input type="checkbox" class="checkedall form-checkbox w-4 h-4 text-indigo-500 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-700"></td><td class="hidden lg:table-cell">INV024</td><td>
                                 <a href="#">
                                   <div class="flex flex-wrap flex-row justify-items-center">
-                                    <div class="self-center"><img class="h-8 w-8 rounded-full bg-gray-200 dark:bg-gray-600" src="../src/img/avatar/avatar3.png"></div>
+                                    <div class="self-center"><img class="h-8 w-8 rounded-full bg-gray-200 dark:bg-gray-600" src=""></div>
                                     <div class="leading-5 dark:text-gray-300 flex-1 ltr:ml-2 rtl:mr-2 mb-1 ">  
                                       John doe
                                     </div>
@@ -135,7 +135,7 @@
                               </td></tr><tr class="border-b dark:border-gray-700"><td><input type="checkbox" class="checkedall form-checkbox w-4 h-4 text-indigo-500 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-700"></td><td class="hidden lg:table-cell">INV023</td><td>
                                 <a href="#">
                                   <div class="flex flex-wrap flex-row items-center">
-                                    <div class="self-center"><img class="h-8 w-8 rounded-full bg-gray-200 dark:bg-gray-600" src="../src/img/avatar/avatar4.png"></div>
+                                    <div class="self-center"><img class="h-8 w-8 rounded-full bg-gray-200 dark:bg-gray-600" src=""></div>
                                     <div class="leading-5 dark:text-gray-300 flex-1 ltr:ml-2 rtl:mr-2 mb-1 ">  
                                       John doe
                                     </div>
@@ -159,7 +159,7 @@
                               </td></tr><tr class="border-b dark:border-gray-700"><td><input type="checkbox" class="checkedall form-checkbox w-4 h-4 text-indigo-500 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-700"></td><td class="hidden lg:table-cell">INV022</td><td>
                                 <a href="#">
                                   <div class="flex flex-wrap flex-row items-center">
-                                    <div class="self-center"><img class="h-8 w-8 rounded-full bg-gray-200 dark:bg-gray-600" src="../src/img/avatar/avatar5.png"></div>
+                                    <div class="self-center"><img class="h-8 w-8 rounded-full bg-gray-200 dark:bg-gray-600" src=""></div>
                                     <div class="leading-5 dark:text-gray-300 flex-1 ltr:ml-2 rtl:mr-2 mb-1">  
                                       John doe
                                     </div>
@@ -183,7 +183,7 @@
                               </td></tr><tr class="border-b dark:border-gray-700"><td><input type="checkbox" class="checkedall form-checkbox w-4 h-4 text-indigo-500 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-700"></td><td class="hidden lg:table-cell">INV021</td><td>
                                 <a href="#">
                                   <div class="flex flex-wrap flex-row items-center">
-                                    <div class="self-center"><img class="h-8 w-8 rounded-full bg-gray-200 dark:bg-gray-600" src="../src/img/avatar/avatar6.png"></div>
+                                    <div class="self-center"><img class="h-8 w-8 rounded-full bg-gray-200 dark:bg-gray-600" src=""></div>
                                     <div class="leading-5 dark:text-gray-300 flex-1 ltr:ml-2 rtl:mr-2 mb-1">  
                                       John doe
                                     </div>
@@ -207,7 +207,7 @@
                               </td></tr><tr class="border-b dark:border-gray-700"><td><input type="checkbox" class="checkedall form-checkbox w-4 h-4 text-indigo-500 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-700"></td><td class="hidden lg:table-cell">INV020</td><td>
                                 <a href="#">
                                   <div class="flex flex-wrap flex-row items-center">
-                                    <div class="self-center"><img class="h-8 w-8 rounded-full bg-gray-200 dark:bg-gray-600" src="../src/img/avatar/avatar8.png"></div>
+                                    <div class="self-center"><img class="h-8 w-8 rounded-full bg-gray-200 dark:bg-gray-600" src=""></div>
                                     <div class="leading-5 dark:text-gray-300 flex-1 ltr:ml-2 rtl:mr-2 mb-1">  
                                       John doe
                                     </div>
@@ -231,7 +231,7 @@
                               </td></tr><tr class="border-b dark:border-gray-700"><td><input type="checkbox" class="checkedall form-checkbox w-4 h-4 text-indigo-500 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-700"></td><td class="hidden lg:table-cell">INV019</td><td>
                                 <a href="#">
                                   <div class="flex flex-wrap flex-row items-center">
-                                    <div class="self-center"><img class="h-8 w-8 rounded-full bg-gray-200 dark:bg-gray-600" src="../src/img/avatar/avatar8.png"></div>
+                                    <div class="self-center"><img class="h-8 w-8 rounded-full bg-gray-200 dark:bg-gray-600" src=""></div>
                                     <div class="leading-5 dark:text-gray-300 flex-1 ltr:ml-2 rtl:mr-2 mb-1">  
                                       John doe
                                     </div>
@@ -255,7 +255,7 @@
                               </td></tr><tr class="border-b dark:border-gray-700"><td><input type="checkbox" class="checkedall form-checkbox w-4 h-4 text-indigo-500 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-700"></td><td class="hidden lg:table-cell">INV006</td><td>
                                 <a href="#">
                                   <div class="flex flex-wrap flex-row items-center">
-                                    <div class="self-center"><img class="h-8 w-8 rounded-full bg-gray-200 dark:bg-gray-600" src="../src/img/avatar/avatar8.png"></div>
+                                    <div class="self-center"><img class="h-8 w-8 rounded-full bg-gray-200 dark:bg-gray-600" src=""></div>
                                     <div class="leading-5 dark:text-gray-300 flex-1 ltr:ml-2 rtl:mr-2 mb-1">  
                                       John doe
                                     </div>
@@ -279,7 +279,7 @@
                               </td></tr><tr class="border-b dark:border-gray-700"><td><input type="checkbox" class="checkedall form-checkbox w-4 h-4 text-indigo-500 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-700"></td><td class="hidden lg:table-cell">INV006</td><td>
                                 <a href="#">
                                   <div class="flex flex-wrap flex-row items-center">
-                                    <div class="self-center"><img class="h-8 w-8 rounded-full bg-gray-200 dark:bg-gray-600" src="../src/img/avatar/avatar8.png"></div>
+                                    <div class="self-center"><img class="h-8 w-8 rounded-full bg-gray-200 dark:bg-gray-600" src=""></div>
                                     <div class="leading-5 dark:text-gray-300 flex-1 ltr:ml-2 rtl:mr-2 mb-1">  
                                       John doe
                                     </div>
@@ -303,7 +303,7 @@
                               </td></tr><tr class="border-b dark:border-gray-700"><td><input type="checkbox" class="checkedall form-checkbox w-4 h-4 text-indigo-500 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-700"></td><td class="hidden lg:table-cell">INV006</td><td>
                                 <a href="#">
                                   <div class="flex flex-wrap flex-row items-center">
-                                    <div class="self-center"><img class="h-8 w-8 rounded-full bg-gray-200 dark:bg-gray-600" src="../src/img/avatar/avatar8.png"></div>
+                                    <div class="self-center"><img class="h-8 w-8 rounded-full bg-gray-200 dark:bg-gray-600" src=""></div>
                                     <div class="leading-5 dark:text-gray-300 flex-1 ltr:ml-2 rtl:mr-2 mb-1">  
                                       John doe
                                     </div>
