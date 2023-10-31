@@ -29,16 +29,16 @@
                       </button>
                       
                     </div>
-                    <!-- <button @click="change(product.images[0].src)" type="button" class="flex-0 aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2 border-gray-900">
-                      <img  class="h-full w-full object-cover" :src="product.images[0].src " :alt="product.images[0].alt" />
-                    </button> -->
                   </div>
                 </div>
             </div>
           </aside>
+          
+          
           <div id="preview" class="p-6 items-center">
-              <img style="width: 750px; height: 750px;" class="" :src="previewImage" alt="">
+            <img class="max-w-full h-auto" :src="previewImage" alt="">
           </div>
+          
           <!-- <div class="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
               <div class="aspect-h-4 aspect-w-3 hidden overflow-hidden rounded-lg lg:block">
                   <img :src="product.images[0].src" :alt="product.images[0].alt" class="h-full w-full object-cover object-center" />
