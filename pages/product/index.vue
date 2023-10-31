@@ -27,6 +27,7 @@
                         <button @click="change(image.src)" type="button" class="flex-0 aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2">
                           <img class="h-full w-full object-cover" :src="image.src" :alt="image.alt">
                         </button>
+                        
                       </div>
                       <!-- <button @click="change(product.images[0].src)" type="button" class="flex-0 aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2 border-gray-900">
                         <img  class="h-full w-full object-cover" :src="product.images[0].src " :alt="product.images[0].alt" />
