@@ -22,6 +22,11 @@
     "bootstrap-icons": "^1.11.0",
     "flowbite": "^1.8.1",
     "omise": "^0.11.0",
-    "tailwindcss-animated": "^1.0.1"
+    "tailwindcss-animated": "^1.0.1",
+    "axios": "^1.5.0"
+    
+  },
+  "overrides": {
+    "vue": "latest"
   }
 }
