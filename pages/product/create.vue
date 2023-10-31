@@ -44,7 +44,7 @@
                     </div> 
                     
                     <section v-for="(list,index) in totalList"
-                    id="selected product" class="grid grid-cols-12 gap-6 font-poppin mt-6 items-center justify-center p-6 border-10 bg-black rounded-xl">
+                    id="selected product" class="grid grid-cols-12 gap-6 font-poppin mt-6 items-center justify-center p-6 border-10 bg-gray-900 rounded-xl">
                         <div class="col-span-3">
                             <input class=" block w-full text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" type="file">
                         </div>
