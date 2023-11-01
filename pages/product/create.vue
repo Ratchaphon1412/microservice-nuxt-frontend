@@ -136,51 +136,19 @@
                     </div>
                     
                     <section id="imageSet">
-                        <!-- Input Image -->
-                        <div class="flex justify-center mt-8">
-                            <div class="rounded-lg shadow-xl bg-gray-50 md:w-full ">
-                                <div class="m-4">
-                                    <label class="inline-block mb-2 text-gray-500">Upload Image</label>
-                                        <div class="flex items-center justify-center w-full">
-                                            <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-                                                <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                                                    <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
-                                                    </svg>
-                                                    <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
-                                                    <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
-                                                </div>
-                                                <input multiple id="dropzone-file" type="file" class="hidden" />
-                                            </label>
-                                        </div> 
-                                </div>
-                            </div>
-                        </div>
-                        <!-- <button @click="check()">
-                            Here
-                        </button> -->
-                        <!-- Preview Image -->
-                        <!-- <div class="image-preview" v-for="(item, index) in imageList" :key="index">
-                            <img :src="item.image" alt="Preview" />
-                        </div> -->
                         
-                        <div class="p-4">
-                            <label for="file-input" class="mb-2 font-medium flex justify-between items-center">
-                                <button id="select-button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-fill transition-colors duration-300">
-                                    Select
-                                </button>
-                            </label>
-                            <input type="file" id="file-input" multiple class="hidden">
-                            <div class="flex justify-between items-center mb-4">
-                                <div id="drop-zone" class="w-full h-48 border-2 border-dashed border-gray-300 rounded-lg flex
-                                justify-center items-center text-gray-400 text-lg">
-                                <span>Drag and drop files here</span>
+        
+
+                        <input class="m-5" type="file" id="file-input" multiple  @change="handleFileChange($event)">
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 border">
+
+                            <div class="image-preview" v-for="(item, index) in imageList" :key="index">
+                                <div v-if="(index !=null)">
+                                    <img :src="item.image" class="h-auto max-w-full rounded-lg">
                                 </div>
                             </div>
-                            <div id="selected-files-count" class="text-gray-500 text-sm font-medium">
-                            <div id="selected-images" class="flex flex-wrap mx-2"></div>
-                            </div>
                         </div>
+                        
 
 
                         
@@ -194,8 +162,12 @@
 
     </div>
  </template>
- 
 <script setup lang="ts">
+    definePageMeta({
+  layout: "admin-layout",
+});
+
+
     import {Listbox,ListboxLabel,ListboxButton,ListboxOptions,ListboxOption , RadioGroup , RadioGroupLabel ,RadioGroupOption}   from '@headlessui/vue'    
     // const colorlist = [
     //     {
@@ -263,19 +235,20 @@
 
 
 
-    const imageList = ref([{
-        image:""
-    }])
-
-    console.log(imageList.value)
-
-    const checklistImage=ref(false)
+    const imageList = ref([]);
 
 
-    function check(){
+    const handleFileChange = (event) => {
+    const files = event.target.files;
+    for (let i = 0; i < files.length; i++) {
+        const reader = new FileReader();
+        reader.onload = () => {
+            imageList.value.push({ image: reader.result });
+        };
+        reader.readAsDataURL(files[i]);
         console.log(imageList.value)
     }
-
+};
 
     // const fileInput = document.getElementById('file-input') as HTMLInputElement | null;
     // const dropzone = document.getElementById('drop-zone') as HTMLElement | null;
