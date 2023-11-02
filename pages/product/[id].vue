@@ -19,25 +19,21 @@
       
       <section class="flex mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8 gap-10 ">
           <!-- Image gallery -->
-          <aside id="selected" class="m-4 w-24 p-6">
-              <div class="lg:flex lg:items-start">
-                <div class="mt-2 w-full lg:order-1 lg:w-32 lg:flex-shrink-0">
-                  <div v-for="image in product.image_products" :key="image.id" class="flex items-center lg:flex-col">
-                    <div>
-                      <button @click="change(image.image_path)" type="button" class="flex-0 aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2">
-                        <img class="h-full w-full object-cover" :src="image.image_path">
-                      </button>
-                      
-                    </div>
-                    <!-- <button @click="change(product.images[0].src)" type="button" class="flex-0 aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2 border-gray-900">
-                      <img  class="h-full w-full object-cover" :src="product.images[0].src " :alt="product.images[0].alt" />
-                    </button> -->
+          <aside id="selected" class="m-4 sm:w-1/4 md:w-1/5 lg:w-1/6 p-6">
+            <div class="lg:flex lg:items-start">
+              <div class="mt-2 w-full lg:order-1 lg:w-32 lg:flex-shrink-0">
+                <div v-for="image in product.image_products" :key="image.id" class="flex items-center lg:flex-col">
+                  <div>
+                    <button @click="change(image.image_path)" type="button" class="flex-0 aspect-square mb-3 sm:h-20 md:h-24 lg:h-32 overflow-hidden rounded-lg border-2">
+                      <img class="h-full w-full object-cover" :src="image.image_path">
+                    </button>
                   </div>
                 </div>
+              </div>
             </div>
           </aside>
           <div id="preview" class="p-6 items-center">
-              <img style="width: 750px; height: 750px;" class="" :src="previewImage" alt="">
+            <img class="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-2xl" :src="previewImage" alt="">
           </div>
       </section>
 
@@ -50,24 +46,24 @@
               <div class="mt-4 lg:row-span-3 lg:mt-0">
                   <h2 class="sr-only">Product information</h2>
 
-                  <p class=" mt-4 text-3xl tracking-tight text-gray-900">{{ product.price }}</p>
+                  <p class=" mt-4 text-3xl tracking-tight text-gray-900">{{ product.price }} ฿</p>
 
                   <form class="mt-10">
                       <!-- Colors -->
                       <div>
-                      <h3 class="text-sm font-medium text-gray-900">Color</h3>
-          
-                      <RadioGroup v-model="formData.product_color" class="mt-4">
+                        <h3 class="text-sm font-medium text-gray-900">Color</h3>
+
+                        <RadioGroup v-model="formData.product_color" class="mt-4">
                           <RadioGroupLabel class="sr-only">Choose a color</RadioGroupLabel>
                           <div class="flex items-center space-x-3">
                           <RadioGroupOption @click="radioColor(item.id)" v-for="item in product.product_colors" :key="item.id" :value="item.id" v-slot="{ active, checked }">
                               <div :class="[active && checked ? 'ring ring-offset-1' : '', !active && checked ? 'ring-2' : '', 'relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none']">
                                 <RadioGroupLabel as="span" class="sr-only">{{ item.color.name }}</RadioGroupLabel>
-                                <span aria-hidden="true" :class="['h-8 w-8 rounded-full border border-black border-opacity-10', 'bg-[' + item.color.hex_color + ']']" />
+                                <span aria-hidden="true" class="h-8 w-8 rounded-full border border-black border-opacity-10" :style="{ backgroundColor: item.color.hex_color }" />
                               </div>
                           </RadioGroupOption>
                           </div>
-                      </RadioGroup>
+                      </RadioGroup> 
                       </div>
           
                       <!-- Sizes -->
@@ -126,6 +122,7 @@
                               /> -->
                           </DisclosureButton>
                           <DisclosurePanel class="px-4 pt-4 pb-2 text-sm text-gray-500">
+                            <span class="text-xl text-gray-900">{{ product.Materials }}</span>
                               <!-- <span v-for="Materials in product.Materials" :key="Materials" class="text-black">
                                   <p class="text-lg text-gray-900">{{ Materials }}</p>
                               </span> -->
@@ -141,12 +138,15 @@
         <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-3xl">Related Product</h1>
         <!-- card1 -->
         <div class="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16">
-          <!-- <SectionsCard/>
-          <SectionsCard/>
-          <SectionsCard/>
-          <SectionsCard/>
-          <SectionsCard/>
-          <SectionsCard/> -->
+          <SectionsCard v-for="list in products" 
+          :name="list.name" 
+          :description="list.description" 
+          :gender="list.gender"
+          :listSize="list.listSize"
+          :listColor="list.listColor"
+          :price="list.price"
+          :image="list.image"
+          />
         </div>
       </section>
   </div>
@@ -157,12 +157,14 @@
 import { ref } from 'vue'
 import { StarIcon } from '@heroicons/vue/20/solid'
 import { RadioGroup, RadioGroupLabel, RadioGroupOption ,Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
+import { list } from 'postcss';
 
 const route = useRoute()
 const { data: product, error } = await baseFetch<any>(`product/${route.params.id}`, {})
-const { data: products } = await baseFetch<any>("product", {})
+const { data: products } = await baseFetch<any>("product/format", {})
 
-console.log(product.value)
+console.log(products.value)
+
 
 const previewImage = useState<string>(undefined)
 const change = function (_image:  string) {
@@ -174,6 +176,19 @@ const formData = reactive({
   size: "",
   quantity: 0
 })
+
+// const listColor = ref<any>([
+//   {
+//     class: "",
+//   }
+// ])
+
+// listColor.value = product.value.product_colors.map((item: any) => [
+//   {
+//     class: `bg-[${item.color.hex_color}]`,
+//   }
+// ]);
+
 function radioColor(productColorId:any) {
   formData.product_color = product.value.product_colors.find(item => item.id === productColorId)
   console.log(formData.product_color)
