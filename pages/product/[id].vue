@@ -162,6 +162,8 @@ const route = useRoute()
 const { data: product, error } = await baseFetch<any>(`product/${route.params.id}`, {})
 const { data: products } = await baseFetch<any>("product", {})
 
+console.log(product.value)
+
 const previewImage = useState<string>(undefined)
 const change = function (_image:  string) {
     previewImage.value = _image
