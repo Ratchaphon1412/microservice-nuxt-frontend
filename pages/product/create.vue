@@ -50,18 +50,17 @@
                         <div id="color" class="flex flex-col col-span-2 lg:col-span-4" >
                             <label for="hexColor"></label>
                             <div class="bg-white rounded-lg w-full col-span-3">
-                            
-                                <label for="hexColor" class="block mb-2 text-xl font-medium text-gray-900 dark:text-white rounded-lg">hexColor</label>
-                                <input class="w-full border-b-2 border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-lg font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-[#112D4E] focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
+                                <div class="flex">
+                                    <label for="hexColor" class="block mb-2 text-xl font-medium text-gray-900 dark:text-white rounded-lg">hexColor</label>
+                                    <div v-if="list.hexColor" :style="{ backgroundColor: list.hexColor }" class="w-6 h-6 rounded-full mx-3 my-1"></div>
+                                </div>
+
+                                <input v-model="list.hexColor" class="w-full border-b-2 border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-lg font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-[#112D4E] focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
                                     name="hexColor" id="hexColor"/>
                             </div>
+                           
                         </div>
-                        <!-- Preview Color -->
-                        <div class="col-span-2 lg:col-span-4">
-                            <span class="cursor-pointer w-6 h-6 rounded-full mx-1 my-1">
-
-                            </span>
-                        </div>
+                        
                         
                         </div>
                         
@@ -69,8 +68,8 @@
                         <!-- Size -->
                         
                         <RadioGroup class="flex col-span-4 grid">
-                            <label for="size">Choose a size</label>
-                            <RadioGroupLabel class="sr-only">Choose a size</RadioGroupLabel>
+                            <label for="size" class="block mb-2 text-xl font-medium text-gray-900 dark:text-white rounded-lg" >Choose a size</label>
+                            
                             <div class="grid  gap-4 sm:grid-cols-2 lg:grid-cols-4 w-full">
                                 
                                 <RadioGroupOption
@@ -79,7 +78,7 @@
                                     :value="item"
                                     :disabled="!item.inStock">
                                     <button @click="changeStatus($event,item.size, list.size)" 
-                                    :class="[item.inStock ? 'cursor-pointer bg-white text-gray-900 shadow-sm w-full' : 'bg-gray-50 text-gray-200 w-full', 'group relative flex items-center justify-center rounded-md border py-3 px-4 text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6']">
+                                    :class="[item.inStock ? 'cursor-pointer bg-white text-gray-900 shadow-sm w-full' : 'bg-gray-50 text-gray-400 w-full', 'group relative flex items-center justify-center rounded-md border py-3 px-4 text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6']">
                                         <RadioGroupLabel as="span">{{ item.size }}</RadioGroupLabel>
                                         <span v-if="item.inStock" aria-hidden="true"></span>
                                         <span v-else aria-hidden="true" class="pointer-events-none absolute -inset-px rounded-md border-2 border-gray-200">
@@ -181,23 +180,41 @@
                             </div>
                         </div>
                         <div v-else class="flex justify-center mt-8">
-                            <div class="rounded-lg shadow-xl bg-gray-50 md:w-full ">
+                            <div class="rounded-lg shadow-xl bg-gray-50 md:w-full  ">
                                 <div class="m-4">
                                     <div class="flex flex-col justify-col"> <label class="inline-block mb-2 text-gray-500">Upload Image</label> </div>
                                     
                                         <div class="flex items-center justify-center w-full">
-                                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 border">
+                                            
+                                            <div  class="grid grid-cols-2 md:grid-cols-4 gap-4 ">
 
-<div class="image-preview" v-for="(item, index) in imageList" :key="index">
-    <div v-if="(index !=null)">
-        <img :src="item.image" class="object-scale-down object-center h-96 w-96 object-center max-w-full rounded-lg ">
-        <!-- Add the Remove button here -->
-<button @click="removeImage($event,index)" class="mt-2 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600">
-Remove
-</button>
+                                                <div class="image-preview h-64 max-w-full overflow-hidden" v-for="(item, index) in imageList" :key="index">
+                                                    <div v-if="(index != null)" class="flex items-center justify-between space-x-4">
+    <div class="animate-jump-in">
+        <button @click="removeImage($event, index)" class="absolute mt-2 px-4 py-2 transition duration-150 ease-in-out">
+            <svg fill="#b30000" height="16px" width="16px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 460.775 460.775" xml:space="preserve" stroke="#b30000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M285.08,230.397L456.218,59.27c6.076-6.077,6.076-15.911,0-21.986L423.511,4.565c-2.913-2.911-6.866-4.55-10.992-4.55 c-4.127,0-8.08,1.639-10.993,4.55l-171.138,171.14L59.25,4.565c-2.913-2.911-6.866-4.55-10.993-4.55 c-4.126,0-8.08,1.639-10.992,4.55L4.558,37.284c-6.077,6.075-6.077,15.909,0,21.986l171.138,171.128L4.575,401.505 c-6.074,6.077-6.074,15.911,0,21.986l32.709,32.719c2.911,2.911,6.865,4.55,10.992,4.55c4.127,0,8.08-1.639,10.994-4.55 l171.117-171.12l171.118,171.12c2.913,2.911,6.866,4.55,10.993,4.55c4.128,0,8.081-1.639,10.992-4.55l32.709-32.719 c6.074-6.075,6.074-15.909,0-21.986L285.08,230.397z"></path> </g></svg>
+        </button>
+        <img :src="item.image" class="object-scale-down object-center max-w-full rounded-lg">
     </div>
+    
 </div>
+    
+    
+    
+                                                    </div>
+                                    
+                                    
+                                        <div class="flex items-center justify-center w-full h-64 ">
+                                            <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-full  cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                                                <svg width="64px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M8 11L12 15M12 15L16 11M12 15V3M7 4.51555C4.58803 6.13007 3 8.87958 3 12C3 16.9706 7.02944 21 12 21C16.9706 21 21 16.9706 21 12C21 8.87958 19.412 6.13007 17 4.51555" stroke="#004d13" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+                                                Add more here!
+                                                <input multiple  @change="handleFileChange($event)" id="dropzone-file" type="file" class="hidden" />
+                                            </label>
+                                        </div> 
+                                
+
                                             </div>
+                                        
                                         </div> 
                                 </div>
                                 
@@ -253,6 +270,9 @@ Remove
     definePageMeta({
   layout: "admin-layout",
 });
+import { ref } from 'vue';
+
+
 
 
     import {Listbox,ListboxLabel,ListboxButton,ListboxOptions,ListboxOption , RadioGroup , RadioGroupLabel ,RadioGroupOption}   from '@headlessui/vue'    
@@ -278,8 +298,7 @@ Remove
                 { size: '3XL', inStock: false,amount:0}
                 ],
     }])
-
-
+    console.log(totalList)
     function increaseProduct(){
         totalList.value.push({
             hexColor:"",
@@ -296,6 +315,7 @@ Remove
         });
 
         canDecrease.value = true
+        console.log(totalList)
         console.log("incersesize")
     }
 
