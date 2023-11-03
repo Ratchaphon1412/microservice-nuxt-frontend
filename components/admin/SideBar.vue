@@ -5,7 +5,7 @@
 
             <AdminSideBarLink to ="/dashborad"> Dash Board</AdminSideBarLink>
             <AdminSideBarLink to ="/dashborad/productList"> Product</AdminSideBarLink>
-            <AdminSideBarLink to ="/dashborad/outOfStock"> Out of Stock</AdminSideBarLink>
+            <AdminSideBarLink to ="/dashborad/stock"> Out of Stock</AdminSideBarLink>
             <AdminSideBarLink to ="/dashborad/coupon"> Coupon Code</AdminSideBarLink>
             <AdminSideBarLink to ="/dashborad/orderList"> Order lists</AdminSideBarLink>
             

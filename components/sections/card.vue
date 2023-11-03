@@ -1,7 +1,8 @@
 <template>
+<nuxt-link :to="`/product/${id}`">
   <div class="relative flex flex-col mt-10 w-full">
     <div class="container">
-      <div class="max-w-md w-full bg-[#DBE2EF] shadow-lg rounded-xl p-6">
+      <div class="max-w-md w-full bg-[#DBE2EF] shadow-lg rounded-xl p-6 hover:shadow-xl">
         <div class="flex flex-col ">
           <div class="">
             <div class="h-62 w-full mb-3">
@@ -55,6 +56,7 @@
       </div>
     </div>
   </div>
+</nuxt-link>
 </template>
 
 <script setup lang="ts">
@@ -67,6 +69,7 @@ defineProps({
   listColor : Array<string>,
   price : Number,
   image : String,
+  id: undefined
 });
 
 
