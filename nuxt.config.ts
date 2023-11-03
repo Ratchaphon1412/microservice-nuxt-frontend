@@ -19,10 +19,6 @@ export default defineNuxtConfig({
     },
   },
 
-
-
-
-
   modules: [
     '@pinia/nuxt',
   ],
@@ -39,6 +35,7 @@ export default defineNuxtConfig({
 
   runtimeConfig:{
     public:{
+      apiBaseURL: "http://localhost/api/",
       URL_ENDPOINT: "https://fakestoreapi.com/products/",
       omise:{
         publicKey: process.env.OMISE_PUBLIC_KEY,

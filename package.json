@@ -22,14 +22,13 @@
     "@heroicons/vue": "^2.0.18",
     "@pinia/nuxt": "^0.4.11",
     "@vue-hero-icons/solid": "^1.7.2",
+    "axios": "^1.5.0",
     "bootstrap-icons": "^1.11.0",
     "flowbite": "^1.8.1",
     "flowbite-datepicker": "^1.2.2",
     "flowbite-vue": "^0.0.17-next.13",
     "omise": "^0.11.0",
-    "tailwindcss-animated": "^1.0.1",
-    "axios": "^1.5.0"
-    
+    "tailwindcss-animated": "^1.0.1"
   },
   "overrides": {
     "vue": "latest"
