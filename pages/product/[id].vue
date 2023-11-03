@@ -17,23 +17,31 @@
         </ol>
       </nav>
       
-      <section class="flex mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8 gap-10">
-          <!-- Image gallery -->
-          <aside id="selected" class="m-4 sm:w-1/4 md:w-1/5 lg:w-1/6 p-6 overflow-auto h-64">
-            <div class="lg:flex lg:items-start">
-              <div class="mt-2 w-full lg:order-1 lg:w-32 lg:flex-shrink-0">
-                <div v-for="image in product.image_products" :key="image.id" class="flex items-center lg:flex-col ">
-                  <div>
-                    <button @click="change(image.image_path)" type="button" class="flex-0 aspect-square mb-3 sm:h-20 md:h-24 lg:h-32 overflow-hidden rounded-lg border-2">
-                      <img class="h-full w-full object-cover" :src="image.image_path">
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </aside>
-          <div id="preview" class="p-6 items-center">
-            <img class="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-2xl" :src="previewImage" alt="">
+      <section class="grid grid-cols-11 gap-10 pt-6 h-[700px]">
+      <!-- Image gallery -->
+      <div></div>
+      <div></div>
+      
+      
+      <aside class="col-span-1 h-[900px] lg:w-32">
+  <div class="lg:flex lg:items-start overflow-y-scroll h-4/6">
+    <div class="mt-2 w-full lg:order-1 lg:w-32 lg:flex-shrink-0">
+      <div v-for="image in product.image_products" :key="image.id" class="flex items-center lg:flex-col">
+        <div>
+          <button @click="change(image.image_path)" type="button" class="flex-0 aspect-square mb-3 sm:h-20 md:h-24 lg:h-32 overflow-hidden rounded-lg border-2">
+            <img class="h-full w-full object-cover" :src="image.image_path">
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</aside>
+
+          <div></div>
+          
+          
+          <div class="col-span-4 ">
+            <img :src="previewImage" class="rounded-lg object-none object-center w-[650px] h-[650px]" alt="Preview Image">
           </div>
       </section>
 
@@ -46,7 +54,7 @@
               <div class="mt-4 lg:row-span-3 lg:mt-0">
                   <h2 class="sr-only">Product information</h2>
 
-                  <p class=" mt-4 text-3xl tracking-tight text-gray-900">{{ product.price }} ฿</p>
+                  <p class=" mt-4 text-5xl tracking-tight text-gray-900">{{ product.price }} ฿</p>
 
                   <form class="mt-10">
                       <!-- Colors -->
@@ -57,9 +65,14 @@
                           <RadioGroupLabel class="sr-only">Choose a color</RadioGroupLabel>
                           <div class="flex items-center space-x-3">
                           <RadioGroupOption @click="radioColor(item.id)" v-for="item in product.product_colors" :key="item.id" :value="item.id" v-slot="{ active, checked }">
-                              <div :class="[active && checked ? 'ring ring-offset-1' : '', !active && checked ? 'ring-2' : '', 'relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none']">
+                              
+                              <div v-if = "colorChoose == item.id " class ="border-2 border-zinc-950 relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none">
                                 <RadioGroupLabel as="span" class="sr-only">{{ item.color.name }}</RadioGroupLabel>
-                                <span aria-hidden="true" class="h-8 w-8 rounded-full border border-black border-opacity-10" :style="{ backgroundColor: item.color.hex_color }" />
+                                <span aria-hidden="true" class="h-10 w-10 rounded-full border border-black border-opacity-10" :style="{ backgroundColor: item.color.hex_color }" />
+                              </div>
+                              <div v-else class="relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none">
+                                <RadioGroupLabel as="span" class="sr-only">{{ item.color.name }}</RadioGroupLabel>
+                                <span aria-hidden="true" class="h-10 w-10 rounded-full border border-black border-opacity-10" :style="{ backgroundColor: item.color.hex_color }" />
                               </div>
                           </RadioGroupOption>
                           </div>
@@ -160,7 +173,8 @@ import { StarIcon } from '@heroicons/vue/20/solid'
 import { RadioGroup, RadioGroupLabel, RadioGroupOption ,Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
 import { list } from 'postcss';
 
-const route = useRoute()
+const route = useRoute();
+const colorChoose = ref();
 const { data: product, error } = await baseFetch<any>(`product/${route.params.id}`, {})
 const { data: products } = await baseFetch<any>("product/format", {})
 
@@ -192,6 +206,7 @@ const formData = reactive({
 // ]);
 
 function radioColor(productColorId:any) {
+  colorChoose.value = productColorId
   formData.product_color = product.value.product_colors.find(item => item.id === productColorId)
   console.log(formData.product_color)
 }
