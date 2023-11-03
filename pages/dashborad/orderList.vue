@@ -6,7 +6,6 @@
     <div class="flex flex-wrap flex-col">
 
 
-<<<<<<< HEAD
                       <div>
                         <div id="bulk-actions">
                           <label class="flex flex-wrap flex-row">
@@ -357,9 +356,6 @@
                         <!-- pagination end -->
                         </div>
                       </div>
-=======
-      <div class="m-8 bg-white dark:bg-gray-800 rounded-lg shadow-lg ">
->>>>>>> feature/Dashboard
 
         <div class="flex flex-wrap flex-row mx-4">
           <div class="flex-shrink max-w-full px-4 w-full">
