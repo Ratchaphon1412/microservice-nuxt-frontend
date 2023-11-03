@@ -69,8 +69,9 @@
             </div>
         </div>
     </div>
-      </template>
-    <script setup lang="ts">
+</template>
+
+<script setup lang="ts">
     const items = ref([{
         id:'1', counter: 1, isOrder: false, 
             color: ['#f6cda8', '#d89d94', '#dd6b6c', '#875d71', '#5b5b5b']
@@ -82,9 +83,9 @@
     ])
     const selectAll = ref(false)
     const selectedOrderItems = ref([])
-    
+
     const isColorFormVisible = ref(false);
-    
+
     function selectAllItems() {
         if (selectAll.value) {
             // Select all items by getting their keys
@@ -93,7 +94,7 @@
                 item.isOrder = true;
             });
             console.log(selectedOrderItems)
-    
+
         } else {
             // Deselect all items
             selectedOrderItems.value = [];
@@ -101,7 +102,7 @@
                 item.isOrder = false;
             });
             console.log(selectedOrderItems)
-    
+
         }
     }
     function updateCounter(item:{counter: number}, newCounterValue:number) {
@@ -119,13 +120,13 @@
         if (index !== -1) {
             selectedOrderItems.value.splice(index, 1);
         }
-    
+
         const itemIndex = items.value.findIndex((element) => element.id === item.id);
         if (itemIndex !== -1) {
             items.value.splice(itemIndex, 1);
         }
     }
     function addToOrder() {
-    
+
     }
-    </script>
+</script>

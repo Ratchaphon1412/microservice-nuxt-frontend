@@ -9,20 +9,39 @@ export default defineNuxtConfig({
       ]
     }
   },
+
   css:['~/assets/css/main.css'],
+
   postcss: {
     plugins: {
       tailwindcss: {},
       autoprefixer: {},
     },
   },
-  devtools: { enabled: true },
+
+  modules: [
+    '@pinia/nuxt',
+  ],
+  devtools: { 
+    enabled: true 
+  },
+  pinia: {
+    autoImports: [
+      // automatically imports `defineStore`
+      'defineStore', // import { defineStore } from 'pinia'
+      ['defineStore', 'definePiniaStore'], // import { defineStore as definePiniaStore } from 'pinia'
+    ],
+  },
+
   runtimeConfig:{
     public:{
+      apiBaseURL: "http://localhost/api/",
+      URL_ENDPOINT: "https://fakestoreapi.com/products/",
       omise:{
         publicKey: process.env.OMISE_PUBLIC_KEY,
       }
     }
   },
-
+  
+  ssr: true
 })
