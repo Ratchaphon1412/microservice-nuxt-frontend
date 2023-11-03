@@ -62,11 +62,7 @@
                 </div>
                 <div class="text-2xl text-black font-semibold mt-1">฿ 240.00</div>
                 
-                <div class="flex space-x-2 text-sm font-medium justify-start mt-4">
-                  <button class=" transition ease-in duration-300 inline-flex items-center text-sm font-medium mb-2 md:mb-0 bg-[#b54545] px-5 py-2 hover:shadow-lg tracking-wider text-white rounded-full hover:bg-[#FF0000]">
-                    <span>Add Cart</span>
-                  </button>
-                </div>
+                
               </div>
             </div>
           </div>

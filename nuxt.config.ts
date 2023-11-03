@@ -10,6 +10,7 @@ export default defineNuxtConfig({
     }
   },
   css:['~/assets/css/main.css'],
+  modules: ['@nuxt/ui'],
   postcss: {
     plugins: {
       tailwindcss: {},
