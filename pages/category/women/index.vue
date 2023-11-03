@@ -155,32 +155,40 @@
                <!-- Filter section, show/hide based on section state. -->
                <div class="border-t border-gray-200">
                    <h1 class="text-xl text-start mt-4">Colors</h1>
-                       <RadioGroup v-model="selectedColor" class="mt-4">
+                        <!-- <RadioGroup>
+                            <RadioGroupLabel class="sr-only">Choose a color</RadioGroupLabel>
+                            <div class="flex items-center space-x-3">
+                                <RadioGroupOption as="template" @click="filterSize(color)" v-for="color in colors" :key="color.name" :value="color.name" v-slot="{ active, checked }">
+
+                                </RadioGroupOption>
+                            </div>
+                        </RadioGroup> -->
+                       <RadioGroup v-model="filterData.selectedColor" class="mt-4">
                            <RadioGroupLabel class="sr-only">Choose a color</RadioGroupLabel>
                            <div class="lg:grid lg:max-w-7xl lg:grid-cols-4 lg:grid-rows-[auto,auto,1fr] p-2 gap-2">
-                               <RadioGroupOption as="template" v-for="color in colors" :key="colors.name" :value="color" v-slot="{ active, checked }">
-                                   <div :class="[color.selectedClass, active && checked ? 'ring ring-offset-1' : '', !active && checked ? 'ring-2' : '', 'relative -m-0.5 cursor-pointer flex items-center justify-center rounded-full p-0.5 focus:outline-none']">
+                               <RadioGroupOption @click="filterColor(color.name)" as="template" v-for="color in colors" :key="color.name" :value="color.class" v-slot="{ active, checked }">
+                                   <div :class="[active && checked ? 'ring ring-offset-1' : '', !active && checked ? 'ring-2' : '', 'relative -m-0.5 cursor-pointer flex items-center justify-center rounded-full p-0.5 focus:outline-none']">
                                        <RadioGroupLabel as="span" class="sr-only">{{ color.name }}</RadioGroupLabel>
-                                       <span aria-hidden="true" :class="[color.class, 'h-8 w-8 rounded-full border border-black border-opacity-10']" />
+                                       <span aria-hidden="true" class="h-8 w-8 rounded-full border border-black border-opacity-10" :style="{ backgroundColor: color.class }" />
                                    </div>
                                </RadioGroupOption>
                            </div>
-                       </RadioGroup>
+                       </RadioGroup> 
                </div>
                <div class="border-t border-gray-200">
                    <h1 class="text-xl text-start mt-4">Size</h1>
-                   <RadioGroup v-model="selectedSize" class="mt-4">
+                   <RadioGroup v-model="filterData.selectedSize" class="mt-4">
                        <RadioGroupLabel class="sr-only">Choose a size</RadioGroupLabel>
                        <div class="grid grid-cols-3 gap-4 md:grid-cols-3 ">
-                           <RadioGroupOption as="template" v-for="size in sizes" :key="size" :value="size"  v-slot="{ active, checked }">
-                               <div :class="[size.selectedClass, active && checked ? 'ring-1 ring-[#112D4E]' : '', !active && checked ? '' : '', 'border-black border-opacity-10 group relative flex items-center justify-center rounded-md border text-lg font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1']">
+                           <RadioGroupOption @click="filterSize(size)" as="template" v-for="size in sizes" :key="size" :value="size"  v-slot="{ active, checked }">
+                               <div :class="[size, active && checked ? 'ring-1 ring-[#112D4E]' : '', !active && checked ? '' : '', 'border-black border-opacity-10 group relative flex items-center justify-center rounded-md border text-lg font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1']">
                                    <RadioGroupLabel as="span" class="p-2">{{ size }}</RadioGroupLabel>
                                </div>   
                            </RadioGroupOption>
                        </div>
                    </RadioGroup>
                </div>
-               <div class="border-t border-gray-200 mt-4">
+               <!-- <div class="border-t border-gray-200 mt-4">
                    <h1 class="text-xl text-start mt-4">Cost</h1>
                    <div class="p-4 flex flex-col gap-4">
                        <div class="flex gap-1">
@@ -200,51 +208,110 @@
                            </ul>
                        </div>
                    </div>
-               </div>
+               </div> -->
                <div class="border-t border-gray-200 mt-4">
                    <h1 class="text-xl text-start mt-4">Cost</h1>
                    <div class="p-4 flex flex-col gap-4 ">
-                       <div class="flex gap-1">
-                           <input type="radio" name="radio-1" class="radio"/>
-                           <h1>less than ฿500</h1>
-                       </div>
-                       <div class="flex gap-1">
-                           <input type="radio" name="radio-1" class="radio" />
-                           <h1>฿500 - ฿999</h1>
-                       </div>
-                       <div class="flex gap-1">
-                           <input type="radio" name="radio-1" class="radio" />
-                           <h1>more than ฿1000</h1>
+                       <div @click="filterCost(cost.cost)" class="flex gap-1" v-for="cost in listCost">
+                           <input type="radio" name="radio-1" class="radio">
+                           <h1>{{ cost.name }}</h1>
                        </div>
                    </div>
                </div>
 
            </aside>
            <div class="mx-auto max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16">
-               <SectionsCard/>
-               <SectionsCard/>
-               <SectionsCard/>
-               <SectionsCard/>
-               <SectionsCard/>
-               <SectionsCard/>
+            <SectionsCard v-for="list in filterList" 
+            :name="list.name" 
+            :description="list.description" 
+            :gender="list.gender"
+            :listSize="list.listSize"
+            :listColor="list.listColor"
+            :price="list.price"
+            :image="list.image"
+            />
            </div>
        </div>
    </div>
 </template>
 
-<script setup>
-   import { RadioGroup, RadioGroupLabel, RadioGroupOption ,Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
-   import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
+<script setup lang="ts">
+   import { RadioGroup, RadioGroupLabel, RadioGroupOption } from '@headlessui/vue'
+
    const colors = [
-       { name: 'darkBlue', class: 'bg-[#112D4E]', selectedClass: 'ring-gray-400' },
-       { name: 'softblue', class: 'bg-[#3F72AF]', selectedClass: 'ring-gray-400' },
-       { name: 'White', class: 'bg-[#DBE2EF]', selectedClass: 'ring-gray-400' },
-       { name: 'darkBlue', class: 'bg-[#112D4E]', selectedClass: 'ring-gray-400' },
-       { name: 'darkBlue', class: 'bg-[#112D4E]', selectedClass: 'ring-gray-400' },
-       { name: 'darkBlue', class: 'bg-[#112D4E]', selectedClass: 'ring-gray-400' },
+       { name: 'white', class: '#f5f5f5', selectedClass: 'ring-gray-400' },
+       { name: 'gray', class: '#a6a4a4', selectedClass: 'ring-gray-400' },
+       { name: 'black', class: '#000000', selectedClass: 'ring-gray-400' },
+       { name: 'pink', class: '#ed87de', selectedClass: 'ring-gray-400' },
+       { name: 'red', class: '#cf1b3f', selectedClass: 'ring-gray-400' },
+       { name: 'green', class: '#57ab3e', selectedClass: 'ring-gray-400' },
    ]
    const sizes =['xss','xs','s','m','l','xl','2xl','3xl']
-   
+   const listCost = [
+                {name: 'less than ฿500',cost:500},
+                {name: '฿500 - ฿999',cost:999},
+                {name: 'more than ฿1000',cost:1000}
+            ]
+
+   const { data: products } = await baseFetch<any>("product/format", {});
+   console.log(products);
+
+
+   const filterList = ref({
+       name: '',
+       description : '',
+       gender : '',
+       listSize : [],
+       listColor : [],
+       price : 0,
+       image : '',
+   })
+
+    filterList.value = products.value.map((item: any) => {
+    return {
+        name: item.name,
+        description: item.description,
+        gender : item.gender,
+        listSize : item.listSize,
+        listColor : item.listColor,
+        price : item.price,
+        image : item.image,
+    }
+   })
+   console.log(filterList.value.length);
+
+    const filterData = reactive({
+    selectedColor: '',
+    selectedSize: '',
+    cost : '',
+    })
+    function filterSize(Size:any){
+        filterData.selectedSize = Size;
+        console.log(filterData);
+        filter()
+    }
+
+    function filterColor(color:any){
+        filterData.selectedColor = color;
+        console.log(filterData);
+        filter()
+    }
+
+    function filterCost(cost:string){
+        filterData.cost = cost;
+        console.log(filterData);
+        filter()
+    }   
+
+    async function filter(){
+        const {data: filter,error} = await baseFetch<any>("product/filter",{
+            method : 'POST',
+            body : filterData
+        })
+        console.log(filter.value);
+    }
+
+
 </script>
 
 
