@@ -17,12 +17,12 @@
         </ol>
       </nav>
       
-      <section class="flex mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8 gap-10 ">
+      <section class="flex mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8 gap-10">
           <!-- Image gallery -->
-          <aside id="selected" class="m-4 sm:w-1/4 md:w-1/5 lg:w-1/6 p-6">
+          <aside id="selected" class="m-4 sm:w-1/4 md:w-1/5 lg:w-1/6 p-6 overflow-auto h-64">
             <div class="lg:flex lg:items-start">
               <div class="mt-2 w-full lg:order-1 lg:w-32 lg:flex-shrink-0">
-                <div v-for="image in product.image_products" :key="image.id" class="flex items-center lg:flex-col">
+                <div v-for="image in product.image_products" :key="image.id" class="flex items-center lg:flex-col ">
                   <div>
                     <button @click="change(image.image_path)" type="button" class="flex-0 aspect-square mb-3 sm:h-20 md:h-24 lg:h-32 overflow-hidden rounded-lg border-2">
                       <img class="h-full w-full object-cover" :src="image.image_path">
@@ -139,6 +139,7 @@
         <!-- card1 -->
         <div class="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16">
           <SectionsCard v-for="list in products" 
+          :id="list.id" 
           :name="list.name" 
           :description="list.description" 
           :gender="list.gender"
@@ -167,6 +168,7 @@ console.log(products.value)
 
 
 const previewImage = useState<string>(undefined)
+previewImage.value = product.value.image_products[0].image_path
 const change = function (_image:  string) {
     previewImage.value = _image
 }
