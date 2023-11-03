@@ -12,7 +12,7 @@
 
         </div>
 
-                <div class="flex w-full justify-between">
+                <div class="flex h-screen justify-between text-black">
                 <AdminSideBar/>
 
                    
