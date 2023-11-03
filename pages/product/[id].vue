@@ -29,7 +29,7 @@
       <div v-for="image in product.image_products" :key="image.id" class="flex items-center lg:flex-col">
         <div>
           <button @click="change(image.image_path)" type="button" class="flex-0 aspect-square mb-3 sm:h-20 md:h-24 lg:h-32 overflow-hidden rounded-lg border-2">
-            <img class="h-full w-full object-cover" :src="image.image_path">
+            <img class="h-full w-full object-cover animate-fade-up" :src="image.image_path">
           </button>
         </div>
       </div>
@@ -40,15 +40,16 @@
           <div></div>
           
           
-          <div class="col-span-4 ">
-            <img :src="previewImage" class="rounded-lg object-none object-center w-[650px] h-[650px]" alt="Preview Image">
+          <div class="col-span-4 " >
+            <img :src="previewImage" class=" rounded-lg object-none object-center w-[650px] h-[650px]"  alt="Preview Image">
           </div>
+          
       </section>
 
       <section class="flex-col" >
           <div class="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16">
               <div class="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
-                <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-3xl">{{ product.name }}</h1>
+                <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-3xl mb-5">{{ product.name }}</h1>
               </div>
               <!-- Options -->
               <div class="mt-4 lg:row-span-3 lg:mt-0">
@@ -63,10 +64,10 @@
 
                         <RadioGroup v-model="formData.product_color" class="mt-4">
                           <RadioGroupLabel class="sr-only">Choose a color</RadioGroupLabel>
-                          <div class="flex items-center space-x-3">
+                          <div class="flex items-center space-x-3 h-10">
                           <RadioGroupOption @click="radioColor(item.id)" v-for="item in product.product_colors" :key="item.id" :value="item.id" v-slot="{ active, checked }">
                               
-                              <div v-if = "colorChoose == item.id " class ="border-2 border-zinc-950 relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none">
+                              <div v-if = "colorChoose == item.id " class ="animate-jump border-2 border-zinc-950 relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none">
                                 <RadioGroupLabel as="span" class="sr-only">{{ item.color.name }}</RadioGroupLabel>
                                 <span aria-hidden="true" class="h-10 w-10 rounded-full border border-black border-opacity-10" :style="{ backgroundColor: item.color.hex_color }" />
                               </div>
@@ -92,8 +93,8 @@
                           <RadioGroupOption v-model="formData.size" v-for="stock in formData.product_color.stocks" :key="stock.size" :value="stock.size" :disabled="!stock.quantity" v-slot="{ active, checked }">
                               <div :class="[stock.quantity > 0 ? 'cursor-pointer bg-white text-gray-900 shadow-sm' : 'cursor-not-allowed bg-gray-50 text-gray-200', active ? 'ring-2 ring-[#112D4E]' : '', 'group relative flex items-center justify-center rounded-md border py-3 px-4 text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6']">
                               <RadioGroupLabel as="span">{{ stock.size }}</RadioGroupLabel>
-                              <span v-if="stock.quantity > 0" :class="[active ? 'border' : 'border-2', checked ? 'border-[#112D4E]' : 'border-transparent', 'pointer-events-none absolute -inset-px rounded-md']" aria-hidden="true" />
-                              <span v-else aria-hidden="true" class="pointer-events-none absolute -inset-px rounded-md border-2 border-gray-200">
+                              <span v-if="stock.quantity > 0" :class="[active ? 'animate-jump border' : 'border-2', checked ? 'border-[#112D4E]' : 'border-transparent', 'pointer-events-none absolute -inset-px rounded-md']" aria-hidden="true" />
+                              <span v-else aria-hidden="true" class="animate-jump pointer-events-none absolute -inset-px rounded-md border-2 border-gray-200">
                                   <svg class="absolute inset-0 h-full w-full stroke-2 text-gray-200" viewBox="0 0 100 100" preserveAspectRatio="none" stroke="currentColor">
                                   <line x1="0" y1="100" x2="100" y2="0" vector-effect="non-scaling-stroke" />
                                   </svg>
@@ -120,33 +121,32 @@
 
                   <div class="mx-auto w-full rounded-2xl bg-white p-2">
                       <Disclosure v-slot="{ open }">
-                          <DisclosureButton
-                              class="flex w-full rounded-lg bg-[#DBE2EF] px-4 py-2 text-left text-sm font-medium text-[#112D4E] hover:bg-[#3F72AF] hover:bg-opacity-40 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
-                              <span class="text-2xl">Description</span>
+                          
+                              <span class="text-2xl text-black ">Description</span>
+                              <div class="flex border-b-2 mt-5">
                               <!-- <ChevronUpIcon
                               :class="open ? 'rotate-180 transform' : ''"
                               class="h-5 w-5 text-purple-500"
                               /> -->
-                          </DisclosureButton>
-                          <DisclosurePanel class="px-4 pt-4 pb-2 text-sm text-gray-500">
+                          </div>
+                          <div class="px-4 pt-4 pb-2 text-sm text-gray-500 mb-10">
                               <span class="text-xl text-gray-900">{{ product.description }}</span>
-                          </DisclosurePanel>
+                          </div>
                       </Disclosure>
                       <Disclosure as="div" class="mt-2" v-slot="{ open }">
-                          <DisclosureButton
-                              class="flex w-full rounded-lg bg-[#DBE2EF] px-4 py-2 text-left text-sm font-medium text-[#112D4E] hover:bg-[#3F72AF] hover:bg-opacity-40 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
-                              <span class="text-2xl">Materials</span>
-                              <!-- <ChevronUpIcon
+                        <span class="text-2xl text-black ">Materials</span>
+                              <div class="flex border-b-2 mt-5">
+                              <!-- <ChevronUpIconMaterials
                               :class="open ? 'rotate-180 transform' : ''"
                               class="h-5 w-5 text-purple-500"
                               /> -->
-                          </DisclosureButton>
-                          <DisclosurePanel class="px-4 pt-4 pb-2 text-sm text-gray-500">
-                            <span class="text-xl text-gray-900">{{ product.Materials }}</span>
+                          </div>
+                          <div class="px-4 pt-4 pb-2 text-sm text-gray-500">
+                            <span class="text-xl text-gray-900 ">{{ product.Materials }}</span>
                               <!-- <span v-for="Materials in product.Materials" :key="Materials" class="text-black">
                                   <p class="text-lg text-gray-900">{{ Materials }}</p>
                               </span> -->
-                          </DisclosurePanel>
+                          </div>
                       </Disclosure>
                   </div>
                   </div> 
@@ -181,6 +181,7 @@ import { RadioGroup, RadioGroupLabel, RadioGroupOption ,Disclosure, DisclosureBu
 import { list } from 'postcss';
 
 const route = useRoute();
+
 const colorChoose = ref();
 const { data: product, error } = await baseFetch<any>(`product/${route.params.id}`, {})
 const { data: products } = await baseFetch<any>("product/format", {})
@@ -191,6 +192,7 @@ console.log(products.value)
 const previewImage = useState<string>(undefined)
 previewImage.value = product.value.image_products[0].image_path
 const change = function (_image:  string) {
+
     previewImage.value = _image
 }
 
