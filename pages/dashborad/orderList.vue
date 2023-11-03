@@ -3,7 +3,7 @@
     <div class="flex-shrink max-w-full px-4 w-[500px]">
       <p class="text-3xl font-poppin mt-3 mb-5">Order list</p>
     </div>
-    <div class="flex flex-wrap flex-col">
+                    <div class="flex flex-wrap flex-col">
 
 
                       <div>
@@ -356,6 +356,7 @@
                         <!-- pagination end -->
                         </div>
                       </div>
+                    </form>
 
         <div class="flex flex-wrap flex-row mx-4">
           <div class="flex-shrink max-w-full px-4 w-full">
@@ -898,7 +899,6 @@
         </div>
       </div>
     </div>
-  </div>
 </template>
 
 <script setup lang="ts">
