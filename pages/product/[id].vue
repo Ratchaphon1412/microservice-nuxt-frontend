@@ -17,10 +17,11 @@
         </ol>
       </nav>
       
-      <section class="flex mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8 gap-10">
+      <section class="grid grid-cols-3 mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8 gap-10 pt-5">
           <!-- Image gallery -->
-          <aside id="selected" class="m-4 sm:w-1/4 md:w-1/5 lg:w-1/6 p-6 overflow-auto h-64">
-            <div class="lg:flex lg:items-start">
+          <div class="content-center grid grid-cols-1">
+          <aside id="selected" class=" m-4 sm:w-3/4 md:w-4/5 lg:w-3/4 p-6 overflow-auto h-3/4">
+            <div class="lg:flex lg:items-start ">
               <div class="mt-2 w-full lg:order-1 lg:w-32 lg:flex-shrink-0">
                 <div v-for="image in product.image_products" :key="image.id" class="flex items-center lg:flex-col ">
                   <div>
@@ -32,8 +33,10 @@
               </div>
             </div>
           </aside>
-          <div id="preview" class="p-6 items-center">
-            <img class="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-2xl" :src="previewImage" alt="">
+        </div>
+          
+          <div id="preview" class=" col-span-2  grid grid-cols-1">
+            <img class=" max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-2xl bg-yellow-300 w-[600px] h-[600px]" :src="previewImage" alt="">
           </div>
       </section>
 
