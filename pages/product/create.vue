@@ -1,7 +1,7 @@
 <template>
     <div class="animate-fade-down flex-col w-full p-2">
          <div class="flex-shrink max-w-full px-4 w-full">   
-                                 <p class="text-4xl text-gray-900 font-poppin mt-3 mb-5">Create Product</p>
+                <p class="text-4xl text-gray-900 font-poppin mt-3 mb-5">Create Product</p>
          </div>     
  <!-- start -->
  
@@ -62,103 +62,72 @@
                     </div> 
                     <div class="mt-3">
                     <!-- product size & color -->
-                    <section class="flex gap-5 grid grid-cols-4 lg:grid-cols-5  border-b border-t p-4 w-full" v-for="list in totalList">
-                        <div class="grid col-span-4 grid-cols-4 gap-4 lg:col-span-1">
-                            <!-- Color -->
-                        <div id="color" class="flex flex-col col-span-2 lg:col-span-4" >
-                            <label for="hex_color"></label>
-                            <div class="bg-white rounded-lg w-full col-span-3">
-                                <div class="flex">
-                                    <label for="hex_color" class="block mb-2 text-xl font-medium text-gray-900 dark:text-white rounded-lg">hexColor</label>
-                                    <div v-if="list.hex_color" :style="{ backgroundColor: list.hex_color }" class="w-6 h-6 rounded-full mx-3 my-1"></div>
-                                </div>
+                        <section class="gap-5 grid grid-cols-4 lg:grid-cols-5  border-b border-t p-4 w-full" v-for="list in totalList">
+                            <div class="grid col-span-4 grid-cols-4 gap-4 lg:col-span-1">
+                                <!-- Color -->
+                            <div id="color" class="flex flex-col col-span-2 lg:col-span-4" >
+                                <label for="hex_color"></label>
+                                <div class="bg-white rounded-lg w-full col-span-3">
+                                    <div class="flex">
+                                        <label for="hex_color" class="block mb-2 text-xl font-medium text-gray-900 dark:text-white rounded-lg">hexColor</label>
+                                        <div v-if="list.hex_color" :style="{ backgroundColor: list.hex_color }" class="w-6 h-6 rounded-full mx-3 my-1"></div>
+                                    </div>
 
-                                <input v-model="list.hex_color" class="w-full border-b-2 border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-lg font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-[#112D4E] focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
-                                    name="hex_color" id="hex_color"/>
+                                    <input v-model="list.hex_color" class="w-full border-b-2 border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-lg font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-[#112D4E] focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
+                                        name="hex_color" id="hex_color"/>
 
-                                <div class="flex">
-                                    <label for="name" class="block mb-2 text-xl font-medium text-gray-900 dark:text-white rounded-lg">Name</label>
+                                    <div class="flex">
+                                        <label for="name" class="block mb-2 text-xl font-medium text-gray-900 dark:text-white rounded-lg">Name</label>
+                                    </div>
+                                    <input v-model="list.name" class="w-full border-b-2 border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-lg font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-[#112D4E] focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
+                                        name="name" id="name"/>
                                 </div>
-                                <input v-model="list.name" class="w-full border-b-2 border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-lg font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-[#112D4E] focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
-                                    name="name" id="name"/>
-                            </div>
-                           
-                        </div>
-                        
-                        
-                        </div>
-                        
-                        
-                        <!-- Size -->
-                        
-                        <RadioGroup class="flex col-span-4 grid">
-                            <label for="size" class="block mb-2 text-xl font-medium text-gray-900 dark:text-white rounded-lg" >Choose a size</label>
                             
-                            <div class="grid  gap-4 sm:grid-cols-2 lg:grid-cols-4 w-full">
+                            </div>
+                            
+                            
+                            </div>
+                            
+                            
+                            <!-- Size -->
+                            
+                            <RadioGroup class="flex col-span-4 grid">
+                                <label for="size" class="block mb-2 text-xl font-medium text-gray-900 dark:text-white rounded-lg" >Choose a size</label>
                                 
-                                <RadioGroupOption
-                                    v-for="item in list.stock"
-                                    :key="item.size"
-                                    :value="item"
-                                    :disabled="!item.inStock">
-                                    <button @click="changeStatus($event,item.size, list.stock)" 
-                                    :class="[item.inStock ? 'cursor-pointer bg-white text-gray-900 shadow-sm w-full' : 'bg-gray-50 text-gray-400 w-full', 'group relative flex items-center justify-center rounded-md border py-3 px-4 text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6']">
-                                        <RadioGroupLabel as="span">{{ item.size }}</RadioGroupLabel>
-                                        <span v-if="item.inStock" aria-hidden="true"></span>
-                                        <span v-else aria-hidden="true" class="pointer-events-none absolute -inset-px rounded-md border-2 border-gray-200">
-                                            <svg class="absolute inset-0 h-full w-full stroke-2 text-gray-200" viewBox="0 0 100 100" preserveAspectRatio="none" stroke="currentColor">
-                                                <line x1="0" y1="100" x2="100" y2="0" vector-effect="non-scaling-stroke" />
-                                            </svg>
-                                        </span>
-                                    </button>
-                                    <div v-if="item.inStock" class="flex flex-col py-3 justify-center">
-                                        <div class="grid grid-cols-2 lg:grid-cols-4 animate-fade-down animate-ease-in animate-duration-500">
-                                            <div class="bg-white rounded-lg w-full lg:col-span-3 ">
-                                                <div class="relative bg-inherit ">
-                                                <input v-model="item.quantity" type="text" id="size" name="size" class="peer bg-transparent h-10 rounded-lg text-black placeholder-transparent ring-gray-500 focus:ring-sky-600 focus:outline-none focus:border-rose-600 w-full" placeholder="Type inside me"/>
-                                                <label for="size" class="absolute cursor-text left-0 -top-3 text-sm text-gray-500 bg-inherit mx-1 px-1 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-2 peer-focus:-top-3 peer-focus:text-sky-600 peer-focus:text-sm transition-all">Size {{ item.size }}</label>
+                                <div class="grid  gap-4 sm:grid-cols-2 lg:grid-cols-4 w-full">
+                                    
+                                    <RadioGroupOption
+                                        v-for="item in list.stock"
+                                        :key="item.size"
+                                        :value="item"
+                                        :disabled="!item.inStock">
+                                        <button @click="changeStatus($event,item.size, list.stock)" 
+                                        :class="[item.inStock ? 'cursor-pointer bg-white text-gray-900 shadow-sm w-full' : 'bg-gray-50 text-gray-400 w-full', 'group relative flex items-center justify-center rounded-md border py-3 px-4 text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6']">
+                                            <RadioGroupLabel as="span">{{ item.size }}</RadioGroupLabel>
+                                            <span v-if="item.inStock" aria-hidden="true"></span>
+                                            <span v-else aria-hidden="true" class="pointer-events-none absolute -inset-px rounded-md border-2 border-gray-200">
+                                                <svg class="absolute inset-0 h-full w-full stroke-2 text-gray-200" viewBox="0 0 100 100" preserveAspectRatio="none" stroke="currentColor">
+                                                    <line x1="0" y1="100" x2="100" y2="0" vector-effect="non-scaling-stroke" />
+                                                </svg>
+                                            </span>
+                                        </button>
+                                        <div v-if="item.inStock" class="flex flex-col py-3 justify-center">
+                                            <div class="grid grid-cols-2 lg:grid-cols-4 animate-fade-down animate-ease-in animate-duration-500">
+                                                <div class="bg-white rounded-lg w-full lg:col-span-3 ">
+                                                    <div class="relative bg-inherit ">
+                                                    <input v-model="item.quantity" type="text" id="size" name="size" class="peer bg-transparent h-10 rounded-lg text-black placeholder-transparent ring-gray-500 focus:ring-sky-600 focus:outline-none focus:border-rose-600 w-full" placeholder="Type inside me"/>
+                                                    <label for="size" class="absolute cursor-text left-0 -top-3 text-sm text-gray-500 bg-inherit mx-1 px-1 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-2 peer-focus:-top-3 peer-focus:text-sky-600 peer-focus:text-sm transition-all">Size {{ item.size }}</label>
+                                                </div>
+                                                
                                             </div>
+                                            <label class=" place-self-center ">ชิ้น</label>
                                             
+                                            </div>
                                         </div>
-                                        <label class=" place-self-center ">ชิ้น</label>
-                                        
-                                        </div>
-                                    </div>
-                                </RadioGroupOption>
-                            </div>
-                        </RadioGroup>
-                        
-                        <!-- <RadioGroup class="flex">
-                            <RadioGroupLabel class="sr-only">Choose a size</RadioGroupLabel>
-                            <div class="grid grid-cols-4 gap-4 sm:grid-cols-8 lg:grid-cols-4">
-                                <RadioGroupOption  @click="changeStatus(item.size , list.size)" as="template" v-for="item in list.size"  :value="item" :disabled="!item.inStock" v-slot="{ active, checked }" >
-                                    <span :class="[item.inStock ? 'cursor-pointer bg-white text-gray-900 shadow-sm' : 'bg-gray-50 text-gray-200', active ? '' : '', 'group relative flex items-center justify-center rounded-md border py-3 px-4 text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6']">
-                                        <RadioGroupLabel as="span">{{ item.size }}</RadioGroupLabel>
-                                        <span v-if="item.inStock" aria-hidden="true" />
-                                        <span v-else aria-hidden="true" class="pointer-events-none absolute -inset-px rounded-md border-2 border-gray-200">
-                                            <svg class="absolute inset-0 h-full w-full stroke-2 text-gray-200" viewBox="0 0 100 100" preserveAspectRatio="none" stroke="currentColor">
-                                            <line x1="0" y1="100" x2="100" y2="0" vector-effect="non-scaling-stroke" />
-                                            </svg>
-                                        </span>
-                                    </span>
-                                    <div class="w-1/12 " v-for="statusSize in list.size">
-                                        <div v-if="statusSize.inStock" class="flex flex-col gap-4 justify-center">
-                                            Size {{ statusSize.size }}
-                                            <input type="text" class="rounded-lg w-full">
-                                        </div>
-                                    </div>
-                                </RadioGroupOption>
-                            </div>
-
-                        </RadioGroup> -->
-                        <!-- <div class="w-1/12 " v-for="statusSize in list.size">
-                            <div v-if="statusSize.inStock" class="flex flex-col gap-4 justify-center">
-                                Size {{ statusSize.size }}
-                                <input type="text" class="rounded-lg w-full">
-                            </div>
-                        </div> -->
-            
-                    </section>
+                                    </RadioGroupOption>
+                                </div>
+                            </RadioGroup>
+                        </section>
                     </div>
                    
                     
@@ -188,7 +157,6 @@
                                     <label class="inline-block mb-2 text-gray-500">Upload Image</label>
                                         <div class="flex items-center justify-center w-full">
                                             <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-                                                
                                                 <div class="flex flex-col items-center justify-center pt-5 pb-6">
                                                     <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
                                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
@@ -199,8 +167,7 @@
                                                 <input multiple  @change="handleFileChange($event)" id="dropzone-file" type="file" class="hidden" />
                                             </label>
                                         </div> 
-                                </div>
-                                
+                                </div>    
                             </div>
                         </div>
                         <div v-else class="flex justify-center mt-8">
@@ -354,7 +321,7 @@ function decreaseProduct() {
             canDecrease.value = false
         }
     }
-    console.log("incersesize")
+    console.log("decreaseSize")
 }
 
 
@@ -413,43 +380,7 @@ async function onSubmit() {
         console.log(error.value)
     }
 }
-
-    // const fileInput = document.getElementById('file-input') as HTMLInputElement | null;
-    // const dropzone = document.getElementById('drop-zone') as HTMLElement | null;
-    // const selectedImages = document.getElementById('selected-images') as HTMLElement | null;
-    // const selectButton = document.getElementById('select-button') as HTMLElement | null;
-    // const selectedFilesCount = document.getElementById('selected-files-count') as HTMLElement | null;
-
-
-
-
-    // fileInput.addEventListener("change", handleFiles);
-    // dropzone.addEventListener("dragover", handleDragOver);
-    // dropzone.addEventListener("dragleave", handleDragLeave);
-    // dropzone.addEventListener("drop", handleDrop);
-    
-
-//     function handleFiles(this: HTMLInputElement) {
-//   // Your logic for handling file input change event
-//         const fileList = this.files;
-//         displayImages(fileList);
-//     }
-
-
-    // function handleDragOver(event: DragEvent) {
-    // // Your logic for handling drag over event
-    // }
-
-    // function handleDragLeave(event: DragEvent) {
-    // // Your logic for handling drag leave event
-    // }
-
-    // function handleDrop(event: DragEvent) {
-    // // Your logic for handling drop event
-    // }
-
-
-    
+ 
 
 </script>
 

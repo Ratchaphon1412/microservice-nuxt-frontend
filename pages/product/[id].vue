@@ -56,14 +56,14 @@
                         <RadioGroup v-model="formData.product_color" class="mt-4">
                           <RadioGroupLabel class="sr-only">Choose a color</RadioGroupLabel>
                           <div class="flex items-center space-x-3">
-                          <RadioGroupOption @click="radioColor(item.id)" v-for="item in product.product_colors" :key="item.id" :value="item.id" v-slot="{ active, checked }">
-                              <div :class="[active && checked ? 'ring ring-offset-1' : '', !active && checked ? 'ring-2' : '', 'relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none']">
-                                <RadioGroupLabel as="span" class="sr-only">{{ item.color.name }}</RadioGroupLabel>
-                                <span aria-hidden="true" class="h-8 w-8 rounded-full border border-black border-opacity-10" :style="{ backgroundColor: item.color.hex_color }" />
-                              </div>
-                          </RadioGroupOption>
+                            <RadioGroupOption @click="radioColor(item.id)" v-for="item in product.product_colors" :key="item.id" :value="item.id" v-slot="{ active, checked }">
+                                <div :class="[active && checked ? 'ring ring-offset-1' : '', !active && checked ? 'ring-2' : '', 'relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none']">
+                                  <RadioGroupLabel as="span" class="sr-only">{{ item.color.name }}</RadioGroupLabel>
+                                  <span aria-hidden="true" class="h-8 w-8 rounded-full border border-black border-opacity-10" :style="{ backgroundColor: item.color.hex_color }" />
+                                </div>
+                            </RadioGroupOption>
                           </div>
-                      </RadioGroup> 
+                        </RadioGroup> 
                       </div>
           
                       <!-- Sizes -->
