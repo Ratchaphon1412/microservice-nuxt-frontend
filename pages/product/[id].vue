@@ -17,26 +17,31 @@
         </ol>
       </nav>
       
-      <section class="grid grid-cols-3 mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8 gap-10 pt-5">
-          <!-- Image gallery -->
-          <div class="content-center grid grid-cols-1">
-          <aside id="selected" class=" m-4 sm:w-3/4 md:w-4/5 lg:w-3/4 p-6 overflow-auto h-3/4">
-            <div class="lg:flex lg:items-start ">
-              <div class="mt-2 w-full lg:order-1 lg:w-32 lg:flex-shrink-0">
-                <div v-for="image in product.image_products" :key="image.id" class="flex items-center lg:flex-col ">
-                  <div>
-                    <button @click="change(image.image_path)" type="button" class="flex-0 aspect-square mb-3 sm:h-20 md:h-24 lg:h-32 overflow-hidden rounded-lg border-2">
-                      <img class="h-full w-full object-cover" :src="image.image_path">
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </aside>
+      <section class="grid grid-cols-11 gap-10 pt-6 h-[700px]">
+      <!-- Image gallery -->
+      <div></div>
+      <div></div>
+      
+      
+      <aside class="col-span-1 h-[900px] lg:w-32">
+  <div class="lg:flex lg:items-start overflow-y-scroll h-4/6">
+    <div class="mt-2 w-full lg:order-1 lg:w-32 lg:flex-shrink-0">
+      <div v-for="image in product.image_products" :key="image.id" class="flex items-center lg:flex-col">
+        <div>
+          <button @click="change(image.image_path)" type="button" class="flex-0 aspect-square mb-3 sm:h-20 md:h-24 lg:h-32 overflow-hidden rounded-lg border-2">
+            <img class="h-full w-full object-cover" :src="image.image_path">
+          </button>
         </div>
+      </div>
+    </div>
+  </div>
+</aside>
+
+          <div></div>
           
-          <div id="preview" class=" col-span-2  grid grid-cols-1">
-            <img class=" max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-2xl bg-yellow-300 w-[600px] h-[600px]" :src="previewImage" alt="">
+          
+          <div class="col-span-4 ">
+            <img :src="previewImage" class="rounded-lg object-none object-center w-[650px] h-[650px]" alt="Preview Image">
           </div>
       </section>
 
@@ -49,7 +54,7 @@
               <div class="mt-4 lg:row-span-3 lg:mt-0">
                   <h2 class="sr-only">Product information</h2>
 
-                  <p class=" mt-4 text-3xl tracking-tight text-gray-900">{{ product.price }} ฿</p>
+                  <p class=" mt-4 text-5xl tracking-tight text-gray-900">{{ product.price }} ฿</p>
 
                   <form class="mt-10">
                       <!-- Colors -->
@@ -60,9 +65,14 @@
                           <RadioGroupLabel class="sr-only">Choose a color</RadioGroupLabel>
                           <div class="flex items-center space-x-3">
                           <RadioGroupOption @click="radioColor(item.id)" v-for="item in product.product_colors" :key="item.id" :value="item.id" v-slot="{ active, checked }">
-                              <div :class="[active && checked ? 'ring ring-offset-1' : '', !active && checked ? 'ring-2' : '', 'relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none']">
+                              
+                              <div v-if = "colorChoose == item.id " class ="border-2 border-zinc-950 relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none">
                                 <RadioGroupLabel as="span" class="sr-only">{{ item.color.name }}</RadioGroupLabel>
-                                <span aria-hidden="true" class="h-8 w-8 rounded-full border border-black border-opacity-10" :style="{ backgroundColor: item.color.hex_color }" />
+                                <span aria-hidden="true" class="h-10 w-10 rounded-full border border-black border-opacity-10" :style="{ backgroundColor: item.color.hex_color }" />
+                              </div>
+                              <div v-else class="relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none">
+                                <RadioGroupLabel as="span" class="sr-only">{{ item.color.name }}</RadioGroupLabel>
+                                <span aria-hidden="true" class="h-10 w-10 rounded-full border border-black border-opacity-10" :style="{ backgroundColor: item.color.hex_color }" />
                               </div>
                           </RadioGroupOption>
                           </div>
@@ -100,9 +110,11 @@
       
               <div class="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8 lg:pt-6">
                   <h3 class="sr-only">Description</h3>
-
+                  <p class="text-2xl text-black">Description</p>
+                  <p class="text-xl text-gray-900">{{ product.description }}</p>
                   <div class="mx-auto w-full rounded-2xl bg-white p-2">
                       <Disclosure v-slot="{ open }">
+                        
                           <DisclosureButton
                               class="flex w-full rounded-lg bg-[#DBE2EF] px-4 py-2 text-left text-sm font-medium text-[#112D4E] hover:bg-[#3F72AF] hover:bg-opacity-40 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
                               <span class="text-2xl">Description</span>
@@ -163,7 +175,8 @@ import { StarIcon } from '@heroicons/vue/20/solid'
 import { RadioGroup, RadioGroupLabel, RadioGroupOption ,Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
 import { list } from 'postcss';
 
-const route = useRoute()
+const route = useRoute();
+const colorChoose = ref();
 const { data: product, error } = await baseFetch<any>(`product/${route.params.id}`, {})
 const { data: products } = await baseFetch<any>("product/format", {})
 
@@ -195,6 +208,7 @@ const formData = reactive({
 // ]);
 
 function radioColor(productColorId:any) {
+  colorChoose.value = productColorId
   formData.product_color = product.value.product_colors.find(item => item.id === productColorId)
   console.log(formData.product_color)
 }
