@@ -36,7 +36,7 @@
        
        <!-- content product -->
        <div class="flex">
-           <aside class="flex flex-col w-72 px-5 py-8 overflow-y-auto bg-white border-r rtl:border-r-0 rtl:border-l dark:bg-gray-900 dark:border-gray-700">
+           <aside class="flex flex-col w-72 px-5 py-8 overflow-y-auto bg-white border-r rounded-md rtl:border-r-0 rtl:border-l dark:bg-gray-900 dark:border-gray-700">
                <h1 class="text-2xl font-bold text-start text">Women</h1>
                <div class="px-3 py-4 overflow-y-auto">
                    <!-- Tops -->
