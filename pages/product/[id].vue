@@ -304,15 +304,23 @@ const formData = reactive({
   quantity: 1
 })
 
-const confirmData = {
-  name: product.value.name,
-  description: product.value.description,
-  image: product.value.image_products[0].image_path,
-  price: product.value.price,
-  color: null,
-  size: null,
-  quantity: 1
+class Confirm{
+  name: string = product.value.name;
+  description: string = product.value.description;
+  image: string = product.value.image_products[0].image_path;
+  price: number = product.value.price;
+  color: string = "";
+  size: string = "";
+  quantity: number = 1;
 }
+
+function constructor(){
+  const confirmData = new Confirm();
+  return confirmData;
+}
+
+let confirmData = constructor();
+
 
 // const listColor = ref<any>([
 //   {
@@ -347,11 +355,13 @@ function openModal() {
   isOpen.value = true
 }
 
-const { carts, Add } = apiCheckout();
+const { carts } = apiCheckout();
 
 function sameProduct(){
   console.log(carts)
   for(let cart of carts){
+    console.log(confirmData)
+    console.log(cart)
     if(confirmData.name === cart.name && confirmData.color === cart.color && confirmData.size === cart.size){
       cart.quantity += 1;
       return true;
@@ -382,9 +392,10 @@ function addCart(){
   }
   else{
     console.log('ของใหม่')
-    Add(confirmData);
+    carts.push(confirmData);
     openModal();
   }
+  confirmData = constructor();
 }
 </script>
 
