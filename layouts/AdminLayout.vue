@@ -19,6 +19,7 @@
                         <slot />
                 
                 </div>
+        <Footer></Footer>
     </main>
 </div>
   </template>
