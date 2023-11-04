@@ -283,7 +283,6 @@ const { data: product, error } = await baseFetch<any>(`product/defineProduct/${r
 
 console.log(product.value)
 
-
 function changeStatus(event: Event,size:string , sizelist:any){
     event.preventDefault();
     for (let index = 0; index < sizelist.length; index++) {
@@ -294,7 +293,16 @@ function changeStatus(event: Event,size:string , sizelist:any){
     }
 }
 
-const formData = reactive({
+// const formData = reactive({
+//     name: `${product.value.name}`,
+//     description: `${product.value.description}`,
+//     price: `${product.value.price}`,
+//     category_type: `${product.value.category_type}`,
+//     gender: `${product.value.gender}`,
+//     color_list: [{}],
+//     image_list: [{}]
+// })
+const formData = reactive({ 
     name: `${product.value.name}`,
     description: `${product.value.description}`,
     price: `${product.value.price}`,

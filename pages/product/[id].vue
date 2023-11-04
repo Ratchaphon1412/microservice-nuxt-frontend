@@ -179,7 +179,6 @@ const route = useRoute();
 const colorChoose = ref();
 const { data: product, error } = await baseFetch<any>(`product/${route.params.id}`, {})
 const { data: products } = await baseFetch<any>("product/format", {})
-
 console.log(products.value)
 
 
