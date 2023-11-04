@@ -442,7 +442,7 @@ async function onSubmit() {
     }
 
     const { data: product, error } = await baseFetch("product", {
-        method: "POST",
+        method: "PUT",
         body: productFormData
     })
 
