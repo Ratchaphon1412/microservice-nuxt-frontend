@@ -45,7 +45,7 @@
         </div>
       </div>
     </div>
-    <Footer></Footer>
+   
   </main>
 </template>
 <script setup lang="ts">

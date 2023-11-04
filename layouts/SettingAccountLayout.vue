@@ -1,5 +1,5 @@
 <template >
-    <main class="bg-white h-full">
+    <main class="bg-white h-full min-h-screen">
         <AdminNavbar></AdminNavbar>
     <div class="flex justify-center h-[150px] from-indigo-600 bg-indigo-700 to-violet-800">
       <div class="flex h-4/5 px-16 items-center border-b-2 md:w-[1300px]">

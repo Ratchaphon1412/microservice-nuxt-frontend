@@ -13,7 +13,7 @@
           <div class="flex-shrink max-w-full px-4 w-full">
             <div class="md:flex md:justify-between">
               <div>
-                <a href="coupon/addCoupon"
+                <a href="coupon/create"
                   class="py-2 px-4 mb-3 block lg:inline-block text-center rounded leading-5 text-gray-100 bg-indigo-500 border border-indigo-500 hover:text-white hover:bg-indigo-600 hover:ring-0 hover:border-indigo-600 focus:bg-indigo-600 focus:border-indigo-600 focus:outline-none focus:ring-0">Add
                   new <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor"
                     class="inline-block ltr:ml-1 rtl:mr-1 bi bi-plus-lg" viewBox="0 0 16 16">

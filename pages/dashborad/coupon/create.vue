@@ -63,16 +63,24 @@
                                     class="peer w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-pink-500 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
                                     name="discount" id="discount" />
                             </div>
+                            <div v-else class="col-span-6 sm:col-span-3 animate-fade-up">
+                                
+                            </div>
 
                             <div class="col-span-6 sm:col-span-3 grid grid-cols-4 gap-2 rounded">
-                                <div class="col-span-3 grid grid-cols-2">
+                                <div class="col-span-4 grid grid-rows-2">
                                     <label for="expire_date"
                                         class="col-span-1 block mb-2 text-lg font-medium sm:col-span-1   w-full">
                                         Expire Date
                                     </label>
                                     <input v-model="formData.expire_date" type="date" name="expire_date" id="expire_date">
                                 </div>
-                                <div class="col-span-3 grid grid-cols-2">
+                                
+
+
+                            </div>
+                            <div class="col-span-6 sm:col-span-3 grid grid-cols-4 gap-2 rounded">
+                                <div class="col-span-4 grid grid-rows-2">
                                     <label for="limit_coupon"
                                         class="col-span-1 block mb-2 text-lg font-medium sm:col-span-1 w-full">
                                         Limit Coupon
@@ -80,11 +88,16 @@
                                     <input v-model="formData.limit_coupon" type="number" name="limit_coupon" id="limit_coupon" placeholder="Enter Number">
                                 </div>
 
-
+                            </div>
+                            <div class="col-span-6 sm:col-span-6">
+                                
                             </div>
 
                             <div class="col-span-6 sm:col-span-2">
-                                <button @click="clear()" className="btn btn-outline btn-error w-full">Clear</button>
+                                <button @click="clear()" class="btn btn-outline btn-error w-full">Clear</button>
+                            </div>
+                            <div class="col-span-1 sm:col-span-2">
+                                
                             </div>
 
                             <div class="col-span-6 sm:col-span-2 flex justify-end">
