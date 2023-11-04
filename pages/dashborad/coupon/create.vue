@@ -139,7 +139,6 @@ const formData = reactive({
     limit_coupon: 0
 })
 
-console.log(formData)
 const messageError = ref([{}])
 async function clear() {
     formData.name =  ""
