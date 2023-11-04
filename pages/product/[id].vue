@@ -48,7 +48,7 @@
       <section class="flex-col" >
           <div class="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16">
               <div class="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
-                <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-3xl">{{ product.name }}</h1>
+                <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-3xl mb-5">{{ product.name }}</h1>
               </div>
               <!-- Options -->
               <div class="mt-4 lg:row-span-3 lg:mt-0">
@@ -104,8 +104,12 @@
                       </RadioGroup>
                       </div>
           
-                      <button type="submit" class="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Add Cart</button>
-                  </form>
+                      <button type="submit" class=" mt-10 rounded relative inline-flex group items-center justify-center px-3.5 py-2 m-1 cursor-pointer border-b-4 border-l-2 active:border-purple-600 active:shadow-none shadow-lg bg-gradient-to-tr from-purple-600 to-purple-500 border-purple-700 text-white">
+<span class="absolute w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full group-hover:w-32 group-hover:h-32 opacity-10"></span>
+<span class="relative">Button Text</span>
+</button>
+                  
+                    </form>
               </div>
       
               <div class="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8 lg:pt-6">
@@ -114,34 +118,32 @@
                   <p class="text-xl text-gray-900">{{ product.description }}</p>
                   <div class="mx-auto w-full rounded-2xl bg-white p-2">
                       <Disclosure v-slot="{ open }">
-                        
-                          <DisclosureButton
-                              class="flex w-full rounded-lg bg-[#DBE2EF] px-4 py-2 text-left text-sm font-medium text-[#112D4E] hover:bg-[#3F72AF] hover:bg-opacity-40 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
-                              <span class="text-2xl">Description</span>
+                          
+                              <span class="text-2xl text-black ">Description</span>
+                              <div class="flex border-b-2 mt-5">
                               <!-- <ChevronUpIcon
                               :class="open ? 'rotate-180 transform' : ''"
                               class="h-5 w-5 text-purple-500"
                               /> -->
-                          </DisclosureButton>
-                          <DisclosurePanel class="px-4 pt-4 pb-2 text-sm text-gray-500">
+                          </div>
+                          <div class="px-4 pt-4 pb-2 text-sm text-gray-500 mb-10">
                               <span class="text-xl text-gray-900">{{ product.description }}</span>
-                          </DisclosurePanel>
+                          </div>
                       </Disclosure>
                       <Disclosure as="div" class="mt-2" v-slot="{ open }">
-                          <DisclosureButton
-                              class="flex w-full rounded-lg bg-[#DBE2EF] px-4 py-2 text-left text-sm font-medium text-[#112D4E] hover:bg-[#3F72AF] hover:bg-opacity-40 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
-                              <span class="text-2xl">Materials</span>
-                              <!-- <ChevronUpIcon
+                        <span class="text-2xl text-black ">Materials</span>
+                              <div class="flex border-b-2 mt-5">
+                              <!-- <ChevronUpIconMaterials
                               :class="open ? 'rotate-180 transform' : ''"
                               class="h-5 w-5 text-purple-500"
                               /> -->
-                          </DisclosureButton>
-                          <DisclosurePanel class="px-4 pt-4 pb-2 text-sm text-gray-500">
-                            <span class="text-xl text-gray-900">{{ product.Materials }}</span>
+                          </div>
+                          <div class="px-4 pt-4 pb-2 text-sm text-gray-500">
+                            <span class="text-xl text-gray-900 ">{{ product.Materials }}</span>
                               <!-- <span v-for="Materials in product.Materials" :key="Materials" class="text-black">
                                   <p class="text-lg text-gray-900">{{ Materials }}</p>
                               </span> -->
-                          </DisclosurePanel>
+                          </div>
                       </Disclosure>
                   </div>
                   </div> 
