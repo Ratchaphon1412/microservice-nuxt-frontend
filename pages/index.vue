@@ -4,26 +4,19 @@
     <h1 class="text-6xl font-bold text-start p-6">Trending Product</h1>
 
       
-      <div class="carousel carousel-center p-4 w-full space-x-4 bg-neutral rounded-box">
-  <div class="carousel-item">
-      <SectionsCard/>
-  </div> 
-  <div class="carousel-item">
-      <SectionsCard/>
-  </div>
-  <div class="carousel-item">
-      <SectionsCard/>
-  </div>
-  <div class="carousel-item">
-      <SectionsCard/>
-  </div>
-  <div class="carousel-item">
-      <SectionsCard/>
-  </div>
-  <div class="carousel-item">
-      <SectionsCard/>
-  </div>
-</div>
+    <div class="carousel carousel-center p-4 w-full space-x-4 bg-neutral rounded-box">
+        <div class="carousel-item" v-for="product in products">
+            <SectionsCard
+            :id="product.id" 
+            :name="product.name" 
+            :description="product.description" 
+            :gender="product.gender"
+            :listSize="product.listSize"
+            :listColor="product.listColor"
+            :price="product.price"
+            :image="product.image"/>
+        </div> 
+    </div>
 
     <h1 class="text-6xl font-bold text-start p-6">Basic Product</h1>
     <div class="mx-auto max-w-2xl px-4 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16">
@@ -55,3 +48,6 @@
     <Footer></Footer>
   </main>
 </template>
+<script setup lang="ts">
+const { data: products } = await baseFetch<any>("product/format", {})
+</script>
