@@ -6,7 +6,7 @@ export default async function<T>(path:string ,options?:{}){
         baseURL: config.public.apiBaseURL,
         // baseURL: config.public.URL_ENDPOINT,
         headers:{
-            "Accept": "application/json"
+            "Accept": "application/json",
         }
     })
 }

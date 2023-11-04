@@ -85,7 +85,7 @@
 
                     <!-- Material -->
                     <div class="col-span-12 sm:col-span-2 mt-6 font-poppin ">
-                        <label for="product_description" class="block mb-2 text-xl font-medium text-gray-900 dark:text-white">Description Product</label>
+                        <label for="product_description" class="block mb-2 text-xl font-medium text-gray-900 dark:text-white">Description material Product</label>
                         <textarea v-model="formData.material" type="text"  
                         class="rounded-lg
                         peer w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-lg 
@@ -150,7 +150,7 @@
                                             <div class="grid grid-cols-2 lg:grid-cols-4 animate-fade-down animate-ease-in animate-duration-500">
                                                 <div class="bg-white rounded-lg w-full lg:col-span-3 ">
                                                     <div class="relative bg-inherit ">
-                                                    <input v-model="item.quantity" type="text" id="size" name="size" class="peer bg-transparent h-10 rounded-lg text-black placeholder-transparent ring-gray-500 focus:ring-sky-600 focus:outline-none focus:border-rose-600 w-full" placeholder="Type inside me"/>
+                                                    <input v-model="item.quantity" type="text" id="size" name="size" class="peer bg-transparent h-10 rounded-lg text-black placeholder-transparent ring-gray-500 focus:ring-sky-600 focus:outline-none w-full" placeholder="Type inside me"/>
                                                     <label for="size" class="absolute cursor-text left-0 -top-3 text-sm text-gray-500 bg-inherit mx-1 px-1 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-2 peer-focus:-top-3 peer-focus:text-sky-600 peer-focus:text-sm transition-all">Size {{ item.size }}</label>
                                                 </div>
                                                 
@@ -412,6 +412,7 @@ async function onSubmit() {
 
     if (product.value !== null) {
         console.log(product.value)
+        navigateTo("/dashboard")
     } else {
         messageError.value.push(error.value)
         console.log(error.value)
