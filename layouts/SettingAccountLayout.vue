@@ -1,5 +1,5 @@
 <template >
-    <main class="bg-white h-[2000px]">
+    <main class="bg-white h-full">
         <AdminNavbar></AdminNavbar>
     <div class="flex justify-center h-[150px] from-indigo-600 bg-indigo-700 to-violet-800">
       <div class="flex h-4/5 px-16 items-center border-b-2 md:w-[1300px]">
@@ -9,7 +9,7 @@
       </div>
     </div>
 
-    <div class="flex w-full justify-between">
+    <div class="flex w-full justify-between h-min-screen">
       <SettingSideBar />
       <slot />
     </div>
