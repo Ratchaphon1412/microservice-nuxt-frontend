@@ -11,44 +11,53 @@
     
             <div class="rounded-lg md:w-full p-5 bg-[#DBE2EF]">
                 <!-- Select All -->
-                <div class="flex items-center m-5">
+                <!-- <div class="flex items-center m-5">
                     <input class="w-7 h-7 mr-5 rounded-lg border-2 border-[#112D4E] "
                         type="checkbox" v-model="selectAll" @change="selectAllItems"/>
                     <label for="selectAll" class="text-xl font-bold text-[#112D4E]">Select All</label>
-                </div>
+                </div> -->
     
                 <ul class="">
                     <!--Order Item-->
                     <li class="w-full sm:h-52 items-center justify-between mb-6 rounded-lg bg-white p-6 shadow-md sm:flex"
-                        v-for="item in items" :key="item.id">
+                        v-for="item in carts" :key="item.id">
                         <div class="flex justify-center items-center m-5">
-                            <input class="w-7 h-7 mr-5 rounded-lg border-2 border-[#112D4E] "
-                                type="checkbox" v-model="item.isOrder" :value="item"/>
-                            <img class="w-96 rounded-lg sm:w-40 sm:h-40" src="https://images.unsplash.com/photo-1515955656352-a1fa3ffcd111?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="product-image"/>
+                            <!-- <input class="w-7 h-7 mr-5 rounded-lg border-2 border-[#112D4E] "
+                                type="checkbox" v-model="item.isOrder" :value="item"/> -->
+                            <img class="w-96 rounded-lg sm:w-40 sm:h-40" :src="item.image" alt="product-image"/>
                         </div>
                         <div class="ml-10 mr-5 mt-5 sm:mt-0 sm:w-full">
-                            <div class="flex justify-between mb-12">
-                                <h2 class="text-lg font-bold text-[#112D4E] mb-5">Nike Air Max 2019</h2>
+                            <div class="flex justify-between">
+                                <h2 class="text-lg font-bold text-[#112D4E] mb-5">{{ item.name }}</h2>
                                 <button @click="removeOrder(item)">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 cursor-pointer duration-150 hover:text-red-500">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                                     </svg>
                                 </button>
                             </div>
+                            <p class="mb-12">{{ item.description }}</p>
                             <div class="sm:flex justify-between items-center border-gray-100">
-                                <div class="flex w-2/3">
-                                    <div class="flex items-center justify-center mr-3">
-                                        <Counter :counter="item.counter" @update-counter="updateCounter(item, $event)"></Counter>
+                                <div class="flex w-2/3 items-center">
+                                    <div class="flex items-center justify-center mr-3 border-2 border-gray-400 p-3 rounded-lg">
+                                        <!-- <Counter :counter="item.counter" @update-counter="updateCounter(item, $event)"></Counter> -->
+                                        <span>{{ item.quantity }} items</span>
                                     </div>
-                                    <select name="" id="" class="mr-3 border-[#DBE2EF] text-[#0074FF] rounded-lg">
+                                    <div class="mr-3 border-gray-400 text-[#0074FF] rounded-lg border-2 p-2">
+                                        <img class="h-8 w-8 rounded-full" :style="{ backgroundColor: item.color }" />
+                                    </div>
+                                    <div class="border-gray-400 border-2 rounded-lg p-3">
+                                        size {{ item.size }}
+                                    </div>
+                                    <!-- <select name="" id="" class="mr-3 border-[#DBE2EF] text-[#0074FF] rounded-lg">
                                         <option value="" selected disabled>Color</option>
                                     </select>
                                     <select name="" id="" class="border-[#DBE2EF] text-[#0074FF] rounded-lg">
                                         <option value="" selected disabled>Size</option>
-                                    </select>
+                                    </select> -->
+                                    
                                 </div>
                                 <div class="sm:mt-0 mt-5">
-                                    <p class="text-sm text-[#112D4E]">2000.00 Bath</p>
+                                    <p class="text-sm text-[#112D4E]">{{ item.price * item.quantity }} Bath</p>
                                 </div>
                             </div>
                         </div>
@@ -60,7 +69,7 @@
                 <div class="flex justify-between items-center">
                     <div class="flex m-5 items-center">
                         <h2 class="text-xl mr-5 text-[#112D4E] font-bold">Total</h2>
-                        <p class="text-xl text-[#112D4E]">2000.00 Bath</p>
+                        <p class="text-xl text-[#112D4E]">{{ sumCarts() }} Bath</p>
                     </div>
                     <div class="flex items-center">
                         <button @click="addToOrder" class="px-10 py-2 bg-[#0074FF] text-white font-semibold rounded-lg hover:bg-blue-600">Checkout</button>
@@ -72,61 +81,68 @@
 </template>
 
 <script setup lang="ts">
-    const items = ref([{
-        id:'1', counter: 1, isOrder: false, 
-            color: ['#f6cda8', '#d89d94', '#dd6b6c', '#875d71', '#5b5b5b']
-        }, { id:'2', counter: 1, isOrder: false,
-            color: ['#f6cda8', '#d89d94', '#dd6b6c', '#875d71', '#5b5b5b']
-        }, { id:'3', counter: 1, isOrder: false, 
-            color: ['#f6cda8', '#d89d94', '#dd6b6c', '#875d71', '#5b5b5b'] 
-        },
-    ])
-    const selectAll = ref(false)
-    const selectedOrderItems = ref([])
+import { apiCheckout } from '~/store/pinia.store'
+const { carts } = apiCheckout();
 
-    const isColorFormVisible = ref(false);
+function sumCarts():number{
+  let sum = 0;
+  for(let cart of carts){
+    sum += cart.price * cart.quantity;
+  }
+  return sum;
+}
+    // const items = ref([{
+    //     id:'1', counter: 1, isOrder: false, 
+    //         color: ['#f6cda8', '#d89d94', '#dd6b6c', '#875d71', '#5b5b5b']
+    //     }, { id:'2', counter: 1, isOrder: false,
+    //         color: ['#f6cda8', '#d89d94', '#dd6b6c', '#875d71', '#5b5b5b']
+    //     }, { id:'3', counter: 1, isOrder: false, 
+    //         color: ['#f6cda8', '#d89d94', '#dd6b6c', '#875d71', '#5b5b5b'] 
+    //     },
+    // ])
+    // const selectAll = ref(false)
+    // const selectedOrderItems = ref([])
 
-    function selectAllItems() {
-        if (selectAll.value) {
-            // Select all items by getting their keys
-            selectedOrderItems.value = [...items.value];
-            items.value.forEach(item => {
-                item.isOrder = true;
-            });
-            console.log(selectedOrderItems)
+    // const isColorFormVisible = ref(false);
 
-        } else {
-            // Deselect all items
-            selectedOrderItems.value = [];
-            items.value.forEach(item => {
-                item.isOrder = false;
-            });
-            console.log(selectedOrderItems)
+    // function selectAllItems() {
+    //     if (selectAll.value) {
+    //         // Select all items by getting their keys
+    //         selectedOrderItems.value = [...items.value];
+    //         items.value.forEach(item => {
+    //             item.isOrder = true;
+    //         });
+    //         console.log(selectedOrderItems)
 
+    //     } else {
+    //         // Deselect all items
+    //         selectedOrderItems.value = [];
+    //         items.value.forEach(item => {
+    //             item.isOrder = false;
+    //         });
+    //         console.log(selectedOrderItems)
+
+    //     }
+    // }
+    // function updateCounter(item:{counter: number}, newCounterValue:number) {
+    //     item.counter = newCounterValue
+    //     console.log(item)
+    // }
+    // function showColorForm() {
+    //     isColorFormVisible.value = true;
+    // }
+    // function closeColorForm() {
+    //     isColorFormVisible.value = false;
+    // }
+    function removeOrder(item:any) {
+        const index = carts.findIndex((element) => element.id === item.id);
+        if (index !== -1) { // ถ้าหาเจอ
+            carts.splice(index, 1);
         }
-    }
-    function updateCounter(item:{counter: number}, newCounterValue:number) {
-        item.counter = newCounterValue
-        console.log(item)
-    }
-    function showColorForm() {
-        isColorFormVisible.value = true;
-    }
-    function closeColorForm() {
-        isColorFormVisible.value = false;
-    }
-    function removeOrder(item) {
-        const index = items.value.findIndex((element) => element.id === item.id);
-        if (index !== -1) {
-            selectedOrderItems.value.splice(index, 1);
-        }
 
-        const itemIndex = items.value.findIndex((element) => element.id === item.id);
-        if (itemIndex !== -1) {
-            items.value.splice(itemIndex, 1);
-        }
-    }
-    function addToOrder() {
-
+        // const itemIndex = carts.findIndex((element) => element.id === item.id);
+        // if (itemIndex !== -1) { // ถ้าหาเจอ
+        //     items.value.splice(itemIndex, 1);
+        // }
     }
 </script>

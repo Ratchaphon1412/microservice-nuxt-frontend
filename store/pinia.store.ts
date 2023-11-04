@@ -31,3 +31,14 @@ export const apiCountry = defineStore('apiProvince', () => {
     
     return { getProvince ,getDistrict, getSubdistrict }
 })
+
+export const apiCheckout = defineStore('apiCheckout', () => {
+    let carts = reactive([]);
+
+    function Add(confrimData:any){
+        carts.push(confrimData)
+    }
+    return { carts, Add }
+},{
+    persist: true
+})
