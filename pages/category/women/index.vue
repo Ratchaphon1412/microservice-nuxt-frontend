@@ -221,7 +221,7 @@
 
            </aside>
            <div class="mx-auto max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16">
-            <SectionsCard v-for="list in filterList" 
+            <SectionsCard v-model="filterList" v-for="(list,index) in filterList" :key="index" 
             :name="list.name" 
             :description="list.description" 
             :gender="list.gender"
@@ -237,6 +237,7 @@
 
 <script setup lang="ts">
    import { RadioGroup, RadioGroupLabel, RadioGroupOption } from '@headlessui/vue'
+   import { ref, watch} from 'vue'
 
    const colors = [
        { name: 'white', class: '#f5f5f5', selectedClass: 'ring-gray-400' },
@@ -254,18 +255,10 @@
             ]
 
    const { data: products } = await baseFetch<any>("product/format", {});
-   console.log(products);
+   console.log(products.value.length);
 
 
-   const filterList = ref({
-       name: '',
-       description : '',
-       gender : '',
-       listSize : [],
-       listColor : [],
-       price : 0,
-       image : '',
-   })
+   const filterList = ref<any>([])
 
     filterList.value = products.value.map((item: any) => {
     return {
@@ -276,15 +269,15 @@
         listColor : item.listColor,
         price : item.price,
         image : item.image,
-    }
-   })
-   console.log(filterList.value.length);
+    }})
 
+    console.log(filterList.value.length);
     const filterData = reactive({
-    selectedColor: '',
-    selectedSize: '',
-    cost : '',
+        selectedColor: '',
+        selectedSize: '',
+        cost : 0,
     })
+
     function filterSize(Size:any){
         filterData.selectedSize = Size;
         console.log(filterData);
@@ -297,7 +290,7 @@
         filter()
     }
 
-    function filterCost(cost:string){
+    function filterCost(cost:number){
         filterData.cost = cost;
         console.log(filterData);
         filter()
@@ -305,11 +298,40 @@
 
     async function filter(){
         const {data: filter,error} = await baseFetch<any>("product/filter",{
-            method : 'POST',
+            method: 'POST',
             body : filterData
         })
-        console.log(filter.value);
+        console.log(filter);
+        const filterList = ref<any>([]);
+        // const filterList = ref({
+        //     name: '',
+        //     description : '',
+        //     gender : '',
+        //     listSize : [],
+        //     listColor : [],
+        //     price : 0,
+        //     image : '',
+        // })
+
+        filterList.value = filter.value.map((item: any) => {
+        return {
+            name: item.name,
+            description: item.description,
+            gender : item.gender,
+            listSize : item.listSize,
+            listColor : item.listColor,
+            price : item.price,
+            image : item.image,
+        }})
+        console.log(filterList.value)
     }
+
+    // watch(filterList, (newFilterList, oldFilterList) => {
+    // console.log('filterList changed' ,newFilterList, oldFilterList);
+    // // You can perform any actions here that you want to trigger when filterList changes.
+    // // For example, you can update the UI or call other functions.
+    // });
+    
 
 
 </script>
