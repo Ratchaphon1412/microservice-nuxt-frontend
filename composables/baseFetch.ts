@@ -1,3 +1,4 @@
+
 export default async function<T>(path:string ,options?:{}){
     const config = useRuntimeConfig()
     return await useFetch(path,{

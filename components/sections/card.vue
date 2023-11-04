@@ -69,8 +69,13 @@ defineProps({
   listColor : Array<string>,
   price : Number,
   image : String,
-  id: undefined
+  id : Number
 });
+
+
+defineEmits({
+  
+})
 
 
 </script>
