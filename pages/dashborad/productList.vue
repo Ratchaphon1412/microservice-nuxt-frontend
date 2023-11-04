@@ -1,5 +1,5 @@
 <template>
-     <div class="animate-fade-down mx-full w-full p-2">
+     <div class="animate-fade-down mx-full w-full p-2 ">
       <div class="flex-shrink max-w-full px-4 w-full">   
 					    <p class="text-3xl font-poppin pt-3 pb-5">PRODUCT</p>
 					  </div>
