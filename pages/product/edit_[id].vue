@@ -238,13 +238,13 @@
                                </div>
                            </div>
                             <div class="col-span-6 sm:col-span-2">
-                               <button type="submit" @click.prevent="deleteProduct()" class="btn btn-outline btn-error w-full">Delete</button>
+                               <button type="submit" @click.prevent="confirmDelete()" class="btn btn-outline btn-error w-full">Delete</button>
                            </div>
 
                            <div class="col-span-6 sm:col-span-2"></div>
 
                             <div class="col-span-6 sm:col-span-2 flex justify-end">
-                                <button type="submit" @click.prevent="onSubmit()" class="btn btn-outline btn-accent w-full">Update</button>
+                                <button type="submit" @click.prevent="confirmUpdate()" class="btn btn-outline btn-accent w-full">Update</button>
                             </div>
                         </div>
                        <div v-for="error in messageError">
@@ -261,6 +261,8 @@
 
 
 <script setup lang="ts">
+import Swal from 'sweetalert2'
+
 const route = useRoute()
 const { data: product, error } = await baseFetch<any>(`product/defineProduct/${route.params.id}`, {})
 
@@ -380,15 +382,49 @@ const handleFileChange = (event) => {
 console.log(all_image.value)
 const messageError = ref([])
 
+function confirmDelete() {
+  Swal.fire({
+    title: 'Delete Product?',
+    icon: 'question',
+    iconHtml: '?',
+    confirmButtonText: 'Delete',
+    cancelButtonText: 'Cancel',
+    showCancelButton: true,
+    showCloseButton: true,
+  }).then((result) => {
+    if (result.isConfirmed) {
+      deleteProduct();
+    }
+  })
+}
 async function deleteProduct() {
     const { data: check, error } = await baseFetch(`product/${route.params.id}`, {
         method: "DELETE"
     });
-    console.log(check.value)
-    navigateTo("/dashboard/productList")
+    if (check !== null) {
+        console.log(check.value)
+        navigateTo("/dashboard/productList")
+    } else {
+        messageError.value.push(error.value?.data.message)
+        console.log(error.value?.data.message)
+    }
 }
 
-
+function confirmUpdate() {
+  Swal.fire({
+    title: 'Update Product?',
+    icon: 'question',
+    iconHtml: '?',
+    confirmButtonText: 'Update',
+    cancelButtonText: 'Cancel',
+    showCancelButton: true,
+    showCloseButton: true,
+  }).then((result) => {
+    if (result.isConfirmed) {
+        onSubmit();
+    }
+  })
+}
 async function onSubmit() {
     const productFormData = new FormData()
     productFormData.append("name", formData.name)
@@ -423,7 +459,7 @@ async function onSubmit() {
 
     if (product.value !== null) {
         console.log(product.value)
-        // navigateTo("/dashboard/productList")
+        navigateTo("/dashboard/productList")
     } else {
         messageError.value.push(error.value?.data.message)
         console.log(error.value?.data.message)

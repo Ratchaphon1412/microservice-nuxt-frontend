@@ -29,6 +29,7 @@
     "flowbite-vue": "^0.0.17-next.13",
     "laravel-vue-pagination": "^4.1.1",
     "omise": "^0.11.0",
+    "sweetalert2": "^11.9.0",
     "tailwindcss-animated": "^1.0.1",
     "vue-carousel": "^0.18.0"
   },
