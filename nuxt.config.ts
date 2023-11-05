@@ -21,6 +21,7 @@ export default defineNuxtConfig({
 
   modules: [
     '@pinia/nuxt',
+    '@pinia-plugin-persistedstate/nuxt'
   ],
   devtools: { 
     enabled: true 
@@ -37,6 +38,7 @@ export default defineNuxtConfig({
     public:{
       apiBaseURL: "http://localhost/api/",
       URL_ENDPOINT: "https://fakestoreapi.com/products/",
+      kongApi: process.env.KONG_API,
       omise:{
         publicKey: process.env.OMISE_PUBLIC_KEY,
       }
