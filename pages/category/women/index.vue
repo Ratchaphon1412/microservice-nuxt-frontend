@@ -229,8 +229,8 @@
                 {name: 'more than ฿1000',cost:1000}
             ]
 
-   const { data: products } = await baseFetch<any>("product/format", {});
-//    console.log(products.value.length);
+    const { data: products } = await baseFetch<any>("product/format", {});
+    console.log(products.value);
 
 
    const filterList = ref<any>([])

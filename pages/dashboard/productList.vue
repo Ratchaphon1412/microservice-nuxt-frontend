@@ -101,7 +101,7 @@
                                 
                               </td>
                               <td class="text-center hidden lg:table-cell">
-                                1256
+                                {{ product.qtySum }}
                               </td>
                               <td class="lg:table-cell flex justify-center w-30">
                                   <div v-for="color in product.listColor" :key="color.id" :value="color.id"  class="flex -m-0.5 cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none">
@@ -111,9 +111,8 @@
                               </td>
                                 
                               <td class="lg:table-cell flex justify-center items-center w-30 place-self-center">
-                                  <span v-if="product.status == 'in' " class="flex w-32 justify-center   text-sm px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full">In stock</span>
-                                  <span v-else-if="product.status == 'out' " class=" flex w-32 justify-center   text-sm px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full">out of Stock</span>
-                                  <span v-else-if="product.status == 'end' " class=" flex w-32 justify-center  text-sm px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full">End product</span>
+                                  <span v-if="product.qtySum > 0" class="flex w-32 justify-center   text-sm px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full">In stock</span>
+                                  <span v-else-if="product.qtySum == 0 " class=" flex w-32 justify-center   text-sm px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full">out of Stock</span>
                               </td>
                                 <td class="text-center">
                                 
@@ -130,7 +129,9 @@
                                 <a href="javascript:;" class="inline-block ltr:mr-2 rtl:ml-2 hover:text-green-500" title="Edit">
                                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                     <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"></path>
-                                    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"></path>
+                                    <a href="">
+                                      <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"></path>
+                                    </a>
                                   </svg>
                                 </a>
                               </td>

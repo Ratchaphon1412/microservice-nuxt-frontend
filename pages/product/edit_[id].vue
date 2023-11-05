@@ -77,6 +77,7 @@
                     </div> 
                    <div class="mt-3">
                    <!-- product size & color -->
+                   
                    <section class="gap-5 grid grid-cols-4 lg:grid-cols-5  border-b border-t p-4 w-full" v-for="list in totalList">
                        <div class="grid col-span-4 grid-cols-4 gap-4 lg:col-span-1">
                            <!-- Color -->
@@ -213,10 +214,7 @@
                                                <input multiple  @change="handleFileChange($event)" id="dropzone-file" type="file" class="hidden" />
                                            </label>
                                        </div> 
-                               
-
                                            </div>
-                                       
                                        </div> 
                                </div>
                                
@@ -391,11 +389,11 @@ console.log(all_image.value)
 const messageError = ref([])
 
 async function deleteProduct() {
-    const { data: product, error } = await baseFetch(`product/delete/${route.params.id}`, {
-        method: "DELETE",
-    })
-    console.log(product.value)
-    // navigateTo("/dashboard/productList")
+    const { data: check, error } = await baseFetch(`product/${route.params.id}`, {
+        method: "DELETE"
+    });
+    console.log(check.value)
+    navigateTo("/dashboard/productList")
 }
 
 
