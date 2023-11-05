@@ -7,7 +7,6 @@
        
             
     <div class="m-8 bg-white dark:bg-gray-800 rounded-lg shadow-lg ">
-      
                 <div class="flex flex-wrap flex-row mx-4">
                   <div class="flex-shrink max-w-full px-4 w-full">
                     
@@ -79,7 +78,7 @@
                           </thead>
                           <tbody>
 
-                            <tr v-for= "product in products">
+                            <tr v-for="product in products">
                               <td>
                                 
                                 <a href="#">
@@ -104,17 +103,17 @@
                               <td class="text-center hidden lg:table-cell">
                                 1256
                               </td>
-                              <td class="hidden lg:table-cell flex justify-center w-30">
-                                  <div v-for="color in product.listColor" :key="color.id" :value="color.id"  class=" -m-0.5  flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none">
+                              <td class="lg:table-cell flex justify-center w-30">
+                                  <div v-for="color in product.listColor" :key="color.id" :value="color.id"  class="flex -m-0.5 cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none">
                             
                                   <span aria-hidden="true" class=" h-5 w-5 rounded-full border border-black border-opacity-10" :style="{backgroundColor:color}"></span></div>
                                 
                               </td>
                                 
-                              <td class="hidden lg:table-cell flex justify-center w-30 place-self-center">
+                              <td class="lg:table-cell flex justify-center items-center w-30 place-self-center">
                                   <span v-if="product.status == 'in' " class="flex w-32 justify-center   text-sm px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full">In stock</span>
-                                  <span v-if="product.status == 'out' " class=" flex w-32 justify-center   text-sm px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full">out of Stock</span>
-                                  <span v-if="product.status == 'end' " class=" flex w-32 justify-center  text-sm px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full">End product</span>
+                                  <span v-else-if="product.status == 'out' " class=" flex w-32 justify-center   text-sm px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full">out of Stock</span>
+                                  <span v-else-if="product.status == 'end' " class=" flex w-32 justify-center  text-sm px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full">End product</span>
                               </td>
                                 <td class="text-center">
                                 
@@ -204,9 +203,6 @@ definePageMeta({
 const route = useRoute();
 const colorChoose = ref();
 const { data: products } = await baseFetch<any>("product/format", {})
-
-
-
 
 console.log(products.value)
 console.log(products.value.length)
