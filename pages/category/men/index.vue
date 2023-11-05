@@ -12,11 +12,11 @@
                             <span class="relative text-black group-hover:text-white text-xl">Women</span>
                         </a>
                     </li>
-                    <li class="w-full">
-                        <a href="/category/men" class="relative inline-flex items-center justify-center w-full h-full overflow-hidden font-mono font-medium tracking-tighter text-white bg-white border-white border-2 group group-hover:w-56 group-hover:h-56 text-black hover:text-white">
-                            <span class="absolute w-0 h-0 transition-all duration-500 ease-out bg-gray-800 rounded-full group-hover:w-full group-hover:h-96"></span>
-                            <span class="relative text-black group-hover:text-white text-xl">Men</span>
-                        </a>                    
+                    <li class="w-full bg-gray-800" >
+                        <div class="relative inline-flex items-center justify-center w-full h-full overflow-hidden font-mono font-medium tracking-tighter text-white border-white group w-56 h-56 text-black hover:text-white">
+                            <span class="absolute w-0 h-0 transition-all duration-500 ease-out bg-gray-800 rounded-full w-full h-96"></span>
+                            <span class="relative text-blacktext-white text-xl" disabled>Men</span>
+                        </div>                    
                     </li>
                     <li class="w-full">
                         <a href="/category/kid" class="relative inline-flex items-center justify-center w-full h-12 overflow-hidden font-mono font-medium tracking-tighter text-white bg-white rounded-r-lg border-white border-2 group group-hover:w-56 group-hover:h-56 text-black hover:text-white">

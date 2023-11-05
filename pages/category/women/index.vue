@@ -7,11 +7,12 @@
                
                <ul class="border-2 border-gray-900 hidden text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg shadow sm:flex dark:divide-gray-700 dark:text-gray-400">
                     
-                    <li class="w-full" >
-                        <a href="/category/women" class="relative inline-flex items-center justify-center w-full h-full overflow-hidden font-mono font-medium tracking-tighter text-white bg-white rounded-l-lg border-white border-2 group group-hover:w-56 group-hover:h-56 text-black hover:text-white">
-                            <span class="absolute w-0 h-0 transition-all duration-500 ease-out bg-gray-800 rounded-full group-hover:w-full group-hover:h-96"></span>
-                            <span class="relative text-black group-hover:text-white text-xl">Women</span>
-                        </a>
+                    <li class="w-full bg-gray-800" >
+                        <div class="relative inline-flex items-center justify-center w-full h-full overflow-hidden font-mono font-medium tracking-tighter text-white  rounded-l-lg border-white group w-56 h-56 text-black hover:text-white">
+                            
+                            <span class="relative  text-white text-xl">Women</span>
+               
+                        </div>
                     </li>
                     <li class="w-full">
                         <a href="/category/men" class="relative inline-flex items-center justify-center w-full h-full overflow-hidden font-mono font-medium tracking-tighter text-white bg-white border-white border-2 group group-hover:w-56 group-hover:h-56 text-black hover:text-white">
@@ -261,7 +262,17 @@
         else if (filterData.cost == filter ){
             filterData.cost = 0
         }
-        filter()
+        filterList.value = products.value.map((item: any) => {
+        console.log(products.value)
+    return {
+        name: item.name,
+        description: item.description,
+        gender : item.gender,
+        listSize : item.listSize,
+        listColor : item.listColor,
+        price : item.price,
+        image : item.image,
+    }})
     }
 
     function filterSize(event:Event , Size:any){
