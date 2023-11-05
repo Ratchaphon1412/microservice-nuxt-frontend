@@ -11,7 +11,7 @@
       </div>
     </div>
 
-    <div class="flex w-full justify-between">
+    <div class="flex w-full justify-between h-min-screen">
       <SettingSideBar />
       <slot />
     </div>

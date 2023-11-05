@@ -1,5 +1,5 @@
 <template >
-    <div class=" bg-white h-[2000-px]">
+    <div class=" bg-white min-h-screen">
     <main>
         <AdminNavbar></AdminNavbar>
         <div class="flex justify-center h-[150px] w-full bg-stone-600 from-indigo-600 via-indigo-700 to-violet-800 ">
@@ -12,13 +12,12 @@
 
         </div>
 
-                <div class="flex justify-between text-black">
-                <AdminSideBar/>
-
-                   
+                <div class="flex justify-between text-black ">
+                <AdminSideBar/>          
                         <slot />
                 
                 </div>
+    
     </main>
 </div>
   </template>

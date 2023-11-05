@@ -30,28 +30,63 @@
                         </div>
                         <!-- Product category_type -->
                         <div class="col-span-3 md:col-span-3">
+                            <div class="flex flex-col">
+                                <label for="product_category_type" class="block mb-2 text-xl font-medium text-gray-900 dark:text-white">Product category_type</label>
+                                <select name="product_category_type" id="product_category_type" v-model="formData.category_type" class="w-full px-4 py-2.5 rounded focus:outline-none focus:ring-2 focus:ring-myOrange-btn mt-2 text-black bg-gray-100">
+                                    <option value="Tops">Tops</option>
+                                    <option value="Outerwear">Outerwear</option>
+                                    <option value="Bottoms">Bottoms</option>
+                                </select>
+                            </div>  
+                        </div>
+                        <div class="col-span-3 md:col-span-3">
+                            <div class="flex flex-col">
+                                <label for="product_gender" class="block mb-2 text-xl font-medium text-gray-900 dark:text-white">Gender</label>
+                                <select name="product_gender" id="role" v-model="formData.gender" class="w-full px-4 py-2.5 rounded focus:outline-none focus:ring-2 focus:ring-myOrange-btn mt-2 text-black bg-gray-100">
+                                    <option value="Men">Men</option>
+                                    <option value="Women">Women</option>
+                                    <option value="Kids">Kids</option>
+                                    <option value="Unisex">Unisex</option>
+                                </select>
+                            </div>  
+                        </div>
+                        
+                        <!-- <div class="col-span-3 md:col-span-3">
                             <label for="product_category_type" class="block mb-2 text-xl font-medium text-gray-900 dark:text-white">Product category_type</label>
                             <input v-model="formData.category_type" class="peer w-full border-b-2 border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-lg font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-[#112D4E] focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
                             name="product_category_type" id="product_category_type"/>
                                 <label class="after:content[' '] pointer-events-none absolute left-0 -top-2.5 flex w-full select-none text-lg font-normal leading-tight text-blue-gray-500 transition-all after:absolute after:-bottom-2.5 after:block after:w-full after:scale-x-0 after:border-b-2 after:border-gray-600 after:transition-transform after:duration-300 peer-placeholder-shown:leading-tight peer-placeholder-shown:text-blue-gray-500 peer-focus:text-sm peer-focus:leading-tight peer-focus:text-[#112D4E] peer-focus:after:scale-x-100 peer-focus:after:border-[#112D4E] peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
                             
                                 </label>
-                        </div>
+                        </div> -->
                         <!-- Product gender -->
-                        <div class="col-span-3 md:col-span-3">
+                        <!-- <div class="col-span-3 md:col-span-3">
                             <label for="product_gender" class="block mb-2 text-xl font-medium text-gray-900 dark:text-white">Product gender</label>
                             <input v-model="formData.gender" class="peer w-full border-b-2 border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-lg font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-[#112D4E] focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
                             name="product_gender" id="product_gender"/>
                                 <label class="after:content[' '] pointer-events-none absolute left-0 -top-2.5 flex w-full select-none text-lg font-normal leading-tight text-blue-gray-500 transition-all after:absolute after:-bottom-2.5 after:block after:w-full after:scale-x-0 after:border-b-2 after:border-gray-600 after:transition-transform after:duration-300 peer-placeholder-shown:leading-tight peer-placeholder-shown:text-blue-gray-500 peer-focus:text-sm peer-focus:leading-tight peer-focus:text-[#112D4E] peer-focus:after:scale-x-100 peer-focus:after:border-[#112D4E] peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
                             
                                 </label>
-                        </div>
+                        </div> -->
 
                     </div>  
-                    <!-- ช่องว่าง -->  
+                    <!-- description -->
                     <div class="col-span-12 sm:col-span-2 mt-6 font-poppin ">
                         <label for="product_description" class="block mb-2 text-xl font-medium text-gray-900 dark:text-white">Description Product</label>
                         <textarea v-model="formData.description" type="text"  
+                        class="rounded-lg
+                        peer w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-lg 
+                        font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-[#112D4E] focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
+                        name="description_product" id="description_product"/>
+                            <label class="after:content[' '] pointer-events-none absolute left-0 -top-2.5 flex w-full select-none text-lg font-normal leading-tight text-blue-gray-500 transition-all after:absolute after:-bottom-2.5 after:block after:w-full after:scale-x-0 after:border-b-2 after:border-gray-600 after:transition-transform after:duration-300 peer-placeholder-shown:leading-tight peer-placeholder-shown:text-blue-gray-500 peer-focus:text-sm peer-focus:leading-tight peer-focus:text-[#112D4E] peer-focus:after:scale-x-100 peer-focus:after:border-[#112D4E] peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
+                        
+                            </label>
+                    </div> 
+
+                    <!-- Material -->
+                    <div class="col-span-12 sm:col-span-2 mt-6 font-poppin ">
+                        <label for="product_description" class="block mb-2 text-xl font-medium text-gray-900 dark:text-white">Description material Product</label>
+                        <textarea v-model="formData.material" type="text"  
                         class="rounded-lg
                         peer w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-lg 
                         font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-[#112D4E] focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
@@ -91,7 +126,7 @@
                             
                             <!-- Size -->
                             
-                            <RadioGroup class="flex col-span-4 grid">
+                            <RadioGroup class="flex col-span-4 ">
                                 <label for="size" class="block mb-2 text-xl font-medium text-gray-900 dark:text-white rounded-lg" >Choose a size</label>
                                 
                                 <div class="grid  gap-4 sm:grid-cols-2 lg:grid-cols-4 w-full">
@@ -115,7 +150,7 @@
                                             <div class="grid grid-cols-2 lg:grid-cols-4 animate-fade-down animate-ease-in animate-duration-500">
                                                 <div class="bg-white rounded-lg w-full lg:col-span-3 ">
                                                     <div class="relative bg-inherit ">
-                                                    <input v-model="item.quantity" type="text" id="size" name="size" class="peer bg-transparent h-10 rounded-lg text-black placeholder-transparent ring-gray-500 focus:ring-sky-600 focus:outline-none focus:border-rose-600 w-full" placeholder="Type inside me"/>
+                                                    <input v-model="item.quantity" type="text" id="size" name="size" class="peer bg-transparent h-10 rounded-lg text-black placeholder-transparent ring-gray-500 focus:ring-sky-600 focus:outline-none w-full" placeholder="Type inside me"/>
                                                     <label for="size" class="absolute cursor-text left-0 -top-3 text-sm text-gray-500 bg-inherit mx-1 px-1 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-2 peer-focus:-top-3 peer-focus:text-sky-600 peer-focus:text-sm transition-all">Size {{ item.size }}</label>
                                                 </div>
                                                 
@@ -278,6 +313,7 @@ const formData = reactive({
     description: "",
     price: 0,
     category_type: "",
+    material: "",
     gender: "",
     color_list: [{}],
     image_list: [{}]
@@ -354,6 +390,7 @@ async function onSubmit() {
     productFormData.append("price", Number(formData.price))
     productFormData.append("category_type", formData.category_type)
     productFormData.append("gender", formData.gender)
+    productFormData.append("material", formData.material)
 
     for (let i = 0; i < totalList.value.length; i++) {
         productFormData.append('color_list[' + i + '][name]', totalList.value[i].name)
@@ -375,6 +412,7 @@ async function onSubmit() {
 
     if (product.value !== null) {
         console.log(product.value)
+        navigateTo("/dashboard")
     } else {
         messageError.value.push(error.value)
         console.log(error.value)

@@ -29,7 +29,7 @@
               <div class="flex-1 inline-flex ">
                 <span class="text-secondary whitespace-nowrap mr-3">Size</span>
                 <div class="cursor-pointer text-black " v-for="sizeItem in listSize">
-                  <span class="text-lg hover:text-purple-500 p-1 py-0">{{sizeItem}}</span>
+                  <span class="text-lg hover:text-purple-500 p-1 py-0">{{sizeItem.size}}</span>
                   </div>
                 </div>
               </div>
@@ -69,8 +69,13 @@ defineProps({
   listColor : Array<string>,
   price : Number,
   image : String,
-  id: undefined
+  id : Number
 });
+
+
+defineEmits({
+  
+})
 
 
 </script>

@@ -2,17 +2,17 @@
    <div class="mx-auto max-w-2xl items-center space-x-2 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
        <!-- content card -->
        <nav>
-           <h1 class="p-6 text-6xl font-bold">All Cloth</h1>
+           <h1 class="p-6 text-6xl font-bold">Women</h1>
            <div class="p-6">
                <ul class="hidden text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg shadow sm:flex dark:divide-gray-700 dark:text-gray-400">
                    <li class="w-full">
-                       <a href="#" aria-selected="true" class="inline-block w-full p-4 text-gray-900 bg-gray-100 rounded-l-lg focus:ring-4 focus:ring-blue-300 active focus:outline-none dark:bg-gray-700 dark:text-white" >Women</a>
+                       <a href="/category/women" aria-selected="true" class="inline-block w-full p-4 text-gray-900 bg-gray-100 rounded-l-lg focus:ring-4 focus:ring-blue-300 active focus:outline-none dark:bg-gray-700 dark:text-white" >Women</a>
                    </li>
                    <li class="w-full">
-                       <a href="/" aria-selected="false" class="inline-block w-full p-4 bg-white hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700">Men</a>
+                       <a href="/category/men" aria-selected="false" class="inline-block w-full p-4 bg-white hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700">Men</a>
                    </li>
                    <li class="w-full">
-                       <a href="/" aria-selected="false" class="inline-block w-full p-4 bg-white hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700">Kid</a>
+                       <a href="/category/kid" aria-selected="false" class="inline-block w-full p-4 bg-white hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700">Kid</a>
                    </li>
                </ul> 
            </div>
@@ -32,16 +32,35 @@
                   </div>
               </div> 
            </div>
+           <!-- Filter -->
+           <div  class="font-bold p-4 bg-white m-5 rounded-lg flex flex-rows text-black">
+            <span class="text-xl text-black"> Filter : </span> 
+            <div v-for="filter in filterData">
+            <div v-if="filter != '' && filter != 0" class="mx-3 text-center rounded-lg bg-gray-200 px-2 py-1 flex flex-rows"> 
+                
+                <p v-if="filter == 500 ">less than ฿500</p>
+                <p v-else-if="filter == 999 ">฿500 - ฿999</p>
+                <p v-else-if="filter == 1000 ">more than ฿1000</p>
+                <p v-else>{{ filter }}</p>
+                <button @click="clearItemFilter($event , filter)" >
+                <svg class="w-2 h-2 m-2 hover:ring-2" fill="#000000" height="200px" width="200px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 460.775 460.775" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M285.08,230.397L456.218,59.27c6.076-6.077,6.076-15.911,0-21.986L423.511,4.565c-2.913-2.911-6.866-4.55-10.992-4.55 c-4.127,0-8.08,1.639-10.993,4.55l-171.138,171.14L59.25,4.565c-2.913-2.911-6.866-4.55-10.993-4.55 c-4.126,0-8.08,1.639-10.992,4.55L4.558,37.284c-6.077,6.075-6.077,15.909,0,21.986l171.138,171.128L4.575,401.505 c-6.074,6.077-6.074,15.911,0,21.986l32.709,32.719c2.911,2.911,6.865,4.55,10.992,4.55c4.127,0,8.08-1.639,10.994-4.55 l171.117-171.12l171.118,171.12c2.913,2.911,6.866,4.55,10.993,4.55c4.128,0,8.081-1.639,10.992-4.55l32.709-32.719 c6.074-6.075,6.074-15.909,0-21.986L285.08,230.397z"></path> </g></svg>
+            </button>
+            </div>
+        </div>
+           
+            
+
+           </div>
        </nav>
        
        <!-- content product -->
        <div class="flex">
-           <aside class="flex flex-col w-72 px-5 py-8 overflow-y-auto bg-white border-r rtl:border-r-0 rtl:border-l dark:bg-gray-900 dark:border-gray-700">
+           <aside class="flex flex-col w-72 px-5 py-8 overflow-y-auto bg-white border-r rounded-md rtl:border-r-0 rtl:border-l dark:bg-gray-900 dark:border-gray-700">
                <h1 class="text-2xl font-bold text-start text">Women</h1>
                <div class="px-3 py-4 overflow-y-auto">
                    <!-- Tops -->
-                   <ul class="space-y-2 font-medium">
-                       <li>
+                   <div class="space-y-2 font-medium">
+                       
                            <button type="button" class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-tops" data-collapse-toggle="dropdown-tops">
                                <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" aria-hidden="true"
                                version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 256 256" enable-background="new 0 0 256 256" xml:space="preserve">
@@ -49,29 +68,14 @@
                                    <g><g><g><path fill="#000000" d="M86.9,11.4c-24.9,7-43.4,15.5-48.8,22.7C30,44.8,23.5,71.3,20.3,106.3c-0.8,9.4-0.7,10,3.6,11.9c9.3,4.4,24.3,8.6,33.7,9.4l1.4,0.1l0.2,52.8c0.2,51.9,0.2,52.9,1.2,53.9c1,1.2,2.5,1.8,8.1,3.8c25.1,8.7,72.8,10.3,105.6,3.5c10.5-2.2,20-5.5,21.7-7.6c0.6-0.7,0.7-8.6,0.9-53.6l0.2-52.8l4.6-0.6c8.6-1.1,22.5-5.2,30.5-8.9c3.5-1.7,4.4-3.2,4.1-6.7c-0.1-1.2-0.6-5.6-0.9-9.6c-3.1-32.1-9.6-57.6-17.3-67.9c-5.3-7.1-24.5-16-48.4-22.5c-7-1.9-6-1.9-17.8,0.1c-23.2,4-24.6,4-48.8-0.2c-5.1-0.9-9.6-1.6-10.2-1.5C92.2,10,89.6,10.6,86.9,11.4z M91,23.1c0.6,1.2,2.6,3.5,4.4,5.2c14.3,13.3,43.6,14.8,61.2,3.2c3.2-2.2,7-5.9,8.3-8.4c0.6-1.1,1.2-2,1.4-2c0.8,0,9.9,2.8,16,4.8c15.6,5.4,25.5,10.7,28.8,15.7c4,6,8.1,20.1,11,37.6c2.4,14.7,4.2,30.3,3.5,31c-0.2,0.2-3.3,1.4-6.8,2.6c-6.5,2.3-14.7,4.3-19.7,4.9l-2.7,0.3l0.2-15.6c0.2-13.6,0.3-16.1,1.2-19.6c1.3-5.3,3.4-10.2,5.6-13c2.8-3.5,3.4-5,2.8-7c-0.7-2.1-2.5-3.4-4.7-3.4c-1.4,0-2.2,0.4-3.6,1.7c-3.9,3.5-7.8,11.7-10,20.5c-0.8,3.2-0.8,8.4-1.1,75.1l-0.2,71.6l-4.1,1.3c-14,4.4-31.9,6.5-54.6,6.5c-22.6,0-40.6-2.1-54.6-6.5l-4.1-1.3l-0.3-71.6c-0.3-77.4-0.1-72.8-2.5-80.4c-2.1-6.5-5.6-12.6-8.8-15.4c-2.1-1.8-4.6-1.9-6.5-0.3c-2.6,2.2-2.4,4.8,0.6,8.3c3.5,4,6.1,11.6,7.1,19.9c0.2,2.3,0.5,9.8,0.5,16.8v12.6l-2.6-0.3c-4.9-0.6-13.2-2.6-19.6-4.8c-3.5-1.2-6.6-2.4-6.8-2.6c-0.6-0.6,1.4-18.3,3.6-31c3-18.3,6.9-31.3,11-37.5c4.1-6.1,18.5-13,42.2-20.1C89.5,20.8,89.9,20.9,91,23.1z M110.9,22.8c9.6,1.5,15.6,2,20.3,1.7c3.8-0.3,17.8-2.2,21.2-2.9l1.2-0.3l-1.2,1c-1.8,1.6-8.2,4.5-11.9,5.5c-10.7,3-22.6,1.9-32.1-2.7c-2-1-4.2-2.3-4.8-2.8l-1.2-1l1.4,0.2C104.5,21.8,107.7,22.4,110.9,22.8z"/></g></g></g>
                                    </svg>
                                  <span class="flex-1 ml-3 text-left text-xl whitespace-nowrap">TOPS</span>
-                                 <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
-                                 </svg>
+                                 
                            </button>
-                           <ul id="dropdown-tops" class="hidden py-2 space-y-2">
-                                 <li>
-                                    <a href="#" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Short sleeve t-shirt</a>
-                                 </li>
-                                 <li>
-                                    <a href="#" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Long sleeve t-shirt</a>
-                                 </li>
-                                 <li>
-                                    <a href="#" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Short sleeve shirt</a>
-                                 </li>
-                                 <li>
-                                   <a href="#" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Long sleeve shirt</a>
-                                </li>
-                           </ul>
-                        </li>
-                   </ul>
+                           
+                       
+                        </div>
                    <!-- Outerwear -->
-                   <ul class="space-y-2 font-medium">
-                       <li>
+                   <div class="space-y-2 font-medium">
+                       
                            <button type="button" class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-Outerwear" data-collapse-toggle="dropdown-Outerwear">
                                <svg version="1.1" class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" aria-hidden="true"
                                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 256 256" enable-background="new 0 0 256 256" xml:space="preserve">
@@ -79,26 +83,14 @@
                                    <g><g><g><g><g><path fill="#000000" d="M74.8,182c-1.6-0.4-2.6-1.9-2.3-3.5l9.3-43.4c0.3-1.6,1.9-2.6,3.5-2.3c1.6,0.3,2.6,1.9,2.3,3.5l-9.3,43.4C78,181.1,76.7,182.4,74.8,182z"/></g><g><g><path fill="#000000" d="M177.7,179.7l-9.3-43.4c-0.3-1.6,0.7-3.2,2.3-3.5c1.6-0.3,3.2,0.7,3.5,2.3l9.3,43.4c0.3,1.6-0.7,3.1-2.3,3.5C179.5,182.4,178,181.1,177.7,179.7z"/></g><path fill="#000000" d="M217.7,99.4c-8.4-31.1-19.5-50.5-19.6-50.6c-0.3-0.4-7.9-8.9-21.4-12.5C175.4,20.5,156.2,10,128,10c-28.2,0-47.4,10.5-48.6,26.3c-13.5,3.6-21,12.1-21.4,12.5c-0.1,0.1-11.2,19.5-19.6,50.6c-7.7,28.7-15,74.1-5.9,127.6c0,0,2.4,16.5,2.4,16.5c0.2,1.4,1.4,2.5,2.9,2.5h20c1.5,0,2.7-1.1,2.9-2.5l2.3-16.2l2.5-5.1l0.7,3c0.3,1.3,1.5,2.3,2.9,2.3H187c1.4,0,2.6-0.9,2.9-2.3l0.7-3l2.5,5.1l2.3,16.2c0.2,1.4,1.4,2.5,2.9,2.5h20c1.4,0,2.7-1.1,2.9-2.5c0,0,2.4-16.5,2.4-16.5C232.7,173.5,225.4,128.1,217.7,99.4z M176.2,42.3c8.5,2.5,14.3,7.3,16.4,9.3l-6.6,28.9h-55.1V68.9l6-12.5c6.4,0.5,25.5,1.2,34.6-6.9C173.9,47.5,175.4,45,176.2,42.3z M69.9,86.4h55.2v118.2H67.6C65.6,192.3,57.5,135.7,69.9,86.4z M68.8,210.4h56.3v2.7H69.4L68.8,210.4z M128,61.5l-4.5-9.2c-0.1-0.3-0.3-0.6-0.5-0.9c-1.4-1.6-2.8-3.3-4.1-5h18.2c-1.3,1.7-2.7,3.4-4.1,5c-0.2,0.3-0.4,0.6-0.5,0.9L128,61.5z M114.5,40.5c-2.9-4.2-5-7.8-5-9.3c0-3.3,7.6-5.6,18.4-5.6c10.9,0,18.4,2.3,18.4,5.6c0,1.6-2,5.2-5,9.3H114.5z M128,15.9c25.2,0,42.8,9.1,42.8,22.1c0,2.9-1,5.2-3.2,7.1c-5.8,5.1-18.3,5.9-26.6,5.7c4.7-5.8,11.2-14.8,11.2-19.6c0-7.4-8.6-11.5-24.3-11.5s-24.3,4.1-24.3,11.5c0,4.8,6.5,13.8,11.2,19.6c-8.3,0.3-20.8-0.5-26.6-5.7c-2.1-1.9-3.2-4.2-3.2-7.1C85.2,25,102.8,15.9,128,15.9z M79.8,42.3c0.8,2.7,2.3,5.2,4.6,7.2c9.1,8.1,28.3,7.4,34.6,6.9l6,12.5v11.6H69.9l-6.6-28.9C65.6,49.5,71.3,44.8,79.8,42.3z M55.3,240.1H40.4l-0.4-2.4h15.6L55.3,240.1z M56.4,231.9H39.1l-0.4-2.4h18L56.4,231.9z M58.3,223.6H37.8c-8.4-51.3-1.3-94.8,6.1-122.4c5.2-19.4,11.3-33.9,15.1-41.9l5.5,24.1c-14.4,55.2-3.2,119.7-2.4,124.3c0,0.1,1.2,5.3,1.2,5.3L58.3,223.6z M71.4,221.6l-0.6-2.7h54.3v2.7H71.4z M184.6,221.6h-53.7v-2.7h54.3L184.6,221.6z M186.6,213.1h-55.6v-2.7h56.3L186.6,213.1z M188.4,204.5h-57.4V86.4h55.2C198.5,135.7,190.4,192.3,188.4,204.5z M215.6,240.1h-14.9l-0.3-2.4H216L215.6,240.1z M216.9,231.9h-17.3l-0.3-2.4h18L216.9,231.9z M218.1,223.6h-20.5l-5.1-10.5c0,0,1.2-5.2,1.2-5.3c0.8-4.6,12-69.2-2.4-124.3l5.5-24.1c3.8,7.9,9.9,22.3,15.1,41.6C219.5,128.6,226.5,172.2,218.1,223.6z"/></g></g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></g></g>
                                    </svg>
                                  <span class="flex-1 ml-3 text-left text-xl  whitespace-nowrap">Outerwear</span>
-                                 <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
-                                 </svg>
+                                 
                            </button>
-                           <ul id="dropdown-Outerwear" class="hidden py-2 space-y-2">
-                                 <li>
-                                    <a href="#" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Hoodies & Casual Jackets</a>
-                                 </li>
-                                 <li>
-                                    <a href="#" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Jackets & Blazers</a>
-                                 </li>
-                                 <li>
-                                    <a href="#" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Coats</a>
-                                 </li>
-                           </ul>
-                        </li>
-                   </ul>
+                           
+                        
+                    </div>
                    <!-- BOTTOMS -->
-                   <ul class="space-y-2 font-medium">
-                       <li>
+                   <div class="space-y-2 font-medium">
+                       
                            <button type="button" class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-BOTTOMS" data-collapse-toggle="dropdown-BOTTOMS">
                                <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" aria-hidden="true"
                                fill="#000000" height="800px" width="800px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
@@ -131,26 +123,11 @@
                                     <path d="M15 12a1 1 0 0 0 .962-.726l2-7A1 1 0 0 0 17 3H3.77L3.175.745A1 1 0 0 0 2.208 0H1a1 1 0 0 0 0 2h.438l.6 2.255v.019l2 7 .746 2.986A3 3 0 1 0 9 17a2.966 2.966 0 0 0-.184-1h2.368c-.118.32-.18.659-.184 1a3 3 0 1 0 3-3H6.78l-.5-2H15Z"/>
                                  </svg> -->
                                  <span class="flex-1 ml-3 text-left text-xl whitespace-nowrap">BOTTOMS</span>
-                                 <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
-                                 </svg>
+                                 
                            </button>
-                           <ul id="dropdown-BOTTOMS" class="hidden py-2 space-y-2">
-                                 <li>
-                                    <a href="#" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Casual Pants</a>
-                                 </li>
-                                 <li>
-                                    <a href="#" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Jeans</a>
-                                 </li>
-                                 <li>
-                                    <a href="#" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">short sleeve shirt</a>
-                                 </li>
-                                 <li>
-                                   <a href="#" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">long sleeve shirt</a>
-                                </li>
-                           </ul>
-                        </li>
-                   </ul>
+                           
+                       
+                   </div>
                </div>
                <!-- Filter section, show/hide based on section state. -->
                <div class="border-t border-gray-200">
@@ -169,7 +146,7 @@
                                <RadioGroupOption @click="filterColor(color.name)" as="template" v-for="color in colors" :key="color.name" :value="color.class" v-slot="{ active, checked }">
                                    <div :class="[active && checked ? 'ring ring-offset-1' : '', !active && checked ? 'ring-2' : '', 'relative -m-0.5 cursor-pointer flex items-center justify-center rounded-full p-0.5 focus:outline-none']">
                                        <RadioGroupLabel as="span" class="sr-only">{{ color.name }}</RadioGroupLabel>
-                                       <span aria-hidden="true" class="h-8 w-8 rounded-full border border-black border-opacity-10" :style="{ backgroundColor: color.class }" />
+                                       <span aria-hidden="true" class="h-8 w-8 rounded-full border border-black border-opacity-10 hover:ring-2" :style="{ backgroundColor: color.class }" />
                                    </div>
                                </RadioGroupOption>
                            </div>
@@ -179,13 +156,13 @@
                    <h1 class="text-xl text-start mt-4">Size</h1>
                    <RadioGroup v-model="filterData.selectedSize" class="mt-4">
                        <RadioGroupLabel class="sr-only">Choose a size</RadioGroupLabel>
-                       <div class="grid grid-cols-3 gap-4 md:grid-cols-3 ">
-                           <RadioGroupOption @click="filterSize(size)" as="template" v-for="size in sizes" :key="size" :value="size"  v-slot="{ active, checked }">
-                               <div :class="[size, active && checked ? 'ring-1 ring-[#112D4E]' : '', !active && checked ? '' : '', 'border-black border-opacity-10 group relative flex items-center justify-center rounded-md border text-lg font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1']">
+                       <button class="grid grid-cols-3 gap-4 md:grid-cols-3 ">
+                           <RadioGroupOption @click="filterSize($event , size)" as="template" v-for="size in sizes" :key="size" :value="size"  v-slot="{ active, checked }">
+                               <div :class="[size, active && checked ? 'ring-1 ring-[#112D4E]' : '', !active && checked ? '' : '', ' hover:ring-2 border-black border-opacity-10 group relative flex items-center justify-center rounded-md border text-lg font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1']">
                                    <RadioGroupLabel as="span" class="p-2">{{ size }}</RadioGroupLabel>
                                </div>   
                            </RadioGroupOption>
-                       </div>
+                       </button>
                    </RadioGroup>
                </div>
                <!-- <div class="border-t border-gray-200 mt-4">
@@ -212,8 +189,8 @@
                <div class="border-t border-gray-200 mt-4">
                    <h1 class="text-xl text-start mt-4">Cost</h1>
                    <div class="p-4 flex flex-col gap-4 ">
-                       <div @click="filterCost(cost.cost)" class="flex gap-1" v-for="cost in listCost">
-                           <input type="radio" name="radio-1" class="radio">
+                       <div @click="filterCost(cost.cost)" class="flex gap-1 " v-for="cost in listCost">
+                           <input type="radio" name="radio-1 " class="radio hover:ring-2">
                            <h1>{{ cost.name }}</h1>
                        </div>
                    </div>
@@ -221,7 +198,7 @@
 
            </aside>
            <div class="mx-auto max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16">
-            <SectionsCard v-for="list in filterList" 
+            <SectionsCard v-model="filterList" v-for="(list,index) in filterList" :key="index" 
             :name="list.name" 
             :description="list.description" 
             :gender="list.gender"
@@ -237,6 +214,7 @@
 
 <script setup lang="ts">
    import { RadioGroup, RadioGroupLabel, RadioGroupOption } from '@headlessui/vue'
+   import { ref, watch} from 'vue'
 
    const colors = [
        { name: 'white', class: '#f5f5f5', selectedClass: 'ring-gray-400' },
@@ -246,7 +224,7 @@
        { name: 'red', class: '#cf1b3f', selectedClass: 'ring-gray-400' },
        { name: 'green', class: '#57ab3e', selectedClass: 'ring-gray-400' },
    ]
-   const sizes =['xss','xs','s','m','l','xl','2xl','3xl']
+   const sizes =['XSS','XS','S','M','L','XL','2XL','3XL']
    const listCost = [
                 {name: 'less than ฿500',cost:500},
                 {name: '฿500 - ฿999',cost:999},
@@ -254,20 +232,14 @@
             ]
 
    const { data: products } = await baseFetch<any>("product/format", {});
-   console.log(products);
+//    console.log(products.value.length);
 
 
-   const filterList = ref({
-       name: '',
-       description : '',
-       gender : '',
-       listSize : [],
-       listColor : [],
-       price : 0,
-       image : '',
-   })
+   const filterList = ref<any>([])
+
 
     filterList.value = products.value.map((item: any) => {
+        console.log(products.value)
     return {
         name: item.name,
         description: item.description,
@@ -276,16 +248,29 @@
         listColor : item.listColor,
         price : item.price,
         image : item.image,
-    }
-   })
-   console.log(filterList.value.length);
+    }})
 
     const filterData = reactive({
-    selectedColor: '',
-    selectedSize: '',
-    cost : '',
+        selectedColor: '',
+        selectedSize: '',
+        cost : 0,
     })
-    function filterSize(Size:any){
+    function clearItemFilter(event:Event , filter:any){
+        event.preventDefault();
+        if (filterData.selectedColor == filter) {
+            filterData.selectedColor = ''
+        }
+        else if (filterData.selectedSize == filter ){
+            filterData.selectedSize = ''
+        }
+        else if (filterData.cost == filter ){
+            filterData.cost = 0
+        }
+        filter()
+    }
+
+    function filterSize(event:Event , Size:any){
+        event.preventDefault();
         filterData.selectedSize = Size;
         console.log(filterData);
         filter()
@@ -297,7 +282,7 @@
         filter()
     }
 
-    function filterCost(cost:string){
+    function filterCost(cost:number){
         filterData.cost = cost;
         console.log(filterData);
         filter()
@@ -305,11 +290,40 @@
 
     async function filter(){
         const {data: filter,error} = await baseFetch<any>("product/filter",{
-            method : 'POST',
+            method: 'POST',
             body : filterData
         })
         console.log(filter.value);
+        filterList.value = ref<any>([]);
+        // const filterList = ref({
+        //     name: '',
+        //     description : '',
+        //     gender : '',
+        //     listSize : [],
+        //     listColor : [],
+        //     price : 0,
+        //     image : '',
+        // })
+
+        filterList.value = filter.value.map((item: any) => {
+        return {
+            name: item.name,
+            description: item.description,
+            gender : item.gender,
+            listSize : item.listSize,
+            listColor : item.listColor,
+            price : item.price,
+            image : item.image,
+        }})
+        console.log(filterList.value)
     }
+
+    // watch(filterList, (newFilterList, oldFilterList) => {
+    // console.log('filterList changed' ,newFilterList, oldFilterList);
+    // // You can perform any actions here that you want to trigger when filterList changes.
+    // // For example, you can update the UI or call other functions.
+    // });
+    
 
 
 </script>

@@ -116,7 +116,7 @@
  import { ref } from 'vue';
 //  const { data: product, error } = await baseFetch<any>(`product/${route.params.id}`, {})
 
-const cardcount = 2; //ไม่เกิน 3นะจ๊ะ
+const cardcount = 3; //ไม่เกิน 3นะจ๊ะ
  const formData = reactive({
     name: "saran wongkum",
     card_number: "171 411 5981",

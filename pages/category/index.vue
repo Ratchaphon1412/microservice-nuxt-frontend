@@ -3,19 +3,7 @@
         <!-- content card -->
         <nav>
             <h1 class="p-6 text-6xl font-bold">All Cloth</h1>
-            <div class="p-6">
-                <ul class="hidden text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg shadow sm:flex dark:divide-gray-700 dark:text-gray-400">
-                    <li class="w-full">
-                        <a href="#" aria-selected="true" class="inline-block w-full p-4 text-gray-900 bg-gray-100 rounded-l-lg focus:ring-4 focus:ring-blue-300 active focus:outline-none dark:bg-gray-700 dark:text-white" >Women</a>
-                    </li>
-                    <li class="w-full">
-                        <a href="/" aria-selected="false" class="inline-block w-full p-4 bg-white hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700">Men</a>
-                    </li>
-                    <li class="w-full">
-                        <a href="/" aria-selected="false" class="inline-block w-full p-4 bg-white hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700">Kid</a>
-                    </li>
-                </ul> 
-            </div>
+            
             <div id="indicators-carousel" class="p-6" data-carousel="static">
                 <div class="relative h-56 overflow-hidden rounded-lg ">
                     <!-- Item 1 -->
@@ -31,6 +19,30 @@
                        <img src="https://im.uniqlo.com/global-cms/spa/resce884fadd7f755a2344d2c2718b6aae4fr.jpg?1693291677284" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2" alt="...">
                    </div>
                </div> 
+            </div>
+            <div class="p-6">
+                
+                <ul class="hidden text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg shadow sm:flex dark:divide-gray-700 dark:text-gray-400">
+                    
+                    <li class="w-full" >
+                        <a href="#_" class="relative inline-flex items-center justify-center w-full h-full overflow-hidden font-mono font-medium tracking-tighter text-white bg-white rounded-l-lg border-white border-2 group group-hover:w-56 group-hover:h-56 text-black hover:text-white">
+                            <span class="absolute w-0 h-0 transition-all duration-500 ease-out bg-gray-800 rounded-full group-hover:w-full group-hover:h-96"></span>
+                            <span class="relative text-black group-hover:text-white text-xl">Women</span>
+                        </a>
+                    </li>
+                    <li class="w-full">
+                        <a href="#_" class="relative inline-flex items-center justify-center w-full h-full overflow-hidden font-mono font-medium tracking-tighter text-white bg-white border-white border-2 group group-hover:w-56 group-hover:h-56 text-black hover:text-white">
+                            <span class="absolute w-0 h-0 transition-all duration-500 ease-out bg-gray-800 rounded-full group-hover:w-full group-hover:h-96"></span>
+                            <span class="relative text-black group-hover:text-white text-xl">Men</span>
+                        </a>                    
+                    </li>
+                    <li class="w-full">
+                        <a href="#_" class="relative inline-flex items-center justify-center w-full h-12 overflow-hidden font-mono font-medium tracking-tighter text-white bg-white rounded-r-lg border-white border-2 group group-hover:w-56 group-hover:h-56 text-black hover:text-white">
+                            <span class="absolute w-0 h-0 transition-all duration-500 ease-out bg-gray-800 rounded-full group-hover:w-full group-hover:h-96"></span>
+                            <span class="relative text-black group-hover:text-white text-xl">Kid</span>
+                        </a>   
+                    </li>
+                </ul> 
             </div>
         </nav>
         
@@ -229,10 +241,15 @@
                 <SectionsCard/>
             </div>
         </div>
+        <div class="p-6 grid justify-items-center">
+            <UPagination v-model="page" :page-count="5" :total="items.length" />
+        </div>
     </div>
 </template>
 
 <script setup>
+const page = ref(1)
+const items = ref(Array(55))
     import { RadioGroup, RadioGroupLabel, RadioGroupOption ,Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
     import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
     const colors = [
