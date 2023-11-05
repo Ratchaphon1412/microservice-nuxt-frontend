@@ -125,8 +125,6 @@
                                  <span class="flex-1 ml-3 text-left text-xl whitespace-nowrap">BOTTOMS</span>
                                  
                            </button>
-                           
-                       
                    </div>
                </div>
                <!-- Filter section, show/hide based on section state. -->
@@ -296,17 +294,7 @@
             body : filterData
         })
         console.log(filter);
-        const filterList = ref<any>([]);
-        // const filterList = ref({
-        //     name: '',
-        //     description : '',
-        //     gender : '',
-        //     listSize : [],
-        //     listColor : [],
-        //     price : 0,
-        //     image : '',
-        // })
-
+        
         filterList.value = filter.value.map((item: any) => {
         return {
             name: item.name,
