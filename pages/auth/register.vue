@@ -42,7 +42,7 @@ async function submit() {
             title : "success"
         }).then((result) => {
             if(result.isConfirmed){
-                navigateTo("/")
+                navigateTo("/auth.login")
             }
         })
     // navigateTo("/auth/registerAddress")
