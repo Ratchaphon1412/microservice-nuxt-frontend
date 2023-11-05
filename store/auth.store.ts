@@ -11,12 +11,8 @@ export const authStore = defineStore('authStore', () => {
   let user:any = ref()
   const URL = useRuntimeConfig().public.kongApi
 
-  
-
   async function login(email:string, password:string){
     
-
-
     const payload = {
       "email": email,
       "password": password
@@ -178,7 +174,9 @@ async function getAddressById(id:string){
 
   console.log(data)
 
-    return data.value.address
+
+
+  return data.value.address
 
 
 
@@ -206,6 +204,28 @@ async function updateAddress(id:string,fullname:string,phone:string,detail_addre
 
 }
 
+async function register(username:string,fullname:string,phone:string,gender:string,email:string,password:string){
+  const {data} = await baseFetch(URL+"/api/v1/user/register/",{
+    method: "POST",
+    body: JSON.stringify({
+      "username": username,
+      "fullname": fullname,
+      "phone": phone,
+      "gender": gender,
+      "email": email,
+      "password": password
+    }),
+  })
+  if(data){
+    console.log(data)
+    await login(email,password)
+    await authorize()
+    // updateAddress(data.value.id,fullname,phone,"","","","")
+    return data.value
+  }
+}
+
+
   function getUser(){
     return user.value
   }
@@ -228,7 +248,11 @@ async function updateAddress(id:string,fullname:string,phone:string,detail_addre
   }
 
 
-  return { login ,isLogin, authorize, getUser, logout , getAccessToken , refreshToken,accesstoken,user,refreshtoken,getRole,getAddress,addressUser,address ,updateProfile,deleteAddress,createAddress,getAddressById,updateAddress}
+  return { register, login ,isLogin, authorize, getUser, logout 
+    , getAccessToken , refreshToken,accesstoken,user,refreshtoken
+    ,getRole,getAddress,addressUser,address ,
+    updateProfile,deleteAddress,createAddress
+    ,getAddressById,updateAddress}
 
 
 },{

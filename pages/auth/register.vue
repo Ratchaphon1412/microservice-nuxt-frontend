@@ -1,4 +1,15 @@
 <script setup lang="ts">
+import { authStore } from "@/store/auth.store";
+import { useMyRegister } from "@/store/register.store";
+import Swal from 'sweetalert2'
+
+const registerProcess = useMyRegister();
+const auth = authStore();
+
+const { register } = auth;
+
+const { registerStore } = registerProcess;
+
 let error_email = false;
 let error_phone = false;
 let error_name = false;
@@ -10,11 +21,39 @@ let error_symbol = ref(false);
 let realPassword = ref("");
 let error_realPassword = ref(false);
 
-function next() {
-  if (realPassword.value === Password.value) {
+
+//variable 
+let username = ref("");
+let fullname = ref("");
+let phone =  ref("");
+let gender = ref("");
+let email = ref("");
+
+async function submit() {
+  if (realPassword.value === Password.value && username.value !== "" && fullname.value !== "" && phone.value !== "" && gender.value !== "" && email.value !== "") {
+    // store in pinia store to use somewhere
+    await registerStore(username.value,fullname.value,phone.value,gender.value,email.value,Password.value)
+    
+    // store to database
+    await register(username.value,fullname.value,phone.value,gender.value,email.value,Password.value)
+    Swal.fire({
+            confirmButtonText: 'OK',
+            icon : `success`,
+            title : "success"
+        }).then((result) => {
+            if(result.isConfirmed){
+                navigateTo("/")
+            }
+        })
+    // navigateTo("/auth/registerAddress")
     error_realPassword.value = false;
   } else {
     error_realPassword.value = true;
+    Swal.fire({
+            icon: 'error',
+            title: 'something wrong',
+            text: 'กรณุากรอกข้อมูลให้ครบถ้วน'
+        })
   }
 }
 
@@ -48,12 +87,13 @@ watch(
           LET'S GET YOU STARTED
         </p>
 
-        <form action="" class="w-[50%]" @submit.prevent="next()">
+        <form action="" class="w-[50%]" @submit.prevent="submit()">
           <div class="mb-4">
             <div class="relative">
               <input
                 type="text"
                 id="floating_outlined"
+                v-model="username"
                 class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                 placeholder=""
               />
@@ -77,6 +117,7 @@ watch(
               <input
                 type="text"
                 id="floating_outlined"
+                v-model="fullname"
                 class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                 placeholder=""
               />
@@ -100,6 +141,7 @@ watch(
               <input
                 type="text"
                 id="floating_outlined"
+                v-model="email"
                 class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                 placeholder=""
               />
@@ -123,6 +165,7 @@ watch(
               <input
                 type="tel"
                 id="floating_outlined"
+                v-model="phone"
                 class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                 placeholder=" "
               />
@@ -147,6 +190,7 @@ watch(
               >
               <select
                 id="underline_select"
+                v-model="gender"
                 class="block w-full text-sm text-gray-500 bg-transparent rounded-lg border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-gray-200 bg-gray-200 peer"
               >
                 <option selected class="hidden">Gender</option>
@@ -216,13 +260,12 @@ watch(
           </div>
 
           <button
-            type="submit"
+            type="submit" 
             class="btn btn-info w-full text-white bg-[#2674B4] text-3xl"
           >
             NEXT
           </button>
         </form>
-
         <p class="mt-4 text-xs">
           Already a user?
           <nuxt-link to="login" class="text-[#2674B4]">Login</nuxt-link>
