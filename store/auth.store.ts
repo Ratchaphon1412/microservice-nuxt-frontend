@@ -93,9 +93,8 @@ export const authStore = defineStore('authStore', () => {
     }
 
 
-   
 
-    
+      
    
     return []
   
@@ -142,8 +141,70 @@ export const authStore = defineStore('authStore', () => {
 
   }
 
+  async function deleteAddress(id:number){
+    await baseFetch(URL+"/api/v1/user/address/",{
+      method: "DELETE",
+      body: JSON.stringify({
+        "address_id": id
+      }),
+    })
+    await authorize()
+
+  }
+
+async function createAddress(fullname:string,phone:string,detail_address:string,country:string,province:string,zip_code:string ){
+      const {data} = await baseFetch(URL+"/api/v1/user/address/",{
+        method: "POST",
+        body: JSON.stringify({
+          "fullname": fullname,
+          "phone": phone,
+          "detail_address": detail_address,
+          "country": country,
+          "province": province,
+          "zip_code": zip_code
+        }),
+      })
+      if(data){
+        address.value = data.value
+        
+        return data.value
+      }
+}
+
+async function getAddressById(id:string){
+  const {data} = await baseFetch(URL+"/api/v1/user/address/"+id,{
+    method: "GET",
+  })
+
+  console.log(data)
+
+    return data.value.address
 
 
+
+}
+
+async function updateAddress(id:string,fullname:string,phone:string,detail_address:string,country:string,province:string,zip_code:string ){
+  const {data} = await baseFetch(URL+"/api/v1/user/address/",{
+    method: "PUT",
+    body: JSON.stringify({
+      "address_id": id,
+      "fullname": fullname,
+      "phone": phone,
+      "detail_address": detail_address,
+      "country": country,
+      "province": province,
+      "zip_code": zip_code
+    }),
+  })
+  if(data){
+    address.value = data.value
+    
+    return data.value
+  }
+
+
+}
 
   function getUser(){
     return user.value
@@ -167,7 +228,7 @@ export const authStore = defineStore('authStore', () => {
   }
 
 
-  return { login ,isLogin, authorize, getUser, logout , getAccessToken , refreshToken,accesstoken,user,refreshtoken,getRole,getAddress,addressUser,address ,updateProfile}
+  return { login ,isLogin, authorize, getUser, logout , getAccessToken , refreshToken,accesstoken,user,refreshtoken,getRole,getAddress,addressUser,address ,updateProfile,deleteAddress,createAddress,getAddressById,updateAddress}
 
 
 },{
