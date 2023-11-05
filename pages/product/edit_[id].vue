@@ -8,7 +8,7 @@
    <div class="flex-shrink p-4 mb-4"> 
        <div class="flex flex-col justify-center bg-white dark:bg-gray-800 rounded-lg h-full">
            <div class="p-4 mb-4 bg-white rounded-lg">
-               <form enctype="multipart/form-data" action="#">
+               <form @submit.prevent="onSubmit()" enctype="multipart/form-data" action="#">
                    <div class="grid grid-cols-6 gap-6 font-poppin">
                        <!-- Product Name  -->
                        <div class="col-span-3 md:col-span-3">
@@ -142,36 +142,6 @@
                                </RadioGroupOption>
                            </div>
                        </RadioGroup>
-                       
-                       <!-- <RadioGroup class="flex">
-                           <RadioGroupLabel class="sr-only">Choose a size</RadioGroupLabel>
-                           <div class="grid grid-cols-4 gap-4 sm:grid-cols-8 lg:grid-cols-4">
-                               <RadioGroupOption  @click="changeStatus(item.size , list.size)" as="template" v-for="item in list.size"  :value="item" :disabled="!item.inStock" v-slot="{ active, checked }" >
-                                   <span :class="[item.inStock ? 'cursor-pointer bg-white text-gray-900 shadow-sm' : 'bg-gray-50 text-gray-200', active ? '' : '', 'group relative flex items-center justify-center rounded-md border py-3 px-4 text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6']">
-                                       <RadioGroupLabel as="span">{{ item.size }}</RadioGroupLabel>
-                                       <span v-if="item.inStock" aria-hidden="true" />
-                                       <span v-else aria-hidden="true" class="pointer-events-none absolute -inset-px rounded-md border-2 border-gray-200">
-                                           <svg class="absolute inset-0 h-full w-full stroke-2 text-gray-200" viewBox="0 0 100 100" preserveAspectRatio="none" stroke="currentColor">
-                                           <line x1="0" y1="100" x2="100" y2="0" vector-effect="non-scaling-stroke" />
-                                           </svg>
-                                       </span>
-                                   </span>
-                                   <div class="w-1/12 " v-for="statusSize in list.size">
-                                       <div v-if="statusSize.inStock" class="flex flex-col gap-4 justify-center">
-                                           Size {{ statusSize.size }}
-                                           <input type="text" class="rounded-lg w-full">
-                                       </div>
-                                   </div>
-                               </RadioGroupOption>
-                           </div>
-
-                       </RadioGroup> -->
-                       <!-- <div class="w-1/12 " v-for="statusSize in list.size">
-                           <div v-if="statusSize.inStock" class="flex flex-col gap-4 justify-center">
-                               Size {{ statusSize.size }}
-                               <input type="text" class="rounded-lg w-full">
-                           </div>
-                       </div> -->
            
                    </section>
                    </div>
@@ -270,15 +240,15 @@
                                </div>
                            </div>
                             <div class="col-span-6 sm:col-span-2">
-                               <button @click="deleteProduct()" className="btn btn-outline btn-error w-full">Delete</button>
+                               <button type="submit" @click.prevent="deleteProduct()" class="btn btn-outline btn-error w-full">Delete</button>
                            </div>
 
                            <div class="col-span-6 sm:col-span-2"></div>
 
-                           <div class="col-span-6 sm:col-span-2 flex justify-end">
-                               <button @click="onSubmit()" class="btn btn-outline btn-accent w-full">Update</button>
-                           </div>
-                       </div>
+                            <div class="col-span-6 sm:col-span-2 flex justify-end">
+                                <button type="submit" @click.prevent="onSubmit()" class="btn btn-outline btn-accent w-full">Update</button>
+                            </div>
+                        </div>
                        <div v-for="error in messageError">
                            <p>{{ error }}</p>
                        </div>      
@@ -348,29 +318,7 @@ for (let i = 0; i < colorNames.length; i++) {
 
 console.log(totalList.value);
 
-// for(let i = 0; i < product.value.color_list.length; i++){
-//     formData.color_list[i] = {
-//         name: `${product.value.color_list[i].name}`,
-//         hex_color: `${product.value.color_list[i].hex_color}`,
-//         stock: [
-//             { size: 'XXS', inStock: false, quantity:0},
-//             { size: 'XS', inStock: false, quantity:0},
-//             { size: 'S', inStock: false, quantity:0},
-//             { size: 'M', inStock: false, quantity:0},
-//             { size: 'L', inStock: false, quantity:0},
-//             { size: 'XL', inStock: false, quantity:0},
-//             { size: '2XL', inStock: false, quantity:0},
-//             { size: '3XL', inStock: false, quantity:0}
-//         ],
-//     }
-//     for(let j = 0; j < product.value.color_list[i].stock.length; j++){
-//         formData.color_list[i].stock[j] = {
-//             size: `${product.value.color_list[i].stock[j].size}`,
-//             inStock: `${product.value.color_list[i].stock[j].inStock}`,
-//             quantity: `${product.value.color_list[i].stock[j].quantity}`
-//         }
-//     }
-// }
+
 
 
 function increaseProduct() {
@@ -394,6 +342,9 @@ function increaseProduct() {
 
 
 const canDecrease = ref(false)
+if(totalList.value.length > 1){
+    canDecrease.value = true
+}
 function decreaseProduct() {
     if (totalList.value.length > 1) {
         totalList.value.pop();
@@ -443,6 +394,7 @@ async function deleteProduct() {
     const { data: product, error } = await baseFetch(`product/delete/${route.params.id}`, {
         method: "DELETE",
     })
+    console.log(product.value)
     // navigateTo("/dashboard/productList")
 }
 
@@ -477,7 +429,7 @@ async function onSubmit() {
 
     if (product.value !== null) {
         console.log(product.value)
-        navigateTo("/dashboard/productList")
+        // navigateTo("/dashboard/productList")
     } else {
         messageError.value.push(error.value)
         console.log(error.value)
