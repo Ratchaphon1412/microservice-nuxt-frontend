@@ -94,8 +94,9 @@
                 <div class="col-span-6 sm:col-span-6"></div>
               </div>
               <div class="col-span-6 sm:col-span-2">
-                <button className="btn btn-outline btn-error w-full">
-                  Cancel
+                <button @click.prevent="deleteUser()"
+                className="btn btn-outline btn-error w-full">
+                  Delete
                 </button>
               </div>
 
@@ -104,8 +105,7 @@
               <div class="col-span-6 sm:col-span-2 flex justify-end">
                 <button
                   @click.prevent="submit"
-                  class="btn btn-outline btn-accent w-full"
-                >
+                  class="btn btn-outline btn-accent w-full">
                   Accent
                 </button>
               </div>
@@ -129,31 +129,54 @@ definePageMeta({
 
 const user = ref(authStore().getUser());
 const address = ref(authStore().getAddress());
-const { updateProfile } = useAuthStore();
-let fullname = ref("");
-let email = ref("");
-let phone = ref("");
-let gender = ref("");
+const { updateProfile , deleteAccount , logout } = useAuthStore();
+
+
+let fullname = ref(user.value.user.fullname);
+let email = ref(user.value.user.email);
+let phone = ref(user.value.user.phone);
+let gender = ref(user.value.user.gender);
+
+async function deleteUser() {
+  Swal.fire({
+            confirmButtonText: 'Delete Account',
+            cancelButtonText: 'Cancel',
+            iconHtml: '?',
+            showCancelButton: true,
+            showCloseButton: true,
+            title : "Are you sure you want to delete your account?"
+        }).then((result) => {
+            if(result.isConfirmed){
+                deleteAccount();
+                logout();
+                navigateTo("/");
+            }
+        })
+}
+
 
 async function submit() {
-  let tempemail = user.value.user.email;
-  let tempphone = user.value.user.phone;
-  let tempfullname = user.value.user.fullname;
-  let tempgender = user.value.user.gender;
-  if (email.value != "") {
-    tempemail = email.value;
+  let tempEmail = user.value.user.email;
+  let tempPhone = user.value.user.phone;
+  let tempFullName = user.value.user.fullname;
+  let tempGender = user.value.user.gender;
+  if (email.value != "" && phone.value != "" && fullname.value != "" && gender.value != "") {
+    tempEmail = email.value;
+    tempPhone = phone.value;
+    tempFullName = fullname.value;
+    tempGender = gender.value;
   }
 
   if (phone.value != "") {
-    tempphone = phone.value;
+    tempPhone = phone.value;
   }
 
   if (fullname.value != "") {
-    tempfullname = fullname.value;
+    tempFullName = fullname.value;
   }
 
   if (gender.value != "") {
-    tempgender = gender.value;
+    tempGender = gender.value;
   }
   const { value: password } = await Swal.fire({
     title: "Enter your password",
@@ -161,18 +184,18 @@ async function submit() {
     inputLabel: "Password",
     inputPlaceholder: "Enter your password",
     inputAttributes: {
-      maxlength: 10,
-      autocapitalize: "off",
-      autocorrect: "off",
-    },
-  });
+    maxlength: 10,
+    autocapitalize: "off",
+    autocorrect: "off",    
+  },
+});
 
   if (password) {
     let response = await updateProfile(
-      tempfullname,
-      tempemail,
-      tempphone,
-      tempgender,
+      tempFullName,
+      tempEmail,
+      tempPhone,
+      tempGender,
       password
     );
   }
