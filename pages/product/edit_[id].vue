@@ -8,7 +8,7 @@
    <div class="flex-shrink p-4 mb-4"> 
        <div class="flex flex-col justify-center bg-white dark:bg-gray-800 rounded-lg h-full">
            <div class="p-4 mb-4 bg-white rounded-lg">
-               <form @submit.prevent="onSubmit()" enctype="multipart/form-data" action="#">
+               <form enctype="multipart/form-data" action="#">
                    <div class="grid grid-cols-6 gap-6 font-poppin">
                        <!-- Product Name  -->
                        <div class="col-span-3 md:col-span-3">
@@ -269,14 +269,14 @@
                                    <div></div>
                                </div>
                            </div>
-                       <div class="col-span-6 sm:col-span-2">
-                               <button className="btn btn-outline btn-error w-full">Back</button>
+                            <div class="col-span-6 sm:col-span-2">
+                               <button @click="deleteProduct()" className="btn btn-outline btn-error w-full">Delete</button>
                            </div>
 
                            <div class="col-span-6 sm:col-span-2"></div>
 
                            <div class="col-span-6 sm:col-span-2 flex justify-end">
-                               <button class="btn btn-outline btn-accent w-full">Update</button>
+                               <button @click="onSubmit()" class="btn btn-outline btn-accent w-full">Update</button>
                            </div>
                        </div>
                        <div v-for="error in messageError">
@@ -438,6 +438,15 @@ function removeImage(event:Event ,index: number) {
 
 console.log(all_image.value)
 const messageError = ref([])
+
+async function deleteProduct() {
+    const { data: product, error } = await baseFetch(`product/delete/${route.params.id}`, {
+        method: "DELETE",
+    })
+    // navigateTo("/dashboard/productList")
+}
+
+
 async function onSubmit() {
     const productFormData = new FormData()
     productFormData.append("name", formData.name)
@@ -468,7 +477,7 @@ async function onSubmit() {
 
     if (product.value !== null) {
         console.log(product.value)
-        // navigateTo("/dashboard")
+        navigateTo("/dashboard/productList")
     } else {
         messageError.value.push(error.value)
         console.log(error.value)
