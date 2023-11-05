@@ -36,12 +36,13 @@
         > -->
       </NuxtLink>
       <div class="flex md:order-2 space-x-2">
-        <button
+        <NuxtLink
+          to="/setting"
           class="bg-transparent hover:bg-gray-700 text-gray font-semibold hover:text-white py-2 px-4 border border-gray-700 hover:border-transparent rounded"
         >
           <i class="bi bi-person"></i>
           Account
-        </button>
+        </NuxtLink>
         <NuxtLink
           to="/payment"
           type="button"
