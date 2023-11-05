@@ -1,10 +1,12 @@
-export default async function(path:string ,options?:{}){
+
+export default async function<T>(path:string ,options?:{}){
     const config = useRuntimeConfig()
     return await useFetch(path,{
         ...options,
-        baseURL: config.public.URL_ENDPOINT,
+        baseURL: config.public.apiBaseURL,
+        // baseURL: config.public.URL_ENDPOINT,
         headers:{
-            "Accept": "application/json"
+            "Accept": "application/json",
         }
     })
 }

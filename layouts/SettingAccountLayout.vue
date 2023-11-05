@@ -1,0 +1,17 @@
+<template >
+    <main class="bg-white h-full min-h-screen">
+        <AdminNavbar></AdminNavbar>
+    <div class="flex justify-center h-[150px] from-indigo-600 bg-indigo-700 to-violet-800">
+      <div class="flex h-4/5 px-16 items-center border-b-2 md:w-[1300px]">
+        <div>
+          <h1 class="font-poppin text-4xl text-white">Setting Account</h1>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex w-full justify-between h-min-screen">
+      <SettingSideBar />
+      <slot />
+    </div>
+  </main>
+</template>
