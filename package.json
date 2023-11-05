@@ -11,10 +11,12 @@
   "devDependencies": {
     "@nuxt/devtools": "latest",
     "@nuxtjs/google-fonts": "^3.0.2",
+    "@pinia-plugin-persistedstate/nuxt": "^1.2.0",
     "autoprefixer": "^10.4.15",
     "daisyui": "^3.7.3",
     "nuxt": "^3.7.1",
     "postcss": "^8.4.29",
+    "sass": "^1.69.5",
     "tailwindcss": "^3.3.3"
   },
   "dependencies": {
@@ -28,6 +30,7 @@
     "flowbite-datepicker": "^1.2.2",
     "flowbite-vue": "^0.0.17-next.13",
     "omise": "^0.11.0",
+    "sweetalert2": "^11.9.0",
     "tailwindcss-animated": "^1.0.1",
     "vue-carousel": "^0.18.0"
   },
