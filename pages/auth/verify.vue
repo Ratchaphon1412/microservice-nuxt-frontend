@@ -1,0 +1,145 @@
+<script setup lang="ts">
+import { authStore } from "@/store/auth.store";
+import { useMyRegister } from "@/store/register.store";
+import Swal from 'sweetalert2'
+
+const registerProcess = useMyRegister();
+const auth = authStore();
+
+const { resendEmail } = auth;
+
+
+let error_email = false;
+let error_phone = false;
+let error_name = false;
+
+let Password = ref("");
+let error_minimun = ref(false);
+let error_symbol = ref(false);
+
+let realPassword = ref("");
+let error_realPassword = ref(false);
+
+
+//variable 
+
+let email = ref("");
+
+async function submit() {
+  if (email.value !== "") {
+    resendEmail(email.value);
+    // store in pinia store to use somewhere
+    Swal.fire({
+            confirmButtonText: 'OK',
+            icon : `success`,
+            title : "check your email !"
+        }).then((result) => {
+            if(result.isConfirmed){
+                navigateTo("/auth/login")
+            }
+        })
+  } else {
+    
+    Swal.fire({
+            icon: 'error',
+            title: 'กรณุากรอกอีเมล',
+        })
+  }
+}
+
+watch(
+  Password,
+  () => {
+    if (Password.value.length < 8) {
+      error_minimun.value = true;
+    } else {
+      error_minimun.value = false;
+    }
+
+    if (Password.value.includes("@") || Password.value.includes("!")) {
+      error_symbol.value = false;
+    } else {
+      error_symbol.value = true;
+    }
+  },
+  { immediate: true }
+);
+</script>
+
+<template>
+  <div class="md:flex">
+    <div class="md:basis-1/2 bg-white">
+      <div
+        class="h-screen flex flex-col justify-center items-center"
+        id="intro"
+      >
+        <p class="text-black text-3xl font-semibold tracking-wide mb-10">
+          Resend email
+        </p>
+
+        <form action="" class="w-[50%]" @submit.prevent="submit()">
+          <div class="mb-4">
+            <div class="relative">
+              <input
+                type="text"
+                id="floating_outlined"
+                v-model="email"
+                class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                placeholder=""
+              />
+              <label
+                for="floating_outlined"
+                class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                >your email</label
+              >
+            </div>
+            <p
+              v-if="error_name"
+              id="outlined_error_help"
+              class="mt-2 text-xs text-red-600"
+            >
+              <span class="font-medium">Oh, snapp!</span> Some error message.
+            </p>
+          </div>
+
+         
+
+          <button
+            type="submit" 
+            class="btn btn-info w-full text-white bg-[#2674B4] text-3xl"
+          >
+            resend
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div class="hidden basis-1/2 md:flex items-center md:visible">
+      <img
+        src="/images/backgroundResgister.png"
+        alt=""
+        class="max-h-screen w-full"
+      />
+    </div>
+  </div>
+</template>
+
+<style scoped>
+::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+
+#intro {
+  animation-name: intro;
+  animation-duration: 1s;
+}
+
+@keyframes intro {
+  0% {
+    transform: translateY(25%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+</style>
