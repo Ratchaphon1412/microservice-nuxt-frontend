@@ -125,8 +125,6 @@
                                  <span class="flex-1 ml-3 text-left text-xl whitespace-nowrap">BOTTOMS</span>
                                  
                            </button>
-                           
-                       
                    </div>
                </div>
                <!-- Filter section, show/hide based on section state. -->
@@ -231,8 +229,8 @@
                 {name: 'more than ฿1000',cost:1000}
             ]
 
-   const { data: products } = await baseFetch<any>("product/format", {});
-//    console.log(products.value.length);
+    const { data: products } = await baseFetch<any>("product/format", {});
+    console.log(products.value);
 
 
    const filterList = ref<any>([])
@@ -293,18 +291,8 @@
             method: 'POST',
             body : filterData
         })
-        console.log(filter.value);
-        filterList.value = ref<any>([]);
-        // const filterList = ref({
-        //     name: '',
-        //     description : '',
-        //     gender : '',
-        //     listSize : [],
-        //     listColor : [],
-        //     price : 0,
-        //     image : '',
-        // })
-
+        console.log(filter);
+        
         filterList.value = filter.value.map((item: any) => {
         return {
             name: item.name,
