@@ -69,7 +69,7 @@
                 <div class="flex justify-between items-center">
                     <div class="flex m-5 items-center">
                         <h2 class="text-xl mr-5 text-[#112D4E] font-bold">Total</h2>
-                        <p class="text-xl text-[#112D4E]">{{ sumCarts() }} Bath</p>
+                        <p class="text-xl text-[#112D4E]">{{ checkout.payment() }} Bath</p>
                     </div>
                     <div class="flex items-center">
                         <button @click="addToOrder" class="px-10 py-2 bg-[#0074FF] text-white font-semibold rounded-lg hover:bg-blue-600">Checkout</button>
@@ -82,15 +82,9 @@
 
 <script setup lang="ts">
 import { apiCheckout } from '~/store/pinia.store'
-const { carts } = apiCheckout();
+const { carts, remove } = apiCheckout();
+const checkout = apiCheckout();
 
-function sumCarts():number{
-  let sum = 0;
-  for(let cart of carts){
-    sum += cart.price * cart.quantity;
-  }
-  return sum;
-}
     // const items = ref([{
     //     id:'1', counter: 1, isOrder: false, 
     //         color: ['#f6cda8', '#d89d94', '#dd6b6c', '#875d71', '#5b5b5b']
@@ -135,14 +129,19 @@ function sumCarts():number{
     //     isColorFormVisible.value = false;
     // }
     function removeOrder(item:any) {
-        const index = carts.findIndex((element) => element.id === item.id);
-        if (index !== -1) { // ถ้าหาเจอ
-            carts.splice(index, 1);
-        }
+
+        // const index = carts.findIndex((element) => element.name === item.name && element.color === item.color && element.size === item.size);
+        // console.log(index)
+        // if (index !== -1) { // ถ้าหาเจอ
+        //     carts.splice(index, 1);
+        // }
+
+       remove(item);
+       window.location.reload();
 
         // const itemIndex = carts.findIndex((element) => element.id === item.id);
         // if (itemIndex !== -1) { // ถ้าหาเจอ
-        //     items.value.splice(itemIndex, 1);
+        //     carts.splice(itemIndex, 1);
         // }
     }
 </script>

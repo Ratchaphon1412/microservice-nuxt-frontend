@@ -193,9 +193,9 @@
                   </DialogTitle>
                   <div class="mt-2 flex justify-between">
                     <p class="text-sm text-gray-500">
-                       {{ carts.length }} items
+                       {{ checkout.length() }} items
                     </p>
-                    <p>THB {{ sumCarts() }}</p>
+                    <p>THB {{ checkout.payment() }}</p>
                   </div>
                   <!-- <p>ราคา {{ formData.product_color.color.hex_color }}</p>
                   <p>ราคา {{ formData.product_color.stocks[0].size }}</p> -->
@@ -291,7 +291,7 @@ import { apiCheckout } from '~/store/pinia.store'
 const route = useRoute()
 const { data: product, error } = await baseFetch<any>(`product/${route.params.id}`, {})
 const { data: products } = await baseFetch<any>("product/format", {})
-
+console.log(product.value.id)
 
 const previewImage = useState<string>(undefined)
 previewImage.value = product.value.image_products[0].image_path
@@ -305,6 +305,7 @@ const formData = reactive({
 })
 
 class Confirm{
+  id: number = product.value.id;
   name: string = product.value.name;
   description: string = product.value.description;
   image: string = product.value.image_products[0].image_path;
@@ -312,14 +313,14 @@ class Confirm{
   color: string = "";
   size: string = "";
   quantity: number = 1;
+
+  constructor(color: string = "", size: string = ""){
+    this.color = color;
+    this.size = size;
+  }
 }
 
-function constructor(){
-  const confirmData = new Confirm();
-  return confirmData;
-}
-
-let confirmData = constructor();
+let confirmData = new Confirm();
 
 
 // const listColor = ref<any>([
@@ -355,13 +356,10 @@ function openModal() {
   isOpen.value = true
 }
 
-const { carts } = apiCheckout();
+const checkout = apiCheckout();
 
 function sameProduct(){
-  console.log(carts)
-  for(let cart of carts){
-    console.log(confirmData)
-    console.log(cart)
+  for(let cart of checkout.get() ){
     if(confirmData.name === cart.name && confirmData.color === cart.color && confirmData.size === cart.size){
       cart.quantity += 1;
       return true;
@@ -370,17 +368,9 @@ function sameProduct(){
   return false;
 }
 
-function sumCarts(){
-  let sum = 0;
-  for(let cart of carts){
-    sum += cart.price * cart.quantity;
-  }
-  return sum;
-}
-
 
 function addCart(){
-  if(confirmData.color == null || confirmData.size == null){
+  if(confirmData.color == "" || confirmData.size == ""){
     console.log('ใส่มาไม่ครบ');
     openModal();
     return ;
@@ -392,10 +382,11 @@ function addCart(){
   }
   else{
     console.log('ของใหม่')
-    carts.push(confirmData);
+    checkout.add(confirmData);
     openModal();
   }
-  confirmData = constructor();
+  
+  confirmData = new Confirm(confirmData.color,confirmData.size);
 }
 </script>
 

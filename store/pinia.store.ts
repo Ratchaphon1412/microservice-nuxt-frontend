@@ -33,9 +33,41 @@ export const apiCountry = defineStore('apiProvince', () => {
 })
 
 export const apiCheckout = defineStore('apiCheckout', () => {
-    let carts = reactive([]);
+    let carts = ref([]);
 
-    return { carts }
+    function payment():number{
+        let sum = 0;
+        for(let cart of carts.value){
+            sum += cart.price * cart.quantity;
+        }
+        return sum;
+    }
+
+    function get(){
+        return carts.value;
+    }
+
+    function length(){
+        return carts.value.length;
+    }
+
+    function remove(item:any){
+        let arraytmp = [];
+        carts.value.forEach((element, index, array) => {
+            if(!(element.name === item.name && element.color === item.color && element.size === item.size && element.id === item.id)){
+                arraytmp.push(element)
+            }
+        });
+        carts.value = arraytmp;
+        console.log(carts)
+    }
+
+    function add(item:any){
+        console.log(item)
+        carts.value.push(item);
+    }
+
+    return { carts, payment, remove, add, get, length }
 },{
     persist: true
 })
