@@ -2,7 +2,7 @@
    <div class="mx-auto max-w-2xl items-center space-x-2 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
        <!-- content card -->
        <nav>
-           <h1 class="p-6 text-6xl font-bold">All Cloth</h1>
+           <h1 class="p-6 text-6xl font-bold">Kid</h1>
            <div class="p-6">
                <ul class="hidden text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg shadow sm:flex dark:divide-gray-700 dark:text-gray-400">
                    <li class="w-full">
