@@ -85,3 +85,10 @@
     </nav>
   </template>
   
+<script setup lang="ts">
+import { authStore } from '~/store/auth.store';
+
+const auth = authStore();
+const { getUser } = auth;
+
+</script>
