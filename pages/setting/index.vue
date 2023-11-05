@@ -75,63 +75,6 @@
                   disabled
                 />
               </div>
-
-              <div class="col-span-6 sm:col-span-3">
-                <label
-                  for="address"
-                  class="block mb-2 text-lg font-medium text-gray-900"
-                  >Address
-                </label>
-                <input
-                  :placeholder="address[0].fullname"
-                  class="peer w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-pink-500 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
-                  name="address"
-                  id="address"
-                  disabled
-                />
-              </div>
-              <div class="col-span-6 sm:col-span-3">
-                <label
-                  for="country"
-                  class="block mb-2 text-lg font-medium text-gray-900"
-                  >Country
-                </label>
-                <input
-                  :placeholder="address[0].country"
-                  class="peer w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-pink-500 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
-                  name="country"
-                  id="country"
-                  disabled
-                />
-              </div>
-              <div class="col-span-6 sm:col-span-3">
-                <label
-                  for="city"
-                  class="block mb-2 text-lg font-medium text-gray-900"
-                  >City
-                </label>
-                <input
-                  :placeholder="address[0].province"
-                  class="peer w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-pink-500 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
-                  name="city"
-                  id="city"
-                  disabled
-                />
-              </div>
-              <div class="col-span-6 sm:col-span-3">
-                <label
-                  for="zip_code"
-                  class="block mb-2 text-lg font-medium text-gray-900"
-                  >Zip/postal code
-                </label>
-                <input
-                  :placeholder="address[0].zip_code"
-                  class="peer w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-pink-500 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
-                  name="zip_code"
-                  id="zip_code"
-                  disabled
-                />
-              </div>
               <div class="col-span-7 sm:col-span-3">
                 <label
                   for="Role"
@@ -145,6 +88,64 @@
                   id="Role"
                   disabled
                 />
+              </div>
+              <div v-show="checkAddress()">
+                <div class="col-span-6 sm:col-span-3">
+                  <label
+                    for="address"
+                    class="block mb-2 text-lg font-medium text-gray-900"
+                    >Address
+                  </label>
+                  <input
+                    :placeholder="address[0]?.fullname"
+                    class="peer w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-pink-500 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
+                    name="address"
+                    id="address"
+                    disabled
+                  />
+                </div>
+                <div class="col-span-6 sm:col-span-3">
+                  <label
+                    for="country"
+                    class="block mb-2 text-lg font-medium text-gray-900"
+                    >Country
+                  </label>
+                  <input
+                    :placeholder="address[0]?.country"
+                    class="peer w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-pink-500 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
+                    name="country"
+                    id="country"
+                    disabled
+                  />
+                </div>
+                <div class="col-span-6 sm:col-span-3">
+                  <label
+                    for="city"
+                    class="block mb-2 text-lg font-medium text-gray-900"
+                    >City
+                  </label>
+                  <input
+                    :placeholder="address[0]?.province"
+                    class="peer w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-pink-500 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
+                    name="city"
+                    id="city"
+                    disabled
+                  />
+                </div>
+                <div class="col-span-6 sm:col-span-3">
+                  <label
+                    for="zip_code"
+                    class="block mb-2 text-lg font-medium text-gray-900"
+                    >Zip/postal code
+                  </label>
+                  <input
+                    :placeholder="address[0]?.zip_code"
+                    class="peer w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-pink-500 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
+                    name="zip_code"
+                    id="zip_code"
+                    disabled
+                  />
+                </div>
               </div>
             </div>
           </form>
@@ -165,4 +166,12 @@ definePageMeta({
 
 const user = ref(authStore().getUser());
 const address = ref(authStore().getAddress());
+
+function checkAddress() {
+  if (address.value.length > 0) {
+    return true;
+  } else {
+    return false;
+  }
+}
 </script>
