@@ -1,8 +1,6 @@
 import { defineStore } from 'pinia'
 
 
-
-
 export const authStore = defineStore('authStore', () => {
 
   let accesstoken = ref('')
@@ -218,10 +216,31 @@ async function register(username:string,fullname:string,phone:string,gender:stri
   })
   if(data){
     console.log(data)
-    await login(email,password)
-    await authorize()
+    // await login(email,password)
+    // await authorize()
     // updateAddress(data.value.id,fullname,phone,"","","","")
     return data.value
+  }
+}
+
+async function resendEmail(email:string){
+  const {data} = await baseFetch(URL+"/api/v1/user/re-verify/",{
+    method: "POST",
+    body: JSON.stringify({
+      "email": email,
+    }),
+  })
+  if(data){
+    console.log(data)
+  }
+}
+
+async function deleteAccount() {
+  const {data} = await baseFetch(URL+"/api/v1/user/delete/",{
+    method: "DELETE",
+  })
+  if(data){
+    console.log(data)
   }
 }
 
@@ -236,7 +255,9 @@ async function register(username:string,fullname:string,phone:string,gender:stri
 
   function logout(){
     accesstoken.value = ""
+    refreshtoken.value = ""
     user.value = {}
+    address.value = {}
   }
 
   function getAccessToken(){
@@ -248,8 +269,8 @@ async function register(username:string,fullname:string,phone:string,gender:stri
   }
 
 
-  return { register, login ,isLogin, authorize, getUser, logout 
-    , getAccessToken , refreshToken,accesstoken,user,refreshtoken
+  return { register, login ,isLogin, authorize, getUser, logout ,resendEmail, deleteAccount ,
+    getAccessToken , refreshToken,accesstoken,user,refreshtoken
     ,getRole,getAddress,addressUser,address ,
     updateProfile,deleteAddress,createAddress
     ,getAddressById,updateAddress}
