@@ -296,17 +296,11 @@
 const route = useRoute()
 const { data: product, error } = await baseFetch<any>(`product/defineProduct/${route.params.id}`, {})
 
-console.log(product.value)
-
-
-function changeStatus(event: Event,size:string , sizelist:any){
-    event.preventDefault();
-    for (let index = 0; index < sizelist.length; index++) {
-        if (sizelist[index].size === size) {
-            sizelist[index].inStock = !sizelist[index].inStock
-        }
-        console.log(sizelist[index].inStock)
-    }
+const imageList = ref<any>([])
+const imageListData = product.value.image;
+console.log(imageListData)
+for (let i = 0; i < imageListData.length; i++) {
+    imageList.value.push(imageListData[i])
 }
 
 const formData =  reactive({
@@ -319,7 +313,6 @@ const formData =  reactive({
     color_list: [{}],
     image_list: [{}]
 })
-
 
 const listColor = product.value.listColor;
 const colorNames = Object.keys(listColor);
@@ -345,33 +338,15 @@ for (let i = 0; i < colorNames.length; i++) {
   });
 }
 
-
-console.log(totalList.value);
-
-// for(let i = 0; i < product.value.color_list.length; i++){
-//     formData.color_list[i] = {
-//         name: `${product.value.color_list[i].name}`,
-//         hex_color: `${product.value.color_list[i].hex_color}`,
-//         stock: [
-//             { size: 'XXS', inStock: false, quantity:0},
-//             { size: 'XS', inStock: false, quantity:0},
-//             { size: 'S', inStock: false, quantity:0},
-//             { size: 'M', inStock: false, quantity:0},
-//             { size: 'L', inStock: false, quantity:0},
-//             { size: 'XL', inStock: false, quantity:0},
-//             { size: '2XL', inStock: false, quantity:0},
-//             { size: '3XL', inStock: false, quantity:0}
-//         ],
-//     }
-//     for(let j = 0; j < product.value.color_list[i].stock.length; j++){
-//         formData.color_list[i].stock[j] = {
-//             size: `${product.value.color_list[i].stock[j].size}`,
-//             inStock: `${product.value.color_list[i].stock[j].inStock}`,
-//             quantity: `${product.value.color_list[i].stock[j].quantity}`
-//         }
-//     }
-// }
-
+function changeStatus(event: Event,size:string , sizelist:any){
+    event.preventDefault();
+    for (let index = 0; index < sizelist.length; index++) {
+        if (sizelist[index].size === size) {
+            sizelist[index].inStock = !sizelist[index].inStock
+        }
+        console.log(sizelist[index].inStock)
+    }
+}
 
 function increaseProduct() {
     totalList.value.push({
@@ -392,7 +367,6 @@ function increaseProduct() {
     console.log("incersesize")
 }
 
-
 const canDecrease = ref(false)
 function decreaseProduct() {
     if (totalList.value.length > 1) {
@@ -404,26 +378,22 @@ function decreaseProduct() {
     console.log("decreaseSize")
 }
 
+const deleteImage = ref<{}[]>([])
 function removeImage(event:Event ,index: number) {
-    // Remove the image at the specified index from the imageList array
+    for (let i=0; i < imageListData.length; i++) {
+        // console.log(imageList.value[index], imageListData[i])
+        if (imageList.value[index] === imageListData[i]) {
+            deleteImage.value.push(imageList.value[index])
+            console.log(deleteImage.value)
+            break
+        }
+    }
     event.preventDefault();
     imageList.value.splice(index, 1);
 }
+const all_image = ref<File[]>([]);
 
-    const imageList = ref<any>([])
-
-    // product.value.image_list.forEach((image:any) => {
-    //     imageList.value.push(image.image)
-    // })
-    const imageListData = product.value.image;
-    console.log(imageListData)
-    for (let i = 0; i < imageListData.length; i++) {
-        imageList.value.push(imageListData[i].image)
-    }
-
-    const all_image = ref<File[]>([]);
-
-    const handleFileChange = (event) => {
+const handleFileChange = (event) => {
     const files = event.target.files;
     for (let i = 0; i < files.length; i++) {
         const reader = new FileReader();
@@ -434,7 +404,7 @@ function removeImage(event:Event ,index: number) {
         
     }
     all_image.value.push(event.target.files[0])
-    };
+};
 
 console.log(all_image.value)
 const messageError = ref([])
@@ -456,6 +426,10 @@ async function onSubmit() {
             productFormData.append('color_list[' + i + '][stock][' + j + '][quantity]', Number(totalList.value[i].stock[j].quantity));
         }
     }
+
+    for (let i=0; i <= deleteImage.value.length - 1; i++) {
+        productFormData.append('delete_image_list[]', deleteImage.value[i])
+    }
     for (let i = 0; i < all_image.value.length; i++) {
         productFormData.append('image_list[]', all_image.value[i]);
     }
@@ -470,8 +444,8 @@ async function onSubmit() {
         console.log(product.value)
         // navigateTo("/dashboard")
     } else {
-        messageError.value.push(error.value)
-        console.log(error.value)
+        messageError.value.push(error.value?.data.message)
+        console.log(error.value?.data.message)
     }
 }
 </script>
