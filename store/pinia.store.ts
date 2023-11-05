@@ -51,6 +51,15 @@ export const apiCheckout = defineStore('apiCheckout', () => {
         return carts.value.length;
     }
 
+    function getCart(item:any){
+        for(let cart of carts.value){
+            if(item.name === cart.name && item.color === cart.color && item.size === cart.size && item.id === cart.id){
+              return cart;
+            }
+        }
+        return -1;
+    }
+
     function remove(item:any){
         let arraytmp = [];
         carts.value.forEach((element, index, array) => {
@@ -67,7 +76,7 @@ export const apiCheckout = defineStore('apiCheckout', () => {
         carts.value.push(item);
     }
 
-    return { carts, payment, remove, add, get, length }
+    return { carts, payment, remove, add, get, length, getCart }
 },{
     persist: true
 })

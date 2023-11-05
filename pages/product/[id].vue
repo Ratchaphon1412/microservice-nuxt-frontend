@@ -155,7 +155,7 @@
       </section>
 
       <!-- popup addCart -->
-      <TransitionRoot v-if="formData.product_size.size" appear :show="isOpen" as="template">
+      <TransitionRoot v-if="confirmData.color == '' || confirmData.size == ''" appear :show="isOpen" as="template">
         <Dialog as="div" @close="closeModal" class="relative z-10">
           <TransitionChild
             as="template"
@@ -189,14 +189,64 @@
                     as="h3"
                     class="text-lg font-medium leading-6 text-gray-900"
                   >
-                  Product added to cart.
+                  Please select the size!
                   </DialogTitle>
-                  <div class="mt-2 flex justify-between">
-                    <p class="text-sm text-gray-500">
-                       {{ checkout.length() }} items
-                    </p>
-                    <p>THB {{ checkout.payment() }}</p>
+                  <!-- <p>ราคา {{ formData.product_color.color.hex_color }}</p>
+                  <p>ราคา {{ formData.product_color.stocks[0].size }}</p> -->
+                  <!-- <p>{{ formData.product_size }}</p> -->
+                  <!-- <p>{{ products }}</p> -->
+                  <div class="mt-4">
+                    <button
+                      type="button"
+                      class="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                      @click="closeModal"
+                    >
+                      Close the pup up
+                    </button>
                   </div>
+                </DialogPanel>
+              </TransitionChild>
+            </div>
+          </div>
+        </Dialog>
+      </TransitionRoot>
+      
+      <TransitionRoot v-else-if="stockProductId == cartProductId" appear :show="isOpen" as="template">
+        <Dialog as="div" @close="closeModal" class="relative z-10">
+          <TransitionChild
+            as="template"
+            enter="duration-300 ease-out"
+            enter-from="opacity-0"
+            enter-to="opacity-100"
+            leave="duration-200 ease-in"
+            leave-from="opacity-100"
+            leave-to="opacity-0"
+          >
+            <div class="fixed inset-0 bg-black/25" />
+          </TransitionChild>
+
+          <div class="fixed inset-0 overflow-y-auto">
+            <div
+              class="flex min-h-full items-center justify-center p-4 text-center"
+            >
+              <TransitionChild
+                as="template"
+                enter="duration-300 ease-out"
+                enter-from="opacity-0 scale-95"
+                enter-to="opacity-100 scale-100"
+                leave="duration-200 ease-in"
+                leave-from="opacity-100 scale-100"
+                leave-to="opacity-0 scale-95"
+              >
+                <DialogPanel
+                  class="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all"
+                >
+                  <DialogTitle
+                    as="h3"
+                    class="text-lg font-medium leading-6 text-gray-900"
+                  >
+                  Product out of stock.
+                  </DialogTitle>
                   <!-- <p>ราคา {{ formData.product_color.color.hex_color }}</p>
                   <p>ราคา {{ formData.product_color.stocks[0].size }}</p> -->
                   <!-- <p>{{ formData.product_size }}</p> -->
@@ -251,8 +301,14 @@
                     as="h3"
                     class="text-3xl font-medium leading-6 text-gray-900"
                   >
-                    Please select the size!
+                  Product added to cart.
                   </DialogTitle>
+                  <div class="mt-2 flex justify-between">
+                    <p class="text-sm text-gray-500">
+                       {{ checkout.length() }} items
+                    </p>
+                    <p>THB {{ checkout.payment() }}</p>
+                  </div>
                   <div class="mt-4">
                     <button
                       type="button"
@@ -321,7 +377,10 @@ class Confirm{
 }
 
 let confirmData = new Confirm();
-
+let colorId = "";
+let sizeId = "";
+let stockProductId = -1;
+let cartProductId = 0;
 
 // const listColor = ref<any>([
 //   {
@@ -336,12 +395,14 @@ let confirmData = new Confirm();
 // ]);
 
 function radioColor(productColorId:any) {
+  colorId = productColorId
   formData.product_color = product.value.product_colors.find(item => item.id === productColorId)
   confirmData.color = formData.product_color.color.hex_color
   console.log(confirmData.color)
 }
 
 function radioSize(productSizeId:any){
+  sizeId = productSizeId
   formData.product_size = product.value.product_colors.find(item => item.id === formData.product_color.id).stocks.find(item => item.id === productSizeId)
   confirmData.size = formData.product_size.size;
   console.log(confirmData.size)
@@ -358,31 +419,52 @@ function openModal() {
 
 const checkout = apiCheckout();
 
+function setStock(color:string,size:string){
+  stockProductId = product.value.product_colors.find(item => item.id === color).stocks.find(item => item.id === size).quantity
+}
+
 function sameProduct(){
   for(let cart of checkout.get() ){
-    if(confirmData.name === cart.name && confirmData.color === cart.color && confirmData.size === cart.size){
-      cart.quantity += 1;
+    if(confirmData.name === cart.name && confirmData.color === cart.color && confirmData.size === cart.size && confirmData.id === cart.id){
       return true;
     }
   }
   return false;
 }
 
+function addQuantity(){
+  for(let cart of checkout.get() ){
+    if(confirmData.name === cart.name && confirmData.color === cart.color && confirmData.size === cart.size && confirmData.id === cart.id){
+      cart.quantity += 1;
+      break;
+    }
+  }
+}
 
 function addCart(){
   if(confirmData.color == "" || confirmData.size == ""){
     console.log('ใส่มาไม่ครบ');
     openModal();
     return ;
-  }
-  else if(sameProduct()){
+  }else if(sameProduct()){
     console.log('ของซ้ำกัน')
+    setStock(colorId,sizeId);
+    console.log(stockProductId);
+    if(stockProductId <= checkout.getCart(confirmData).quantity){
+      cartProductId = checkout.getCart(confirmData).quantity
+      console.log('ของเต็ม')
+      openModal();
+      return ;
+    }
+    addQuantity();
     openModal();
     return ;
   }
   else{
     console.log('ของใหม่')
     checkout.add(confirmData);
+    setStock(colorId,sizeId);
+    cartProductId = checkout.getCart(confirmData).quantity;
     openModal();
   }
   

@@ -129,19 +129,7 @@ const checkout = apiCheckout();
     //     isColorFormVisible.value = false;
     // }
     function removeOrder(item:any) {
-
-        // const index = carts.findIndex((element) => element.name === item.name && element.color === item.color && element.size === item.size);
-        // console.log(index)
-        // if (index !== -1) { // ถ้าหาเจอ
-        //     carts.splice(index, 1);
-        // }
-
        remove(item);
        window.location.reload();
-
-        // const itemIndex = carts.findIndex((element) => element.id === item.id);
-        // if (itemIndex !== -1) { // ถ้าหาเจอ
-        //     carts.splice(itemIndex, 1);
-        // }
     }
 </script>
