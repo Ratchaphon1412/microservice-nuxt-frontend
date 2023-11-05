@@ -32,6 +32,25 @@
                   </div>
               </div> 
            </div>
+           <!-- Filter -->
+           <div  class="font-bold p-4 bg-white m-5 rounded-lg flex flex-rows text-black">
+            <span class="text-xl text-black"> Filter : </span> 
+            <div v-for="filter in filterData">
+            <div v-if="filter != '' && filter != 0" class="mx-3 text-center rounded-lg bg-gray-200 px-2 py-1 flex flex-rows"> 
+                
+                <p v-if="filter == 500 ">less than ฿500</p>
+                <p v-else-if="filter == 999 ">฿500 - ฿999</p>
+                <p v-else-if="filter == 1000 ">more than ฿1000</p>
+                <p v-else>{{ filter }}</p>
+                <button @click="clearItemFilter($event , filter)" >
+                <svg class="w-2 h-2 m-2 hover:ring-2" fill="#000000" height="200px" width="200px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 460.775 460.775" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M285.08,230.397L456.218,59.27c6.076-6.077,6.076-15.911,0-21.986L423.511,4.565c-2.913-2.911-6.866-4.55-10.992-4.55 c-4.127,0-8.08,1.639-10.993,4.55l-171.138,171.14L59.25,4.565c-2.913-2.911-6.866-4.55-10.993-4.55 c-4.126,0-8.08,1.639-10.992,4.55L4.558,37.284c-6.077,6.075-6.077,15.909,0,21.986l171.138,171.128L4.575,401.505 c-6.074,6.077-6.074,15.911,0,21.986l32.709,32.719c2.911,2.911,6.865,4.55,10.992,4.55c4.127,0,8.08-1.639,10.994-4.55 l171.117-171.12l171.118,171.12c2.913,2.911,6.866,4.55,10.993,4.55c4.128,0,8.081-1.639,10.992-4.55l32.709-32.719 c6.074-6.075,6.074-15.909,0-21.986L285.08,230.397z"></path> </g></svg>
+            </button>
+            </div>
+        </div>
+           
+            
+
+           </div>
        </nav>
        
        <!-- content product -->
@@ -125,7 +144,7 @@
                                <RadioGroupOption @click="filterColor(color.name)" as="template" v-for="color in colors" :key="color.name" :value="color.class" v-slot="{ active, checked }">
                                    <div :class="[active && checked ? 'ring ring-offset-1' : '', !active && checked ? 'ring-2' : '', 'relative -m-0.5 cursor-pointer flex items-center justify-center rounded-full p-0.5 focus:outline-none']">
                                        <RadioGroupLabel as="span" class="sr-only">{{ color.name }}</RadioGroupLabel>
-                                       <span aria-hidden="true" class="h-8 w-8 rounded-full border border-black border-opacity-10" :style="{ backgroundColor: color.class }" />
+                                       <span aria-hidden="true" class="h-8 w-8 rounded-full border border-black border-opacity-10 hover:ring-2" :style="{ backgroundColor: color.class }" />
                                    </div>
                                </RadioGroupOption>
                            </div>
@@ -137,7 +156,7 @@
                        <RadioGroupLabel class="sr-only">Choose a size</RadioGroupLabel>
                        <div class="grid grid-cols-3 gap-4 md:grid-cols-3 ">
                            <RadioGroupOption @click="filterSize(size)" as="template" v-for="size in sizes" :key="size" :value="size"  v-slot="{ active, checked }">
-                               <div :class="[size, active && checked ? 'ring-1 ring-[#112D4E]' : '', !active && checked ? '' : '', 'border-black border-opacity-10 group relative flex items-center justify-center rounded-md border text-lg font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1']">
+                               <div :class="[size, active && checked ? 'ring-1 ring-[#112D4E]' : '', !active && checked ? '' : '', 'hover:ring-2 border-black border-opacity-10 group relative flex items-center justify-center rounded-md border text-lg font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1']">
                                    <RadioGroupLabel as="span" class="p-2">{{ size }}</RadioGroupLabel>
                                </div>   
                            </RadioGroupOption>
@@ -169,7 +188,7 @@
                    <h1 class="text-xl text-start mt-4">Cost</h1>
                    <div class="p-4 flex flex-col gap-4 ">
                        <div @click="filterCost(cost.cost)" class="flex gap-1" v-for="cost in listCost">
-                           <input type="radio" name="radio-1" class="radio">
+                           <input type="radio" name="radio-1 border-black" class="radio hover:ring-2">
                            <h1>{{ cost.name }}</h1>
                        </div>
                    </div>
@@ -226,6 +245,7 @@
         price : item.price,
         image : item.image,
     }})
+    
 
     console.log(filterList.value.length);
     const filterData = reactive({
@@ -233,6 +253,19 @@
         selectedSize: '',
         cost : 0,
     })
+    function clearItemFilter(event:Event , filter:any){
+        event.preventDefault();
+        if (filterData.selectedColor == filter) {
+            filterData.selectedColor = ''
+        }
+        else if (filterData.selectedSize == filter ){
+            filterData.selectedSize = ''
+        }
+        else if (filterData.cost == filter ){
+            filterData.cost = 0
+        }
+        filter()
+    }
 
     function filterSize(Size:any){
         filterData.selectedSize = Size;

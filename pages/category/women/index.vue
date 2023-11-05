@@ -222,7 +222,7 @@
        { name: 'red', class: '#cf1b3f', selectedClass: 'ring-gray-400' },
        { name: 'green', class: '#57ab3e', selectedClass: 'ring-gray-400' },
    ]
-   const sizes =['xss','xs','s','m','l','xl','2xl','3xl']
+   const sizes =['XSS','XS','S','M','L','XL','2XL','3XL']
    const listCost = [
                 {name: 'less than ฿500',cost:500},
                 {name: '฿500 - ฿999',cost:999},
@@ -230,7 +230,7 @@
             ]
 
    const { data: products } = await baseFetch<any>("product/format", {});
-   console.log(products.value.length);
+//    console.log(products.value.length);
 
 
    const filterList = ref<any>([])
@@ -248,8 +248,6 @@
         image : item.image,
     }})
 
-    console.log(filterList.value.length);
-    
     const filterData = reactive({
         selectedColor: '',
         selectedSize: '',

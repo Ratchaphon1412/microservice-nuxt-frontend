@@ -125,7 +125,7 @@
                                <RadioGroupOption @click="filterColor(color.name)" as="template" v-for="color in colors" :key="color.name" :value="color.class" v-slot="{ active, checked }">
                                    <div :class="[active && checked ? 'ring ring-offset-1' : '', !active && checked ? 'ring-2' : '', 'relative -m-0.5 cursor-pointer flex items-center justify-center rounded-full p-0.5 focus:outline-none']">
                                        <RadioGroupLabel as="span" class="sr-only">{{ color.name }}</RadioGroupLabel>
-                                       <span aria-hidden="true" class="h-8 w-8 rounded-full border border-black border-opacity-10" :style="{ backgroundColor: color.class }" />
+                                       <span aria-hidden="true" class="h-8 w-8 rounded-full border border-black border-opacity-10 hover:ring-2" :style="{ backgroundColor: color.class }" />
                                    </div>
                                </RadioGroupOption>
                            </div>
@@ -137,7 +137,7 @@
                        <RadioGroupLabel class="sr-only">Choose a size</RadioGroupLabel>
                        <div class="grid grid-cols-3 gap-4 md:grid-cols-3 ">
                            <RadioGroupOption @click="filterSize(size)" as="template" v-for="size in sizes" :key="size" :value="size"  v-slot="{ active, checked }">
-                               <div :class="[size, active && checked ? 'ring-1 ring-[#112D4E]' : '', !active && checked ? '' : '', 'border-black border-opacity-10 group relative flex items-center justify-center rounded-md border text-lg font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1']">
+                               <div :class="[size, active && checked ? 'ring-1 ring-[#112D4E]' : '', !active && checked ? '' : '', 'hover:ring-2 border-black border-opacity-10 group relative flex items-center justify-center rounded-md border text-lg font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1']">
                                    <RadioGroupLabel as="span" class="p-2">{{ size }}</RadioGroupLabel>
                                </div>   
                            </RadioGroupOption>
@@ -169,7 +169,7 @@
                    <h1 class="text-xl text-start mt-4">Cost</h1>
                    <div class="p-4 flex flex-col gap-4 ">
                        <div @click="filterCost(cost.cost)" class="flex gap-1" v-for="cost in listCost">
-                           <input type="radio" name="radio-1" class="radio">
+                           <input type="radio" name="radio-1" class="radio hover:ring-2">
                            <h1>{{ cost.name }}</h1>
                        </div>
                    </div>
