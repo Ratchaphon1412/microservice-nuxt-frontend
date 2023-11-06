@@ -99,7 +99,7 @@ export const apiPayment = defineStore('apiPayment',() => {
     }
 
     async function purchase(token_card:string,customer_token:string,amount:number){
-        const {data} = await paymentFetch(URL + "/api/v1/payment/",{
+        const {data,error} = await paymentFetch(URL + "/api/v1/payment/",{
             method: "POST",
             body: JSON.stringify({
                 "customer_token": customer_token,
@@ -113,6 +113,10 @@ export const apiPayment = defineStore('apiPayment',() => {
         if(data != null){
             console.log(data)
         }
+        else{
+            console.log(error)
+        }
+
 
     }
 

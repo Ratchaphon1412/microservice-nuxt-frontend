@@ -136,7 +136,7 @@
                         </button>
                     </div>
                     <hr class="my-4"/>
-                    <div v-if="user_address.length === 0">
+                    <div v-if="user_address.value != null">
                         <p class="text-red-500">Please enter your address.</p>
                     </div>
                     <div v-else>
@@ -146,7 +146,7 @@
                             </option>
                         </select>
                     </div>
-                    <p class="">
+                    <p class="" v-if="address != ''">
                         {{ address.detail_address }}, {{ address.province }}, {{ address.country }}, {{ address.zip_code }}
                     </p>
                 </div>
@@ -187,16 +187,12 @@
 
     const amout = payment();
     console.log(amout);
-    const auth = authStore();
-    console.log(auth.user.user.customer_omise_id)
+    const address = ref("");
+    const user_address = ref(auth.address.address);
+    console.log(user_address.value)
+    let selected = "";
 
-    function selectCard(card:any){
-        selected = card;
-        // console.log(selected)
-        // console.log(card.name)
-    }
-    
-    function buy(){
+    async function buy(){
         if (carts.length === 0) {
             Swal.fire({
                 title: "You don't have any product in cart.",
@@ -210,8 +206,9 @@
                 })
             } else {
                 if(auth.user) {
-                    paymentProduct(auth.user.user.customer_omise_id,);
+                    await purchase(selected.id,auth.user.user.customer_omise_id,amout);
                     reduceStock(address.value)
+                    clear();
                 }
             }
         }
@@ -225,16 +222,22 @@
             cancelButtonText: 'Cancel',
             showCancelButton: true,
             showCloseButton: true,
-        }).then( async (result) => {
+        }).then((result) => {
             if (result.isConfirmed) {
                 buy();
-                await purchase(selected.id,auth.user.user.customer_omise_id,amout);
-                clear();
-                navigateTo("/")
             }
         })
     }
 
+    function selectAddress(selectedAddress:any) {
+        address.value = selectedAddress
+        console.log(address.value)
+    }
+
+    function selectCard(selectedCard:any) {
+        selected = selectedCard
+        console.log(selected)
+    }
 
     function removeOrder(item:any) {
         remove(item);
