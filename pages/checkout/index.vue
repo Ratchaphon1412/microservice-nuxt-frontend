@@ -12,26 +12,48 @@
                 <ul class="h-screen rounded-lg md:w-2/3 p-5 bg-[#DBE2EF] sm:mr-5 overflow-auto">
                     <!--Order Item-->
                     <li class="w-full sm:h-52 items-center justify-between mb-6 rounded-lg bg-white p-6 shadow-md sm:flex"
-                        v-for="item in items" :key="item.id">
-                            <div class="flex justify-center items-center">
-                                <img class="m-5 w-96 rounded-lg sm:w-40 sm:h-40" src="https://images.unsplash.com/photo-1515955656352-a1fa3ffcd111?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="product-image"/>
+                        v-for="item in carts" :key="item.id">
+                        <div class="flex justify-center items-center m-5">
+                            <!-- <input class="w-7 h-7 mr-5 rounded-lg border-2 border-[#112D4E] "
+                                type="checkbox" v-model="item.isOrder" :value="item"/> -->
+                            <img class="w-96 rounded-lg sm:w-40 sm:h-40" :src="item.image" alt="product-image"/>
+                        </div>
+                        <div class="ml-10 mr-5 mt-5 sm:mt-0 sm:w-full">
+                            <div class="flex justify-between">
+                                <h2 class="text-lg font-bold text-[#112D4E] mb-5">{{ item.name }}</h2>
+                                <button @click="removeOrder(item)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 cursor-pointer duration-150 hover:text-red-500">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </button>
                             </div>
-                            <div class="mr-5 mt-5 sm:mt-0 sm:w-2/3">
-                                <div class="flex justify-between mb-12">
-                                    <div class="">
-                                        <h2 class="text-lg font-bold text-[#112D4E] mb-3">Nike Air Max 2019</h2>
-                                        <p class="mt-1 text-md text-[#112D4E]">Blue, Size S</p>
+                            <p class="mb-12">{{ item.description }}</p>
+                            <div class="sm:flex justify-between items-center border-gray-100">
+                                <div class="flex w-2/3 items-center">
+                                    <div class="flex items-center justify-center mr-3 border-2 border-gray-400 p-3 rounded-lg">
+                                        <!-- <Counter :counter="item.counter" @update-counter="updateCounter(item, $event)"></Counter> -->
+                                        <span>{{ item.quantity }} items</span>
                                     </div>
-                                    <span id="amount" class="text-xl font-bold text-[#112D4E]">x1</span>
-                              </div>
-    
-                              <div class="mt-4 flex justify-between sm:mt-0 sm:block">
-                                <div class="flex items-center justify-end">
-                                  <p class="text-sm text-[#112D4E]">2000.00 Bath</p>
+                                    <div class="mr-3 border-gray-400 text-[#0074FF] rounded-lg border-2 p-2">
+                                        <img class="h-8 w-8 rounded-full" :style="{ backgroundColor: item.color }" />
+                                    </div>
+                                    <div class="border-gray-400 border-2 rounded-lg p-3">
+                                        size {{ item.size }}
+                                    </div>
+                                    <!-- <select name="" id="" class="mr-3 border-[#DBE2EF] text-[#0074FF] rounded-lg">
+                                        <option value="" selected disabled>Color</option>
+                                    </select>
+                                    <select name="" id="" class="border-[#DBE2EF] text-[#0074FF] rounded-lg">
+                                        <option value="" selected disabled>Size</option>
+                                    </select> -->
+                                    
                                 </div>
-                                
-                              </div>
+                                <div class="sm:mt-0 mt-5">
+                                    <p class="text-sm text-[#112D4E]">{{ item.price * item.quantity }} Bath</p>
+                                </div>
                             </div>
+                        </div>
+    
                     </li>
                 </ul>
     
@@ -60,13 +82,6 @@
                         </div>
                     </div>
                 </details>
-                <div class="my-5 rounded-lg bg-white p-6 shadow-md">
-                    <p class="text-lg text-[#0074FF] font-bold">Transportation</p>
-                    <hr class="my-4"/>
-                    <select class="w-full" name="" id="">
-                        <option value="" selected disabled>DDDDD</option>
-                    </select>
-                </div>
     
                 <div class="rounded-lg bg-white p-6 mb-5 shadow-md">
                     <div class="flex items-center">
@@ -86,10 +101,6 @@
                     <div class="mb-2 flex justify-between">
                         <p class="text-gray-700">Subtotal</p>
                         <p class="text-gray-700">$129.99</p>
-                    </div>
-                    <div class="mb-2 flex justify-between">
-                        <p class="text-gray-700">Transportation</p>
-                        <p class="text-gray-700">$4.99</p>
                     </div>
                     <div class="flex justify-between">
                         <p class="text-gray-700">Discount</p>
@@ -111,6 +122,13 @@
     </template>
     
     <script setup lang="ts">
+    import { apiCheckout } from '~/store/pinia.store'
+    const { carts, remove } = apiCheckout();
+    const checkout = apiCheckout();
+    function removeOrder(item:any) {
+        remove(item);
+        window.location.reload();
+    }
     const items = ref([{
         id:'1', counter: 1, isOrder: false, 
             color: ['#f6cda8', '#d89d94', '#dd6b6c', '#875d71', '#5b5b5b']

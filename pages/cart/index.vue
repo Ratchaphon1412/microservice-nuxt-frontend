@@ -77,7 +77,7 @@
                         <p class="text-xl text-[#112D4E]">{{ checkout.payment() }} Bath</p>
                     </div>
                     <div class="flex items-center">
-                        <button class="px-10 py-2 bg-[#0074FF] text-white font-semibold rounded-lg hover:bg-blue-600">Checkout</button>
+                        <button @click="gotoCheckout()" class="px-10 py-2 bg-[#0074FF] text-white font-semibold rounded-lg hover:bg-blue-600">Checkout</button>
                     </div>
                 </div>
             </div>
@@ -92,5 +92,9 @@ const checkout = apiCheckout();
 function removeOrder(item:any) {
     remove(item);
     window.location.reload();
+}
+
+function gotoCheckout() {
+    navigateTo('/checkout')
 }
 </script>

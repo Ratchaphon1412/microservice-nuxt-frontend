@@ -10,7 +10,5 @@ export const apiPayment = defineStore('apiPayment',() => {
     function addCredit(credit:object){
         credits.value.push(credit);
     }
-
-
     return { get, addCredit }
 })
