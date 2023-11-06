@@ -374,9 +374,8 @@ const handleFileChange = (event) => {
             imageList.value.push(reader.result);
         };
         reader.readAsDataURL(files[i]);
-        
-    }
-    all_image.value.push(event.target.files[0])
+        all_image.value.push(event.target.files[i])
+    }   
 };
 
 console.log(all_image.value)

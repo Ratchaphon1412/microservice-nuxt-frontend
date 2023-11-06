@@ -364,6 +364,7 @@ function back() {
 
 const imageList = ref<any>([])
 const all_image = ref<File[]>([]);
+
 const handleFileChange = (event) => {
     const files = event.target.files;
     for (let i = 0; i < files.length; i++) {
@@ -372,8 +373,10 @@ const handleFileChange = (event) => {
             imageList.value.push(reader.result);
         };
         reader.readAsDataURL(files[i]);
+        all_image.value.push(event.target.files[i])
     }
-    all_image.value.push(event.target.files[0])
+    // console.log(event.target.files[0])
+    // all_image.value.push(event.target.files[0])
 };
 
 function removeImage(event:Event ,index: number) {
