@@ -94,10 +94,7 @@ export const authStore = defineStore('authStore', () => {
       await addressUser()
       return true
     }
-
-
     return false
-
   }
 
   async function updateProfile(fullname:string,email:string,phone:string,gender:string,password:string){
@@ -154,9 +151,6 @@ async function getAddressById(id:string){
   })
   console.log(data)
   return data.value.address
-
-
-
 }
 
 async function updateAddress(id:string,fullname:string,phone:string,detail_address:string,country:string,province:string,zip_code:string ){
@@ -177,8 +171,6 @@ async function updateAddress(id:string,fullname:string,phone:string,detail_addre
     
     return data.value
   }
-
-
 }
 
 async function register(username:string,fullname:string,phone:string,gender:string,email:string,password:string){
@@ -235,7 +227,6 @@ async function deleteAccount() {
     }
   }
 
-
   function getUser(){
     return user.value
   }
@@ -259,7 +250,7 @@ async function deleteAccount() {
     return user.value.user.groups[0].name
   }
 
-  return { register, login ,isLogin, authorize, getUser, logout ,resendEmail, deleteAccount , verifyEmail ,
+  return {  register, login ,isLogin, authorize, getUser, logout ,resendEmail, deleteAccount , verifyEmail ,
     getAccessToken , refreshToken,accesstoken,user,refreshtoken 
     ,getRole,getAddress,addressUser,address ,
     updateProfile,deleteAddress,createAddress
