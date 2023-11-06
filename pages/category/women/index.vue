@@ -1,39 +1,37 @@
 <template>
-   <div class="mx-auto max-w-2xl items-center space-x-2 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+   <div class=" mx-auto max-w-2xl items-center space-x-2 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
        <!-- content card -->
        <nav>
            <h1 class="p-6 text-6xl font-bold">Women</h1>
            <div class="p-6">
-               <ul class="hidden text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg shadow sm:flex dark:divide-gray-700 dark:text-gray-400">
-                   <li class="w-full">
-                       <a href="/category/women" aria-selected="true" class="inline-block w-full p-4 text-gray-900 bg-gray-100 rounded-l-lg focus:ring-4 focus:ring-blue-300 active focus:outline-none dark:bg-gray-700 dark:text-white" >Women</a>
-                   </li>
-                   <li class="w-full">
-                       <a href="/category/men" aria-selected="false" class="inline-block w-full p-4 bg-white hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700">Men</a>
-                   </li>
-                   <li class="w-full">
-                       <a href="/category/kid" aria-selected="false" class="inline-block w-full p-4 bg-white hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700">Kid</a>
-                   </li>
-               </ul> 
+               
+               <ul class="border-2 border-gray-900 hidden text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg shadow sm:flex dark:divide-gray-700 dark:text-gray-400">
+                    
+                    <li class="w-full bg-gray-800" >
+                        <div class="relative inline-flex items-center justify-center w-full h-full overflow-hidden font-mono font-medium tracking-tighter text-white  rounded-l-lg border-white group w-56 h-56 text-black hover:text-white">
+                            
+                            <span class="relative  text-white text-xl">Women</span>
+               
+                        </div>
+                    </li>
+                    <li class="w-full">
+                        <a href="/category/men" class="relative inline-flex items-center justify-center w-full h-full overflow-hidden font-mono font-medium tracking-tighter text-white bg-white border-white border-2 group group-hover:w-56 group-hover:h-56 text-black hover:text-white">
+                            <span class="absolute w-0 h-0 transition-all duration-500 ease-out bg-gray-800 rounded-full group-hover:w-full group-hover:h-96"></span>
+                            <span class="relative text-black group-hover:text-white text-xl">Men</span>
+                        </a>                    
+                    </li>
+                    <li class="w-full">
+                        <a href="/category/kid" class="relative inline-flex items-center justify-center w-full h-12 overflow-hidden font-mono font-medium tracking-tighter text-white bg-white rounded-r-lg border-white border-2 group group-hover:w-56 group-hover:h-56 text-black hover:text-white">
+                            <span class="absolute w-0 h-0 transition-all duration-500 ease-out bg-gray-800 rounded-full group-hover:w-full group-hover:h-96"></span>
+                            <span class="relative text-black group-hover:text-white text-xl">Kid</span>
+                        </a>   
+                    </li>
+                </ul> 
            </div>
-           <div id="indicators-carousel" class="p-6" data-carousel="static">
-               <div class="relative h-56 overflow-hidden rounded-lg ">
-                   <!-- Item 1 -->
-                  <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
-                      <img src="https://im.uniqlo.com/global-cms/spa/res933c172912482d798eb0d1aeb04a6ff1fr.jpg?1693292673009" class="absolute  block w-full -translate-x-1/2 -translate-y-1/2  top-1/2" alt="...">
-                  </div>
-                  <!-- Item 2 -->
-                  <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                      <img src="https://im.uniqlo.com/global-cms/spa/res7127f28ab1ddeea2e76ed435a404fc4cfr.jpg?1681884198354" class="absolute  block w-full -translate-x-1/2 -translate-y-1/2 top-1/2" alt="...">
-                  </div>
-                  <!-- Item 3 -->
-                  <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                      <img src="https://im.uniqlo.com/global-cms/spa/resce884fadd7f755a2344d2c2718b6aae4fr.jpg?1693291677284" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2" alt="...">
-                  </div>
-              </div> 
-           </div>
+           
+           <SectionsCarousel/>
            <!-- Filter -->
-           <div  class="font-bold p-4 bg-white m-5 rounded-lg flex flex-rows text-black">
+           <div  class="font-bold p-4 bg-white m-5 rounded-lg flex flex-rows text-black border-4 border-gray-900">
             <span class="text-xl text-black"> Filter : </span> 
             <div v-for="filter in filterData">
             <div v-if="filter != '' && filter != 0" class="mx-3 text-center rounded-lg bg-gray-200 px-2 py-1 flex flex-rows"> 
@@ -196,7 +194,7 @@
 
            </aside>
            <div class="mx-auto max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16">
-            <SectionsCard v-model="filterList" v-for="(list,index) in filterList" :key="index" 
+            <SectionsCard class="m-4" v-model="filterList" v-for="(list,index) in filterList" :key="index" 
             :name="list.name" 
             :description="list.description" 
             :gender="list.gender"
@@ -264,7 +262,17 @@
         else if (filterData.cost == filter ){
             filterData.cost = 0
         }
-        filter()
+        filterList.value = products.value.map((item: any) => {
+        console.log(products.value)
+    return {
+        name: item.name,
+        description: item.description,
+        gender : item.gender,
+        listSize : item.listSize,
+        listColor : item.listColor,
+        price : item.price,
+        image : item.image,
+    }})
     }
 
     function filterSize(event:Event , Size:any){

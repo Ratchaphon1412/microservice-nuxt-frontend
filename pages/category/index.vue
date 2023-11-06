@@ -4,22 +4,6 @@
         <nav>
             <h1 class="p-6 text-6xl font-bold">All Cloth</h1>
             
-            <div id="indicators-carousel" class="p-6" data-carousel="static">
-                <div class="relative h-56 overflow-hidden rounded-lg ">
-                    <!-- Item 1 -->
-                   <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
-                       <img src="https://im.uniqlo.com/global-cms/spa/res933c172912482d798eb0d1aeb04a6ff1fr.jpg?1693292673009" class="absolute  block w-full -translate-x-1/2 -translate-y-1/2  top-1/2" alt="...">
-                   </div>
-                   <!-- Item 2 -->
-                   <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                       <img src="https://im.uniqlo.com/global-cms/spa/res7127f28ab1ddeea2e76ed435a404fc4cfr.jpg?1681884198354" class="absolute  block w-full -translate-x-1/2 -translate-y-1/2 top-1/2" alt="...">
-                   </div>
-                   <!-- Item 3 -->
-                   <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                       <img src="https://im.uniqlo.com/global-cms/spa/resce884fadd7f755a2344d2c2718b6aae4fr.jpg?1693291677284" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2" alt="...">
-                   </div>
-               </div> 
-            </div>
             <div class="p-6">
                 
                 <ul class="hidden text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg shadow sm:flex dark:divide-gray-700 dark:text-gray-400">
@@ -44,6 +28,7 @@
                     </li>
                 </ul> 
             </div>
+            <SectionsCarousel/>
         </nav>
         
         <!-- content product -->
