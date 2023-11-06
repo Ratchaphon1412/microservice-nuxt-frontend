@@ -270,9 +270,6 @@
                                 <button type="submit" @click.prevent="onSubmit()" class="btn btn-outline btn-accent w-full">Accept</button>
                             </div>
                         </div>
-                        <div v-for="error in messageError">
-                            <p>{{ error }}</p>
-                        </div>      
                     </section>
                 </form>
             </div>
@@ -290,6 +287,7 @@
 });
 import { ref } from 'vue';
 import {Listbox,ListboxLabel,ListboxButton,ListboxOptions,ListboxOption , RadioGroup , RadioGroupLabel ,RadioGroupOption}   from '@headlessui/vue'    
+import Swal from 'sweetalert2';
 
 const canDecrease = ref(false)
 const totalList = ref([{
@@ -406,6 +404,7 @@ async function onSubmit() {
     for (let i = 0; i < all_image.value.length; i++) {
         productFormData.append('image_list[]', all_image.value[i]);
     }
+    console.log(all_image.value)
 
     const { data: product, error } = await baseFetch("product", {
         method: "POST",
@@ -416,8 +415,11 @@ async function onSubmit() {
         console.log(product.value)
         navigateTo("/dashboard")
     } else {
-        messageError.value.push(error.value)
-        console.log(error.value)
+        Swal.fire({
+            confirmButtonText: 'OK',
+            icon : `error`,
+            title : error.value?.data.message
+        })
     }
 }
  
