@@ -4,7 +4,8 @@ export const apiPayment = defineStore('apiPayment',() => {
 
     let credits = ref([]);
     const URL = "http://microservice.payment.ratchaphon1412.co"
-    
+    let token_card = "";
+    let listCard = ref([]);
     function get(){
         return credits.value;
     }
@@ -29,6 +30,8 @@ export const apiPayment = defineStore('apiPayment',() => {
         })
         if(data.value){
             console.log(data.value.token_card)
+            token_card = data.value.token_card
+            console.log(token_card)
             const {addCard} = await paymentFetch(URL + "/api/v1/payment/customer/card/",{
                 method: "PUT",
                 body: JSON.stringify({
@@ -39,8 +42,8 @@ export const apiPayment = defineStore('apiPayment',() => {
                     'Content-Type': 'application/json',
                 }
             })
-            
         }
+        // credits.value.push(credit);
     }
 
     function paymentProduct(amout:number,card_token:string,customer_token:string){
@@ -48,6 +51,21 @@ export const apiPayment = defineStore('apiPayment',() => {
         console.log(amout,card_token)
     
     }
+
+    async function getListCard(customer_token:string){
+        const {data} = await paymentFetch(URL + "/api/v1/payment/customer/card/?token=" + customer_token,{
+            method: "GET",
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+        if(data){
+            console.log(data.value)
+            listCard.value = data.value
+            return listCard.value
+        }
+    }
+
     function count(){
         return credits.value.length;
     }
@@ -67,6 +85,20 @@ export const apiPayment = defineStore('apiPayment',() => {
         }
     }
 
+    async function removeCard(token_card:string,customer_token:string) {
+        const {data} = await paymentFetch(URL + "/api/v1/payment/customer/card/",{
+            method: "DELETE",
+            body: JSON.stringify({
+                "customer_token": customer_token,
+                "card_token": token_card,
+            }),
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+    }
+
+
     function remove(item:any){
         let arraytmp:object[] = [];
         credits.value.forEach((element) => {
@@ -79,7 +111,8 @@ export const apiPayment = defineStore('apiPayment',() => {
     }
 
 
-    return { credits ,get, addCredit, count, updateCredit, remove, paymentProduct }
+
+    return { listCard, removeCard ,getListCard, credits ,get, addCredit, count, updateCredit, remove, paymentProduct }
 },{
     persist: true
 })
