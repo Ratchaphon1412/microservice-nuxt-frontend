@@ -24,20 +24,18 @@
       
       
       <aside class="col-span-1 h-[900px] lg:w-32">
-  <div class="lg:flex lg:items-start overflow-y-scroll h-4/6">
-    <div class="mt-2 w-full lg:order-1 lg:w-32 lg:flex-shrink-0">
-      <div v-for="image in product.image_products" :key="image.id" class="flex items-center lg:flex-col">
-        <div>
-          <button @click="change(image.image_path)" type="button" class="flex-0 aspect-square mb-3 sm:h-20 md:h-24 lg:h-32 overflow-hidden rounded-lg border-2">
-            <img class="h-full w-full object-cover" :src="image.image_path">
-          </button>
+        <div class="lg:flex lg:items-start overflow-y-scroll h-4/6">
+          <div class="mt-2 w-full lg:order-1 lg:w-32 lg:flex-shrink-0">
+            <div v-for="image in product.image_products" :key="image.id" class="flex items-center lg:flex-col">
+              <div>
+                <button @click="change(image.image_path)" type="button" class="flex-0 aspect-square mb-3 sm:h-20 md:h-24 lg:h-32 overflow-hidden rounded-lg border-2">
+                  <img class="h-full w-full object-cover" :src="image.image_path">
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  </div>
-</aside>
-
-          <div></div>
+      </aside>
           
           
           <div class="col-span-4 ">
@@ -56,7 +54,7 @@
 
                   <p class=" mt-4 text-5xl tracking-tight text-gray-900">{{ product.price }} ฿</p>
 
-                  <form class="mt-10">
+                  <form class="mt-10" @submit.prevent="addCart()">
                       <!-- Colors -->
                       <div>
                         <h3 class="text-sm font-medium text-gray-900">Color</h3>
@@ -89,7 +87,7 @@
                       <RadioGroup class="mt-4">
                           <RadioGroupLabel class="sr-only">Choose a size</RadioGroupLabel>
                           <div class="grid grid-cols-4 gap-4 sm:grid-cols-8 lg:grid-cols-4">
-                          <RadioGroupOption v-model="formData.size" v-for="stock in formData.product_color.stocks" :key="stock.size" :value="stock.size" :disabled="!stock.quantity" v-slot="{ active, checked }">
+                          <RadioGroupOption v-model="formData.size" @click="radioSize(stock.id)" v-for="stock in formData.product_color.stocks" :key="stock.size" :value="stock.size" :disabled="!stock.quantity" v-slot="{ active, checked }">
                               <div :class="[stock.quantity > 0 ? 'cursor-pointer bg-white text-gray-900 shadow-sm' : 'cursor-not-allowed bg-gray-50 text-gray-200', active ? 'ring-2 ring-[#112D4E]' : '', 'group relative flex items-center justify-center rounded-md border py-3 px-4 text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6']">
                               <RadioGroupLabel as="span">{{ stock.size }}</RadioGroupLabel>
                               <span v-if="stock.quantity > 0" :class="[active ? 'border' : 'border-2', checked ? 'border-[#112D4E]' : 'border-transparent', 'pointer-events-none absolute -inset-px rounded-md']" aria-hidden="true" />
@@ -165,35 +163,235 @@
           />
         </div>
       </section>
+
+      <!-- popup addCart -->
+      <TransitionRoot v-if="confirmData.color == '' || confirmData.size == ''" appear :show="isOpen" as="template">
+        <Dialog as="div" @close="closeModal" class="relative z-10">
+          <TransitionChild
+            as="template"
+            enter="duration-300 ease-out"
+            enter-from="opacity-0"
+            enter-to="opacity-100"
+            leave="duration-200 ease-in"
+            leave-from="opacity-100"
+            leave-to="opacity-0"
+          >
+            <div class="fixed inset-0 bg-black/25" />
+          </TransitionChild>
+
+          <div class="fixed inset-0 overflow-y-auto">
+            <div
+              class="flex min-h-full items-center justify-center p-4 text-center"
+            >
+              <TransitionChild
+                as="template"
+                enter="duration-300 ease-out"
+                enter-from="opacity-0 scale-95"
+                enter-to="opacity-100 scale-100"
+                leave="duration-200 ease-in"
+                leave-from="opacity-100 scale-100"
+                leave-to="opacity-0 scale-95"
+              >
+                <DialogPanel
+                  class="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all"
+                >
+                  <DialogTitle
+                    as="h3"
+                    class="text-lg font-medium leading-6 text-gray-900"
+                  >
+                  Please select the size!
+                  </DialogTitle>
+                  <!-- <p>ราคา {{ formData.product_color.color.hex_color }}</p>
+                  <p>ราคา {{ formData.product_color.stocks[0].size }}</p> -->
+                  <!-- <p>{{ formData.product_size }}</p> -->
+                  <!-- <p>{{ products }}</p> -->
+                  <div class="mt-4">
+                    <button
+                      type="button"
+                      class="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                      @click="closeModal"
+                    >
+                      Close the pup up
+                    </button>
+                  </div>
+                </DialogPanel>
+              </TransitionChild>
+            </div>
+          </div>
+        </Dialog>
+      </TransitionRoot>
+      
+      <TransitionRoot v-else-if="stockProductId == cartProductId" appear :show="isOpen" as="template">
+        <Dialog as="div" @close="closeModal" class="relative z-10">
+          <TransitionChild
+            as="template"
+            enter="duration-300 ease-out"
+            enter-from="opacity-0"
+            enter-to="opacity-100"
+            leave="duration-200 ease-in"
+            leave-from="opacity-100"
+            leave-to="opacity-0"
+          >
+            <div class="fixed inset-0 bg-black/25" />
+          </TransitionChild>
+
+          <div class="fixed inset-0 overflow-y-auto">
+            <div
+              class="flex min-h-full items-center justify-center p-4 text-center"
+            >
+              <TransitionChild
+                as="template"
+                enter="duration-300 ease-out"
+                enter-from="opacity-0 scale-95"
+                enter-to="opacity-100 scale-100"
+                leave="duration-200 ease-in"
+                leave-from="opacity-100 scale-100"
+                leave-to="opacity-0 scale-95"
+              >
+                <DialogPanel
+                  class="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all"
+                >
+                  <DialogTitle
+                    as="h3"
+                    class="text-lg font-medium leading-6 text-gray-900"
+                  >
+                  Product out of stock.
+                  </DialogTitle>
+                  <!-- <p>ราคา {{ formData.product_color.color.hex_color }}</p>
+                  <p>ราคา {{ formData.product_color.stocks[0].size }}</p> -->
+                  <!-- <p>{{ formData.product_size }}</p> -->
+                  <!-- <p>{{ products }}</p> -->
+                  <div class="mt-4">
+                    <button
+                      type="button"
+                      class="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                      @click="closeModal"
+                    >
+                      Close the pup up
+                    </button>
+                  </div>
+                </DialogPanel>
+              </TransitionChild>
+            </div>
+          </div>
+        </Dialog>
+      </TransitionRoot>
+
+      <TransitionRoot v-else appear :show="isOpen" as="template">
+        <Dialog as="div" @close="closeModal" class="relative z-10">
+          <TransitionChild
+            as="template"
+            enter="duration-300 ease-out"
+            enter-from="opacity-0"
+            enter-to="opacity-100"
+            leave="duration-200 ease-in"
+            leave-from="opacity-100"
+            leave-to="opacity-0"
+          >
+            <div class="fixed inset-0 bg-black/25" />
+          </TransitionChild>
+
+          <div class="fixed inset-0 overflow-y-auto">
+            <div
+              class="flex min-h-full items-center justify-center p-4 text-center"
+            >
+              <TransitionChild
+                as="template"
+                enter="duration-300 ease-out"
+                enter-from="opacity-0 scale-95"
+                enter-to="opacity-100 scale-100"
+                leave="duration-200 ease-in"
+                leave-from="opacity-100 scale-100"
+                leave-to="opacity-0 scale-95"
+              >
+                <DialogPanel
+                  class="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all"
+                >
+                  <DialogTitle
+                    as="h3"
+                    class="text-3xl font-medium leading-6 text-gray-900"
+                  >
+                  Product added to cart.
+                  </DialogTitle>
+                  <div class="mt-2 flex justify-between">
+                    <p class="text-sm text-gray-500">
+                       {{ checkout.length() }} items
+                    </p>
+                    <p>THB {{ checkout.payment() }}</p>
+                  </div>
+                  <div class="mt-4">
+                    <button
+                      type="button"
+                      class="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                      @click="closeModal"
+                    >
+                      Close the pop up
+                    </button>
+                  </div>
+                </DialogPanel>
+              </TransitionChild>
+            </div>
+          </div>
+        </Dialog>
+      </TransitionRoot>
   </div>
 
 
 </template>
+
 <script setup lang="ts">
 import { ref } from 'vue'
 import { StarIcon } from '@heroicons/vue/20/solid'
 import { RadioGroup, RadioGroupLabel, RadioGroupOption ,Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
+import {
+  TransitionRoot,
+  TransitionChild,
+  Dialog,
+  DialogPanel,
+  DialogTitle,
+} from '@headlessui/vue'
+
 import { list } from 'postcss';
+import { apiCheckout } from '~/store/pinia.store'
 
 const route = useRoute();
 const colorChoose = ref();
 const { data: product, error } = await baseFetch<any>(`product/${route.params.id}`, {})
 const { data: products } = await baseFetch<any>("product/format", {})
-
-console.log(products.value)
-
+console.log(product.value.id)
 
 const previewImage = useState<string>(undefined)
 previewImage.value = product.value.image_products[0].image_path
 const change = function (_image:  string) {
     previewImage.value = _image
 }
-
 const formData = reactive({
   product_color: product.value.product_colors[0],
-  size: "",
-  quantity: 0
+  product_size: {},
+  quantity: 1
 })
+
+class Confirm{
+  id: number = product.value.id;
+  name: string = product.value.name;
+  description: string = product.value.description;
+  image: string = product.value.image_products[0].image_path;
+  price: number = product.value.price;
+  color: string = "";
+  size: string = "";
+  quantity: number = 1;
+
+  constructor(color: string = "", size: string = ""){
+    this.color = color;
+    this.size = size;
+  }
+}
+
+let confirmData = new Confirm();
+let colorId = "";
+let sizeId = "";
+let stockProductId = -1;
+let cartProductId = 0;
 
 // const listColor = ref<any>([
 //   {
@@ -209,8 +407,80 @@ const formData = reactive({
 
 function radioColor(productColorId:any) {
   colorChoose.value = productColorId
+  colorId = productColorId
   formData.product_color = product.value.product_colors.find(item => item.id === productColorId)
-  console.log(formData.product_color)
+  confirmData.color = formData.product_color.color.hex_color
+  console.log(confirmData.color)
+}
+
+function radioSize(productSizeId:any){
+  sizeId = productSizeId
+  formData.product_size = product.value.product_colors.find(item => item.id === formData.product_color.id).stocks.find(item => item.id === productSizeId)
+  confirmData.size = formData.product_size.size;
+  console.log(confirmData.size)
+}
+
+const isOpen = ref(false)
+
+function closeModal() {
+  isOpen.value = false
+}
+function openModal() {
+  isOpen.value = true
+}
+
+const checkout = apiCheckout();
+
+function setStock(color:string,size:string){
+  stockProductId = product.value.product_colors.find(item => item.id === color).stocks.find(item => item.id === size).quantity
+}
+
+function sameProduct(){
+  for(let cart of checkout.get() ){
+    if(confirmData.name === cart.name && confirmData.color === cart.color && confirmData.size === cart.size && confirmData.id === cart.id){
+      return true;
+    }
+  }
+  return false;
+}
+
+function addQuantity(){
+  for(let cart of checkout.get() ){
+    if(confirmData.name === cart.name && confirmData.color === cart.color && confirmData.size === cart.size && confirmData.id === cart.id){
+      cart.quantity += 1;
+      break;
+    }
+  }
+}
+
+function addCart(){
+  if(confirmData.color == "" || confirmData.size == ""){
+    console.log('ใส่มาไม่ครบ');
+    openModal();
+    return ;
+  }else if(sameProduct()){
+    console.log('ของซ้ำกัน')
+    setStock(colorId,sizeId);
+    console.log(stockProductId);
+    if(stockProductId <= checkout.getCart(confirmData).quantity){
+      cartProductId = checkout.getCart(confirmData).quantity
+      console.log('ของเต็ม')
+      openModal();
+      return ;
+    }
+    addQuantity();
+    openModal();
+    return ;
+  }
+  else{
+    console.log('ของใหม่')
+    checkout.add(confirmData);
+    setStock(colorId,sizeId);
+    cartProductId = checkout.getCart(confirmData).quantity;
+    openModal();
+  }
+  
+  confirmData = new Confirm(confirmData.color,confirmData.size);
 }
 </script>
 
