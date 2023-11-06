@@ -98,7 +98,7 @@ export const apiPayment = defineStore('apiPayment',() => {
         })
     }
 
-    async function purchase(token_card:string,customer_token:string,amount:number){
+    async function purchase(token_card:string,customer_token:string,amount:string){
         const {data,error} = await paymentFetch(URL + "/api/v1/payment/",{
             method: "POST",
             body: JSON.stringify({
@@ -116,13 +116,28 @@ export const apiPayment = defineStore('apiPayment',() => {
         }
         else{
             console.log(error)
-            return data.value;
+            return error.value;
         }
-
-
     }
-
-
+    async function invoiceList(user_token:string){
+        const {data,error} = await paymentFetch(URL + "/api/v1/payment/invoice/?token=" + user_token,{
+        method: "PUT",
+        body: JSON.stringify({
+            'user_id': user_token,
+        }),
+        headers: {
+            'Content-Type': 'application/json',
+            }
+        });
+        if(data.value != null){
+            console.log(data)
+            return data.value;
+        }else{
+            console.log(error)
+            return error.value;
+        }
+    }
+    
     function remove(item:any){
         let arraytmp:object[] = [];
         credits.value.forEach((element) => {
@@ -136,7 +151,7 @@ export const apiPayment = defineStore('apiPayment',() => {
 
 
 
-    return { purchase ,listCard, removeCard ,getListCard, credits ,get, addCredit, count, updateCredit, remove, paymentProduct }
+    return { invoiceList, purchase ,listCard, removeCard ,getListCard, credits ,get, addCredit, count, updateCredit, remove, paymentProduct }
 },{
     persist: true
 })
