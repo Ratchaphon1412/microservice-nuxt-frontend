@@ -114,7 +114,7 @@
                 <div class="col-span-6 sm:col-span-6"></div>
               </div>
               <div class="col-span-6 sm:col-span-2">
-                <button @click="back()" class="btn btn-outline btn-error w-full">
+                <button @click.prevent="back()" class="btn btn-outline btn-error w-full">
                   Cancel
                 </button>
               </div>
@@ -124,7 +124,7 @@
               <div
                 class="col-span-6 sm:col-span-2 flex justify-end"
               >
-                <button type="submit" @click="submit()" class="btn btn-outline btn-accent w-full">Accent</button>
+                <button type="submit" @click.prevent="submit()" class="btn btn-outline btn-accent w-full">Accent</button>
               </div>
   
               <div class="col-span-6 mt-4">
@@ -162,18 +162,9 @@
     let postal = ref("");
     let security = ref("")
 
-    function submit() {
+    async function submit() {
         if(name.value != "" && number.value != "" && expiration_month.value != "" && expiration_year.value != "" && city.value != "" && postal.value != "" && security.value != ""){
-            addCredit(name.value,number.value,expiration_month.value,expiration_year.value,city.value,postal.value,security.value);
-            Swal.fire({
-            confirmButtonText: 'OK',
-            icon : `success`,
-            title : "success"
-            }).then((result) => {
-                if(result.isConfirmed){
-                    navigateTo("/auth/login")
-                }
-            })
+            await addCredit(name.value,number.value,expiration_month.value,expiration_year.value,city.value,postal.value,security.value);
         }
         else{
             Swal.fire({
@@ -184,6 +175,6 @@
         }
     }
     function back(){
-        navigateTo("/setting/payment/creditCard")
+        navigateTo("/setting")
     }
 </script>

@@ -12,7 +12,7 @@ type Headers = {
         }
            return await useFetch<T>(path,{
               ...options,
-              baseURL: config.public.kongApi,
+              baseURL: 'http://microservice.payment.ratchaphon1412.co',
               headers:{
                  ...headers,
                  ...options?.headers

@@ -3,12 +3,13 @@
 export const apiPayment = defineStore('apiPayment',() => {
 
     let credits = ref([]);
+    const URL = "http://microservice.payment.ratchaphon1412.co"
     
     function get(){
         return credits.value;
     }
 
-    async function addCredit(nameIn:string,numberIn:string,expiration_monthIn:string,expiration_yearIn:string,cityIn:string,postalIn:string,securityIn:string){
+    async function addCredit(nameIn:string,numberIn:string,expiration_monthIn:string,expiration_yearIn:string,cityIn:string,postalIn:string,securityIn:string,){
         let credit = {
             name: nameIn,
             number: numberIn,
@@ -16,20 +17,19 @@ export const apiPayment = defineStore('apiPayment',() => {
             expiration_year:expiration_yearIn,
             city:cityIn,
             postal_code:postalIn,
-            security:securityIn
+            security_code:securityIn
         }
-        const {data} = await paymentFetch("/api/v1/payment/customer/card/",{
+        const {data} = await paymentFetch(URL + "/api/v1/payment/customer/card/",{
             method: "POST",
             body: JSON.stringify(credit),
             headers: {
                 'Content-Type': 'application/json',
             }
         })
-            if(data.value != null){
-                credits.value.push(credit);
-                navigateTo("/setting/payment/creditCard")
-            }
+        if(data.value){
+        console.log(data)
         }
+    }
 
     function paymentProduct(amout:number,card_token:string,customer_token:string){
         
@@ -43,8 +43,6 @@ export const apiPayment = defineStore('apiPayment',() => {
     function updateCredit(item:any){
         
     }
-
-
 
     return { get, addCredit , paymentProduct , credits }
 },{
