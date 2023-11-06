@@ -3,7 +3,7 @@
          <div class="flex justify-between  max-w-full px-4 w-full">   
                 <p class="text-4xl font-poppin text-gray-900 mt-3 mb-5">My Payment</p>
                 <div class="mx-10 my-3">
-                <a href="#_" class="h-14 relative inline-flex items-center justify-start py-3 pl-4 pr-12 overflow-hidden font-semibold text-black transition-all duration-150 ease-in-out rounded hover:pl-10 hover:pr-6 bg-gray-100 group">
+                <a href="/setting/payment/create" class="h-14 relative inline-flex items-center justify-start py-3 pl-4 pr-12 overflow-hidden font-semibold text-black transition-all duration-150 ease-in-out rounded hover:pl-10 hover:pr-6 bg-gray-100 group">
                     <span class="absolute bottom-0 left-0 w-full h-1 transition-all duration-150 ease-in-out bg-emerald-500 group-hover:h-full"></span>
                     <span class="absolute right-0 pr-4 duration-200 ease-out group-hover:translate-x-12">
                     <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M4 12H20M12 4V20" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
@@ -14,7 +14,7 @@
 
                     </span>
                     <NuxtLink v-if="creditList.listCard.length <= 3" to="/setting/payment/create" class="relative w-full text-left transition-colors duration-200 ease-in-out group-hover:text-white">Add Card {{ creditList.listCard.length }}/3</NuxtLink>
-                    <NuxtLink v-else to="/setting/payment/create" class="relative w-full text-left transition-colors duration-200 ease-in-out group-hover:text-white">Add Card 0/3</NuxtLink>
+                    <NuxtLink v-else-if="creditList.listCard.length === 0" to="/setting/payment/create" class="relative w-full text-left transition-colors duration-200 ease-in-out group-hover:text-white">Add Card 0/3</NuxtLink>
                 </a>
             </div>
          </div>     
@@ -79,8 +79,6 @@
             </div>
             <div class="grid grid-rows-4 gap-6 w-full h-full">
                 <div class="col-span-1"></div>
-                
-
                 <button @click="remove(index.id)" class="h-14 relative inline-flex col-span-1 items-center justify-start py-3 pl-4 pr-12 overflow-hidden font-semibold text-black transition-all duration-150 ease-in-out rounded hover:pl-10 hover:pr-6 bg-gray-100 group">
                     <span class="absolute bottom-0 left-0 w-full h-1 transition-all duration-150 ease-in-out bg-red-800 group-hover:h-full"></span>
                     <span class="absolute right-0 pr-4 duration-200 ease-out group-hover:translate-x-12">
@@ -92,7 +90,7 @@
                     <span class="relative w-full text-left transition-colors duration-200 ease-in-out group-hover:text-white">Delete</span>
                 </button>
             </div>
-        </div>
+</div>
   <!-- end3 -->
      
 </div>

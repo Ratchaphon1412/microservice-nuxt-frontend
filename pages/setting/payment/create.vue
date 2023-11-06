@@ -168,14 +168,14 @@
 
     async function submit() {
         if(name.value != "" && number.value != "" && expiration_month.value != "" && expiration_year.value != "" && city.value != "" && postal.value != "" && security.value != ""){
-            await addCredit(name.value,number.value,expiration_month.value,expiration_year.value,city.value,postal.value,security.value,auth.user.user.customer_omise_id);
             Swal.fire({
             confirmButtonText: 'OK',
             icon : `success`,
             title : "success"
-        }).then((result) => {
+        }).then(async (result) => {
             if(result.isConfirmed){
-                navigateTo("/setting/payment/creditCard")
+              await addCredit(name.value,number.value,expiration_month.value,expiration_year.value,city.value,postal.value,security.value,auth.user.user.customer_omise_id);
+              navigateTo("/setting/payment/creditCard")
             }
         })
           }
