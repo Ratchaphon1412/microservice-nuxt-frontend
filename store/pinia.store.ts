@@ -70,13 +70,16 @@ export const apiCheckout = defineStore('apiCheckout', () => {
         carts.value = arraytmp;
         console.log(carts)
     }
+    function clear(){
+        carts.value = [];
+    }
 
     function add(item:any){
         console.log(item)
         carts.value.push(item);
     }
 
-    return { carts, payment, remove, add, get, length, getCart }
+    return { carts, clear, payment, remove, add, get, length, getCart }
 },{
     persist: true
 })
