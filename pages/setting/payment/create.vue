@@ -124,7 +124,7 @@
               <div
                 class="col-span-6 sm:col-span-2 flex justify-end"
               >
-                <button type="submit" class="btn btn-outline btn-accent w-full">Accent</button>
+                <button type="submit" class="btn btn-outline btn-accent w-full">Create</button>
               </div>
   
               <div class="col-span-6 mt-4">
