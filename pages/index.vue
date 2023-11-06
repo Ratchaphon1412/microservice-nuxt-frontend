@@ -4,9 +4,9 @@
     <h1 class="text-6xl font-bold text-start p-6">Trending Product</h1>
 
       
-    <div class="carousel carousel-center p-4 w-full space-x-4 bg-neutral rounded-box">
+    <div class="carousel carousel-center p-4 w-full space-x-4 bg-neutral">
         <div class="carousel-item" v-for="product in products">
-            <SectionsCard
+            <SectionsCard class="w-80 "
             :id="product.id" 
             :name="product.name" 
             :description="product.description" 
@@ -56,5 +56,11 @@
   </main>
 </template>
 <script setup lang="ts">
-const { data: products } = await baseFetch<any>("product/format", {})
+const { data: products } = await baseFetch<any>("product/format", {
+  method: 'GET',
+  headers:{
+    'Content-Type': 'application/json'
+  }
+})
+console.log(products.value)
 </script>

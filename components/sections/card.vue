@@ -1,13 +1,13 @@
 <template>
 <nuxt-link :to="`/product/${id}`">
-  <div class="relative flex flex-col mt-10 w-full">
+  <div class="relative flex flex-col w-full">
     <div class="container">
       <div class="max-w-md w-full bg-[#DBE2EF] shadow-lg rounded-xl p-6 hover:shadow-xl">
         <div class="flex flex-col ">
           <div class="">
             <div class="h-62 w-full mb-3">
               <!-- image -->
-              <img :src="image" alt="Just a flower" class=" w-full h-auto mx-auto rounded-2xl">
+              <img :src="image" alt="Just a flower" class="rounded-lg object-none object-center w-full h-full">
               
               <div class="flex mt-4">
                 <!-- color -->
@@ -65,11 +65,11 @@ defineProps({
   name : String,
   description : String,
   gender : String,
-  listSize : Array<string>,
-  listColor : Array<string>,
+  listSize : Array<any>,
+  listColor : Array<any>,
   price : Number,
   image : String,
-  id : Number
+  id: undefined
 });
 
 

@@ -42,7 +42,7 @@ async function submit() {
             title : "success"
         }).then((result) => {
             if(result.isConfirmed){
-                navigateTo("/auth.login")
+                navigateTo("/auth/login")
             }
         })
     // navigateTo("/auth/registerAddress")
@@ -263,7 +263,7 @@ watch(
             type="submit" 
             class="btn btn-info w-full text-white bg-[#2674B4] text-3xl"
           >
-            NEXT
+            Submit
           </button>
         </form>
         <p class="mt-4 text-xs">

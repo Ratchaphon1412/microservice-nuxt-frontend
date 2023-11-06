@@ -1,4 +1,3 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   app:{
     head:{
@@ -20,7 +19,7 @@ export default defineNuxtConfig({
 
   modules: [
     '@pinia/nuxt',
-    '@pinia-plugin-persistedstate/nuxt'
+    '@pinia-plugin-persistedstate/nuxt',
   ],
   devtools: { 
     enabled: true 
@@ -43,6 +42,5 @@ export default defineNuxtConfig({
       }
     }
   },
-  
   ssr: true
 })
