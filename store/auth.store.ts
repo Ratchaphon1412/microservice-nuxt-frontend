@@ -80,7 +80,6 @@ export const authStore = defineStore('authStore', () => {
       
     }
     return []
-  
   }
 
   
@@ -234,6 +233,10 @@ async function deleteAccount() {
       console.log(message.value)
       navigateTo("/auth/login")
     }
+  }
+
+  async function addCard(){
+
   }
 
   function getUser(){

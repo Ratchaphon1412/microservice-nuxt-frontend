@@ -6,7 +6,7 @@
       </div>
       <!-- start -->
   
-      <form class="flex-shrink p-4 w-full" @submit.prevent="submit()">
+      <form class="flex-shrink p-4 w-full">
         <div
           class="flex flex-col justify-center bg-white dark:bg-gray-800 rounded-lg h-full"
         >
@@ -114,7 +114,7 @@
                 <div class="col-span-6 sm:col-span-6"></div>
               </div>
               <div class="col-span-6 sm:col-span-2">
-                <button class="btn btn-outline btn-error w-full">
+                <button @click.prevent="back()" class="btn btn-outline btn-error w-full">
                   Cancel
                 </button>
               </div>
@@ -124,7 +124,7 @@
               <div
                 class="col-span-6 sm:col-span-2 flex justify-end"
               >
-                <button type="submit" class="btn btn-outline btn-accent w-full">Create</button>
+                <button type="submit" @click.prevent="submit()" class="btn btn-outline btn-accent w-full">Accent</button>
               </div>
   
               <div class="col-span-6 mt-4">
@@ -149,6 +149,8 @@
   
 <script setup lang="ts">
     import { apiPayment } from '~/store/payment.store'
+    import Swal from 'sweetalert2'
+
     
     let { credits, addCredit } = apiPayment();
 
@@ -160,9 +162,19 @@
     let postal = ref("");
     let security = ref("")
 
-    function submit() {
+    async function submit() {
         if(name.value != "" && number.value != "" && expiration_month.value != "" && expiration_year.value != "" && city.value != "" && postal.value != "" && security.value != ""){
-            addCredit(name.value,number.value,expiration_month.value,expiration_year.value,city.value,postal.value,security.value);
+            await addCredit(name.value,number.value,expiration_month.value,expiration_year.value,city.value,postal.value,security.value);
         }
+        else{
+            Swal.fire({
+            confirmButtonText: 'OK',
+            icon : `error`,
+            title : "กรุณากรอกข้อมูลให้ครบ"
+            })
+        }
+    }
+    function back(){
+        navigateTo("/setting")
     }
 </script>

@@ -69,7 +69,7 @@ defineProps({
   listColor : Array<any>,
   price : Number,
   image : String,
-  id: undefined
+  id: undefined,
 });
 
 

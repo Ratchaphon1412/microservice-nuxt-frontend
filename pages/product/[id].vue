@@ -199,7 +199,7 @@
                     as="h3"
                     class="text-lg font-medium leading-6 text-gray-900"
                   >
-                  Please select the size!
+                  Please select options.
                   </DialogTitle>
                   <!-- <p>ราคา {{ formData.product_color.color.hex_color }}</p>
                   <p>ราคา {{ formData.product_color.stocks[0].size }}</p> -->
@@ -315,7 +315,7 @@
                   </DialogTitle>
                   <div class="mt-2 flex justify-between">
                     <p class="text-sm text-gray-500">
-                       {{ checkout.length() }} items
+                       All item | {{ checkout.length() }} 
                     </p>
                     <p>THB {{ checkout.payment() }}</p>
                   </div>
