@@ -57,4 +57,5 @@
 </template>
 <script setup lang="ts">
 const { data: products } = await baseFetch<any>("product/format", {})
+console.log(products.value)
 </script>

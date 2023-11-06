@@ -65,11 +65,11 @@ defineProps({
   name : String,
   description : String,
   gender : String,
-  listSize : Array<string>,
-  listColor : Array<string>,
+  listSize : Array<any>,
+  listColor : Array<any>,
   price : Number,
   image : String,
-  id: Number
+  id: undefined
 });
 
 
