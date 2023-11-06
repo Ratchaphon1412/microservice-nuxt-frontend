@@ -3,8 +3,6 @@ type Headers = {
 }
 
 export default async function<T>(path:string ,options?:any){
-   
-    const {getAccessToken,isLogin,refreshToken} = useAuthStore()
     const config = useRuntimeConfig()
 
     const headers : Headers = {
