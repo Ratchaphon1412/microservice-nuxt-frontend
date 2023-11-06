@@ -34,14 +34,13 @@ function requestPayment() {
     currency: "THB",
     amount: 10000,
     defaultPaymentMethod: "credit_card",
-    otherPaymentMethods: [
-      "internet_banking",
+    otherPaymentMethods: [ 
       "credit_card",
       "promptpay",
-      "truemoney",
     ],
     onCreateTokenSuccess: function (nonce) {
       console.log(nonce);
+      // ยิ่งเข้าหลังบ้าน
     },
   });
 }
