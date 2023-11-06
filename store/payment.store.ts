@@ -98,6 +98,24 @@ export const apiPayment = defineStore('apiPayment',() => {
         })
     }
 
+    async function purchase(token_card:string,customer_token:string,amount:number){
+        const {data} = await paymentFetch(URL + "/api/v1/payment/",{
+            method: "POST",
+            body: JSON.stringify({
+                "customer_token": customer_token,
+                "card_token": token_card,
+                "amount": amount,
+            }),
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+        if(data != null){
+            console.log(data)
+        }
+
+    }
+
 
     function remove(item:any){
         let arraytmp:object[] = [];
@@ -112,7 +130,7 @@ export const apiPayment = defineStore('apiPayment',() => {
 
 
 
-    return { listCard, removeCard ,getListCard, credits ,get, addCredit, count, updateCredit, remove, paymentProduct }
+    return { purchase ,listCard, removeCard ,getListCard, credits ,get, addCredit, count, updateCredit, remove, paymentProduct }
 },{
     persist: true
 })
