@@ -236,6 +236,7 @@ async function deleteAccount() {
   }
 
   
+  
 
   function getUser(){
     return user.value

@@ -100,7 +100,7 @@
                 <div class="p-6">
                     <div class="mb-2 flex justify-between">
                         <p class="text-gray-700">Subtotal</p>
-                        <p class="text-gray-700">$129.99</p>
+                        <p class="text-gray-700">{{ amout }}฿</p>
                     </div>
                     <div class="flex justify-between">
                         <p class="text-gray-700">Discount</p>
@@ -110,7 +110,7 @@
                     <div class="flex justify-between">
                         <p class="text-lg font-bold">Total</p>
                         <div class="">
-                        <p class="mb-1 text-lg font-bold">$134.98 USD</p>
+                        <p class="mb-1 text-lg font-bold">{{ amout }}฿</p>
                         </div>
                     </div>
                     <button class="mt-6 mr-5 w-full rounded-md bg-[#0075FF] py-1.5 font-medium text-blue-50 hover:bg-blue-600">Check out</button>          
@@ -122,9 +122,30 @@
     </template>
     
     <script setup lang="ts">
+
+
+
+    import { authStore } from '~/store/auth.store'
     import { apiCheckout } from '~/store/pinia.store'
-    const { carts, remove } = apiCheckout();
-    const checkout = apiCheckout();
+    import { apiPayment } from '~/store/pinia.store'
+
+    const { carts, remove , payment , } = apiCheckout();
+    const { paymentProduct } = apiPayment();
+
+    const amout = payment();
+    console.log(amout);
+    const auth = authStore();
+    console.log(auth.user.user.customer_omise_id)
+
+    function buy(){
+        if(auth.user){
+            paymentProduct(auth.user.user.customer_omise_id,);
+        }
+        
+    }
+
+
+
     function removeOrder(item:any) {
         remove(item);
         window.location.reload();
