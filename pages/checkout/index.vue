@@ -206,8 +206,9 @@
                 })
             } else {
                 if(auth.user) {
+                    const address_str = address.value.detail_address + ", " + address.value.province + ", " + address.value.country + ", " + address.value.zip_code
                     await purchase(selected.id,auth.user.user.customer_omise_id,amout);
-                    reduceStock(address.value)
+                    reduceStock(address_str)
                     clear();
                 }
             }
