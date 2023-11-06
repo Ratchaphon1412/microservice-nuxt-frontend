@@ -6,7 +6,7 @@
       </div>
       <!-- start -->
   
-      <div class="flex-shrink p-4 w-full" @submit.prevent="">
+      <form class="flex-shrink p-4 w-full" @submit.prevent="submit()">
         <div
           class="flex flex-col justify-center bg-white dark:bg-gray-800 rounded-lg h-full"
         >
@@ -77,30 +77,32 @@
                   v-model="security"
                 />
               </div>
-              
+
               <div class="col-span-6 sm:col-span-3">
                 <label
-                  for="zip_code"
+                  for="month"
                   class="block mb-2 text-lg font-medium text-gray-900"
-                  >Phone
+                  >Expiration Month
                 </label>
                 <input
                   class="peer w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-pink-500 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
-                  name="zip_code"
-                  id="zip_code"
+                  name="month"
+                  id="month"
+                  v-model="expiration_month"
                 />
               </div>
 
               <div class="col-span-6 sm:col-span-3">
                 <label
-                  for="zip_code"
+                  for="Year"
                   class="block mb-2 text-lg font-medium text-gray-900"
-                  >Phone
+                  >Expiration Year
                 </label>
                 <input
                   class="peer w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-pink-500 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
-                  name="zip_code"
-                  id="zip_code"
+                  name="Year"
+                  id="Year"
+                  v-model="expiration_year"
                 />
               </div>
   
@@ -112,7 +114,7 @@
                 <div class="col-span-6 sm:col-span-6"></div>
               </div>
               <div class="col-span-6 sm:col-span-2">
-                <button className="btn btn-outline btn-error w-full">
+                <button class="btn btn-outline btn-error w-full">
                   Cancel
                 </button>
               </div>
@@ -140,13 +142,16 @@
             </div>
           </div>
         </div>
-      </div>
+      </form>
       <!-- end -->
     </div>
   </template>
   
 <script setup lang="ts">
+    import { apiPayment } from '~/store/payment.store'
     
+    let { credits, addCredit } = apiPayment();
+
     let name = ref("");
     let number = ref("");
     let expiration_month = ref("");
@@ -154,21 +159,10 @@
     let city = ref("");
     let postal = ref("");
     let security = ref("")
-     
-    let credit = ref({
-        name: "",
-        card_number: "",
-        valid: "",
-        expiry: "",
-        CVV: "",
-    });
 
-
-    // function submit() {
-    //     if(){
-
-    //     }else{
-            
-    //     }
-    // }
+    function submit() {
+        if(name.value != "" && number.value != "" && expiration_month.value != "" && expiration_year.value != "" && city.value != "" && postal.value != "" && security.value != ""){
+            addCredit(name.value,number.value,expiration_month.value,expiration_year.value,city.value,postal.value,security.value);
+        }
+    }
 </script>
