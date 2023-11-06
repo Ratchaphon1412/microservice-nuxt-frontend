@@ -2,30 +2,30 @@
    <div class=" mx-auto max-w-2xl items-center space-x-2 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
        <!-- content card -->
        <nav>
-           <h1 class="p-6 text-6xl font-bold">Women</h1>
+           <h1 class="p-6 text-6xl font-bold">{{ selectGenderCategory.gender }}</h1>
            <div class="p-6">
                
-               <ul class="border-2 border-gray-900 hidden text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg shadow sm:flex dark:divide-gray-700 dark:text-gray-400">
+               <ul v-for="gender in AllGender" class="border-2 border-gray-900 hidden text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg shadow sm:flex dark:divide-gray-700 dark:text-gray-400">
                     
-                    <li class="w-full bg-gray-800" >
-                        <div class="relative inline-flex items-center justify-center w-full h-full overflow-hidden font-mono font-medium tracking-tighter text-white  rounded-l-lg border-white group w-56 h-56 text-black hover:text-white">
-                            
-                            <span class="relative  text-white text-xl">Women</span>
-               
-                        </div>
+                    <li class="w-full " >
+                        <button @click="chooseGender(gender)" type="button" class="relative inline-flex items-center justify-center w-full h-full overflow-hidden font-mono font-medium tracking-tighter text-black  rounded-l-lg border-white hover:text-white group w-56 h-56 text-black hover:text-white">
+                            <li class="w-full">
+                            <span class="relative text-black text-xl">{{gender}}</span>
+                            </li>
+                        </button>
                     </li>
-                    <li class="w-full">
-                        <a href="/category/men" class="relative inline-flex items-center justify-center w-full h-full overflow-hidden font-mono font-medium tracking-tighter text-white bg-white border-white border-2 group group-hover:w-56 group-hover:h-56 text-black hover:text-white">
+                    <!-- <li class="w-full">
+                        <button @click="chooseGender('Men')" type="button" class="relative inline-flex items-center justify-center w-full h-full overflow-hidden font-mono font-medium tracking-tighter text-white bg-white border-white border-2 group group-hover:w-56 group-hover:h-56 text-black hover:text-white">
                             <span class="absolute w-0 h-0 transition-all duration-500 ease-out bg-gray-800 rounded-full group-hover:w-full group-hover:h-96"></span>
                             <span class="relative text-black group-hover:text-white text-xl">Men</span>
-                        </a>                    
+                        </button>                    
                     </li>
                     <li class="w-full">
-                        <a href="/category/kid" class="relative inline-flex items-center justify-center w-full h-12 overflow-hidden font-mono font-medium tracking-tighter text-white bg-white rounded-r-lg border-white border-2 group group-hover:w-56 group-hover:h-56 text-black hover:text-white">
+                        <button @click="chooseGender('Kids')" type="button" class="relative inline-flex items-center justify-center w-full h-12 overflow-hidden font-mono font-medium tracking-tighter text-white bg-white rounded-r-lg border-white border-2 group group-hover:w-56 group-hover:h-56 text-black hover:text-white">
                             <span class="absolute w-0 h-0 transition-all duration-500 ease-out bg-gray-800 rounded-full group-hover:w-full group-hover:h-96"></span>
                             <span class="relative text-black group-hover:text-white text-xl">Kid</span>
-                        </a>   
-                    </li>
+                        </button>   
+                    </li> -->
                 </ul> 
            </div>
            
@@ -54,18 +54,27 @@
        <!-- content product -->
        <div class="flex">
            <aside class="flex flex-col w-72 px-5 py-8 overflow-y-auto bg-white border-r rounded-md rtl:border-r-0 rtl:border-l dark:bg-gray-900 dark:border-gray-700">
-               <h1 class="text-2xl font-bold text-start text">Women</h1>
+               <h1 class="text-2xl font-bold text-start text">{{ selectGenderCategory.gender }}</h1>
                <div class="px-3 py-4 overflow-y-auto">
+                    <!-- All -->
+                    <div class="space-y-2 font-medium">
+                       
+                       <button @click="selectCategory('All')" type="button" class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-tops" data-collapse-toggle="dropdown-tops">
+                            <span class="flex-1 ml-3 text-left text-xl whitespace-nowrap">All Product</span>
+                       </button>
+                       
+                   
+                    </div>
                    <!-- Tops -->
                    <div class="space-y-2 font-medium">
                        
-                           <button type="button" class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-tops" data-collapse-toggle="dropdown-tops">
+                           <button @click="selectCategory('Tops')" type="button" class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-tops" data-collapse-toggle="dropdown-tops">
                                <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" aria-hidden="true"
                                version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 256 256" enable-background="new 0 0 256 256" xml:space="preserve">
                                    <metadata> Svg Vector Icons : http://www.onlinewebfonts.com/icon </metadata>
                                    <g><g><g><path fill="#000000" d="M86.9,11.4c-24.9,7-43.4,15.5-48.8,22.7C30,44.8,23.5,71.3,20.3,106.3c-0.8,9.4-0.7,10,3.6,11.9c9.3,4.4,24.3,8.6,33.7,9.4l1.4,0.1l0.2,52.8c0.2,51.9,0.2,52.9,1.2,53.9c1,1.2,2.5,1.8,8.1,3.8c25.1,8.7,72.8,10.3,105.6,3.5c10.5-2.2,20-5.5,21.7-7.6c0.6-0.7,0.7-8.6,0.9-53.6l0.2-52.8l4.6-0.6c8.6-1.1,22.5-5.2,30.5-8.9c3.5-1.7,4.4-3.2,4.1-6.7c-0.1-1.2-0.6-5.6-0.9-9.6c-3.1-32.1-9.6-57.6-17.3-67.9c-5.3-7.1-24.5-16-48.4-22.5c-7-1.9-6-1.9-17.8,0.1c-23.2,4-24.6,4-48.8-0.2c-5.1-0.9-9.6-1.6-10.2-1.5C92.2,10,89.6,10.6,86.9,11.4z M91,23.1c0.6,1.2,2.6,3.5,4.4,5.2c14.3,13.3,43.6,14.8,61.2,3.2c3.2-2.2,7-5.9,8.3-8.4c0.6-1.1,1.2-2,1.4-2c0.8,0,9.9,2.8,16,4.8c15.6,5.4,25.5,10.7,28.8,15.7c4,6,8.1,20.1,11,37.6c2.4,14.7,4.2,30.3,3.5,31c-0.2,0.2-3.3,1.4-6.8,2.6c-6.5,2.3-14.7,4.3-19.7,4.9l-2.7,0.3l0.2-15.6c0.2-13.6,0.3-16.1,1.2-19.6c1.3-5.3,3.4-10.2,5.6-13c2.8-3.5,3.4-5,2.8-7c-0.7-2.1-2.5-3.4-4.7-3.4c-1.4,0-2.2,0.4-3.6,1.7c-3.9,3.5-7.8,11.7-10,20.5c-0.8,3.2-0.8,8.4-1.1,75.1l-0.2,71.6l-4.1,1.3c-14,4.4-31.9,6.5-54.6,6.5c-22.6,0-40.6-2.1-54.6-6.5l-4.1-1.3l-0.3-71.6c-0.3-77.4-0.1-72.8-2.5-80.4c-2.1-6.5-5.6-12.6-8.8-15.4c-2.1-1.8-4.6-1.9-6.5-0.3c-2.6,2.2-2.4,4.8,0.6,8.3c3.5,4,6.1,11.6,7.1,19.9c0.2,2.3,0.5,9.8,0.5,16.8v12.6l-2.6-0.3c-4.9-0.6-13.2-2.6-19.6-4.8c-3.5-1.2-6.6-2.4-6.8-2.6c-0.6-0.6,1.4-18.3,3.6-31c3-18.3,6.9-31.3,11-37.5c4.1-6.1,18.5-13,42.2-20.1C89.5,20.8,89.9,20.9,91,23.1z M110.9,22.8c9.6,1.5,15.6,2,20.3,1.7c3.8-0.3,17.8-2.2,21.2-2.9l1.2-0.3l-1.2,1c-1.8,1.6-8.2,4.5-11.9,5.5c-10.7,3-22.6,1.9-32.1-2.7c-2-1-4.2-2.3-4.8-2.8l-1.2-1l1.4,0.2C104.5,21.8,107.7,22.4,110.9,22.8z"/></g></g></g>
                                    </svg>
-                                 <span class="flex-1 ml-3 text-left text-xl whitespace-nowrap">TOPS</span>
+                                 <span class="flex-1 ml-3 text-left text-xl whitespace-nowrap">Tops</span>
                                  
                            </button>
                            
@@ -74,7 +83,7 @@
                    <!-- Outerwear -->
                    <div class="space-y-2 font-medium">
                        
-                           <button type="button" class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-Outerwear" data-collapse-toggle="dropdown-Outerwear">
+                           <button @click="selectCategory('Outerwear')" type="button" class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-Outerwear" data-collapse-toggle="dropdown-Outerwear">
                                <svg version="1.1" class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" aria-hidden="true"
                                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 256 256" enable-background="new 0 0 256 256" xml:space="preserve">
                                    <metadata> Svg Vector Icons : http://www.onlinewebfonts.com/icon </metadata>
@@ -89,7 +98,7 @@
                    <!-- BOTTOMS -->
                    <div class="space-y-2 font-medium">
                        
-                           <button type="button" class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-BOTTOMS" data-collapse-toggle="dropdown-BOTTOMS">
+                           <button @click="selectCategory('Bottoms')" type="button" class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-BOTTOMS" data-collapse-toggle="dropdown-BOTTOMS">
                                <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" aria-hidden="true"
                                fill="#000000" height="800px" width="800px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
                                    viewBox="0 0 466.389 466.389" xml:space="preserve">
@@ -120,7 +129,7 @@
                                <!-- <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 21">
                                     <path d="M15 12a1 1 0 0 0 .962-.726l2-7A1 1 0 0 0 17 3H3.77L3.175.745A1 1 0 0 0 2.208 0H1a1 1 0 0 0 0 2h.438l.6 2.255v.019l2 7 .746 2.986A3 3 0 1 0 9 17a2.966 2.966 0 0 0-.184-1h2.368c-.118.32-.18.659-.184 1a3 3 0 1 0 3-3H6.78l-.5-2H15Z"/>
                                  </svg> -->
-                                 <span class="flex-1 ml-3 text-left text-xl whitespace-nowrap">BOTTOMS</span>
+                                 <span class="flex-1 ml-3 text-left text-xl whitespace-nowrap">Bottoms</span>
                                  
                            </button>
                    </div>
@@ -211,8 +220,8 @@
 
 <script setup lang="ts">
    import { RadioGroup, RadioGroupLabel, RadioGroupOption } from '@headlessui/vue'
-   import { ref, watch} from 'vue'
-
+   import { ref, watch } from 'vue'
+   const AllGender = ['Women', 'Men', 'Kid']
    const colors = [
        { name: 'white', class: '#f5f5f5', selectedClass: 'ring-gray-400' },
        { name: 'gray', class: '#a6a4a4', selectedClass: 'ring-gray-400' },
@@ -231,21 +240,33 @@
    const { data: products } = await baseFetch<any>("product/format", {});
 //    console.log(products.value.length);
 
-
-   const filterList = ref<any>([])
-
-
-    filterList.value = products.value.map((item: any) => {
-        console.log(products.value)
-    return {
-        name: item.name,
-        description: item.description,
-        gender : item.gender,
-        listSize : item.listSize,
-        listColor : item.listColor,
-        price : item.price,
-        image : item.image,
-    }})
+    const filterList = ref<any>([])
+    if (products.value !== null) {
+        setList(products)
+        // console.log(products.value)
+        // filterList.value = products.value.map((item: any) => {
+        // console.log(products.value)
+        // return {
+        //     name: item.name,
+        //     description: item.description,
+        //     gender : item.gender,
+        //     listSize : item.listSize,
+        //     listColor : item.listColor,
+        //     price : item.price,
+        //     image : item.image,
+        // }})
+    }
+    // filterList.value = products.value.map((item: any) => {
+    //     console.log(products.value)
+    // return {
+    //     name: item.name,
+    //     description: item.description,
+    //     gender : item.gender,
+    //     listSize : item.listSize,
+    //     listColor : item.listColor,
+    //     price : item.price,
+    //     image : item.image,
+    // }})
 
     const filterData = reactive({
         selectedColor: '',
@@ -263,17 +284,18 @@
         else if (filterData.cost == filter ){
             filterData.cost = 0
         }
-        filterList.value = products.value.map((item: any) => {
-        console.log(products.value)
-    return {
-        name: item.name,
-        description: item.description,
-        gender : item.gender,
-        listSize : item.listSize,
-        listColor : item.listColor,
-        price : item.price,
-        image : item.image,
-    }})
+        setList(products)
+        // filterList.value = products.value.map((item: any) => {
+        // console.log(products.value)
+        // return {
+        //     name: item.name,
+        //     description: item.description,
+        //     gender : item.gender,
+        //     listSize : item.listSize,
+        //     listColor : item.listColor,
+        //     price : item.price,
+        //     image : item.image,
+        // }})
     }
 
     function filterSize(event:Event , Size:any){
@@ -302,7 +324,49 @@
         })
         console.log(filter);
         
-        filterList.value = filter.value.map((item: any) => {
+        if (filter !== null) {
+            setList(filter)
+        }
+        // filterList.value = filter.value.map((item: any) => {
+        // return {
+        //     name: item.name,
+        //     description: item.description,
+        //     gender : item.gender,
+        //     listSize : item.listSize,
+        //     listColor : item.listColor,
+        //     price : item.price,
+        //     image : item.image,
+        // }})
+        console.log(filterList.value)
+    }
+
+    const selectGenderCategory = ref({ gender: "All", category: "All" })
+    function chooseGender(genderChoose:string) {
+        selectGenderCategory.value.gender = genderChoose
+        selectGenderCategory.value.category = 'All'
+        getGenderCategory()
+    }
+
+    function selectCategory(category:string) {
+        selectGenderCategory.value.category = category
+        getGenderCategory()
+    }
+
+    async function getGenderCategory() {
+        const { data: products } = await baseFetch<any>("product/gender-category", {
+            method: "POST",
+            body: selectGenderCategory
+        })
+
+        if (products !== null) {
+            setList(products)
+        } else {
+            
+        }
+    }
+
+    function setList(product) {
+        filterList.value = product.value.map((item: any) => {
         return {
             name: item.name,
             description: item.description,
@@ -312,7 +376,6 @@
             price : item.price,
             image : item.image,
         }})
-        console.log(filterList.value)
     }
 
     // watch(filterList, (newFilterList, oldFilterList) => {

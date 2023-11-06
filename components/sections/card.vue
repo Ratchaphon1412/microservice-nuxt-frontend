@@ -28,13 +28,15 @@
             <div class="lg:flex text-lg text-black  mt-2">
               <div class="flex-1 inline-flex ">
                 <span class="text-secondary whitespace-nowrap mr-3">Size</span>
-                <div class="cursor-pointer text-black " v-for="sizeItem in listSize">
-                  <span class="text-lg hover:text-purple-500 p-1 py-0">{{sizeItem}}</span>
-                  </div>
+                <div class="flex" v-if="count_size <= 4">
+                  <div class="cursor-pointer text-black " v-for="sizeItem in listSize">
+                    <span @change="" class=" text-lg hover:text-purple-500 p-1 py-0">{{sizeItem}}</span>
+                    </div>
                 </div>
               </div>
+              </div>
             </div> 
-            <div class="flex-auto justify-evenly">
+            <div class=" flex-auto justify-evenly">
               <div class="flex flex-wrap ">
                 <div class="w-full flex-none text-lg flex items-center text-gray-600">
                   <span class="mr-2 mb-2 text-black bg-[#FFFFFF] px-1 border-white rounded-full">{{gender}}</span>
@@ -43,8 +45,8 @@
                   <h2 class="text-xl mr-auto cursor-pointer text-[#112D4E] hover:text-black ">{{name}}</h2>
                   <div class="flex items-center bg-green-400 text-white text-xs px-2 py-1 ml-3 rounded-lg"> INSTOCK </div>
                 </div>
-                <div>
-                    <p class="text-lg text-gray-500">
+                <div class="truncate max-w-auto">
+                    <p class="my-2 text-xs text-gray-500 ">
                       {{ description }}
                     </p>
                 </div>
@@ -72,7 +74,11 @@ defineProps({
   id: undefined,
 });
 
+function plus_count_size(){
+  count_size++
+}
 
+const count_size = 0;
 defineEmits({
   
 })
