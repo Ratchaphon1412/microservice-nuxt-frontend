@@ -110,7 +110,7 @@
                     <div class="flex justify-between">
                         <p class="text-lg font-bold">Total</p>
                         <div class="">
-                        <p class="mb-1 text-lg font-bold">{{ amout }}฿</p>
+                        <p class="mb-1 text-lg font-bold">{{ amout }} ฿</p>
                         </div>
                     </div>
                     <button class="mt-6 mr-5 w-full rounded-md bg-[#0075FF] py-1.5 font-medium text-blue-50 hover:bg-blue-600">Check out</button>          

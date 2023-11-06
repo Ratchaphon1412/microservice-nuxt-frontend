@@ -262,7 +262,6 @@ async function deleteAccount() {
     return user.value.user.groups[0].name
   }
 
-
   return { register, login ,isLogin, authorize, getUser, logout ,resendEmail, deleteAccount , verifyEmail ,
     getAccessToken , refreshToken,accesstoken,user,refreshtoken 
     ,getRole,getAddress,addressUser,address ,

@@ -9,7 +9,8 @@ export const apiPayment = defineStore('apiPayment',() => {
         return credits.value;
     }
 
-    async function addCredit(nameIn:string,numberIn:string,expiration_monthIn:string,expiration_yearIn:string,cityIn:string,postalIn:string,securityIn:string,){
+    async function addCredit(nameIn:string,numberIn:string,expiration_monthIn:string,expiration_yearIn:string,cityIn:string,postalIn:string
+        ,securityIn:string,customer_token:string){
         let credit = {
             name: nameIn,
             number: numberIn,
@@ -27,7 +28,18 @@ export const apiPayment = defineStore('apiPayment',() => {
             }
         })
         if(data.value){
-        console.log(data)
+            console.log(data.value.token_card)
+            const {addCard} = await paymentFetch(URL + "/api/v1/payment/customer/card/",{
+                method: "PUT",
+                body: JSON.stringify({
+                    "customer_token": customer_token,
+                    "card_token": data.value.token_card,
+                }),
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+            
         }
     }
 
