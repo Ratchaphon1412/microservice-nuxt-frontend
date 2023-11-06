@@ -1,8 +1,24 @@
 <script setup lang="ts">
 definePageMeta({
-  layout: "admin-layout",
-  middleware: ["auth", "admin"],
+  layout: "admin-layout"
 });
+
+const { data: info, error } = await useFetch<any>("http://microservice.payment.ratchaphon1412.co/api/v1/admin/payment/",{
+      headers:{
+          "Accept": "application/json",
+      }
+   });
+
+const {data: receipt } = await useFetch<any>("http://microservice.payment.ratchaphon1412.co/api/v1/admin/payment/receipt/",{
+  headers:{
+          "Accept": "application/json",
+      }
+});
+
+console.log(info.value.balance);
+console.log(receipt.value)
+let balance = info.value.balance / 100
+
 </script>
 
 <template>
@@ -92,9 +108,9 @@ definePageMeta({
               </div>
             </div>
           </div>
-          <div class="flex flex-row justify-between px-6 py-4">
+          <div class="flex flex-row justify-between px-4 py-4">
             <div
-              class="self-center w-14 h-14 rounded-full text-yellow-500 bg-yellow-100 dark:bg-yellow-900 dark:bg-opacity-40 relative text-center"
+              class="self-center w-14 h-14 rounded-full text-yellow-500 bg-yellow-100 relative text-center"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -110,7 +126,7 @@ definePageMeta({
                 ></path>
               </svg>
             </div>
-            <h2 class="self-center text-3xl"><span>$</span>31K</h2>
+            <h2 class="self-center text-3xl">{{ balance }}<span> bath</span></h2>
           </div>
           <div class="px-6 pb-6">
             <a class="hover:text-indigo-500 text-sm" href="#">View more...</a>

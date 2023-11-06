@@ -8,6 +8,8 @@ const { login, authorize, getRole } = auth;
 
 let email = ref("");
 let password = ref("");
+let check_email = ref(false);
+let check_password = ref(false);
 
 async function onSubmit() {
   if (email.value && password.value) {
@@ -22,9 +24,13 @@ async function onSubmit() {
         }
       } else {
         alert("Invalid credentials");
+        check_email.value = true;
+        check_password.value = true;
       }
     } else {
       alert("Invalid credentials");
+      check_email.value = true;
+      check_password.value = true;
     }
   }
 }
@@ -60,7 +66,7 @@ async function onSubmit() {
                 >Email</label
               >
             </div>
-            <p id="outlined_error_help" class="mt-2 text-xs text-red-600">
+            <p v-if="check_email" id="outlined_error_help" class="mt-2 text-xs text-red-600">
               <span class="font-medium">Oh, snapp!</span> Some error message.
             </p>
           </div>
@@ -80,7 +86,7 @@ async function onSubmit() {
                 >password</label
               >
             </div>
-            <p id="outlined_error_help" class="mt-2 text-xs text-red-600">
+            <p v-if="check_password" id="outlined_error_help" class="mt-2 text-xs text-red-600">
               <span class="font-medium">Oh, snapp!</span> Some error message.
             </p>
           </div>

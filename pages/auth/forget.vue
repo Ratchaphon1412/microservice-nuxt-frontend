@@ -32,7 +32,7 @@ let error_email = false;
         </div>
 
         <div class="hidden basis-1/2 md:flex items-center md:visible">
-            <img src="../assets/css/images/backgroundResgister.png" alt="" class="max-h-screen w-full">
+            <img src="/images/backgroundResgister.png" alt="" class="max-h-screen w-full">
         </div>
     </div>
 </template>
