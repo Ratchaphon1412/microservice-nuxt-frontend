@@ -56,6 +56,11 @@
   </main>
 </template>
 <script setup lang="ts">
-const { data: products } = await baseFetch<any>("product/format", {})
+const { data: products } = await baseFetch<any>("product/format", {
+  method: 'GET',
+  headers:{
+    'Content-Type': 'application/json'
+  }
+})
 console.log(products.value)
 </script>
