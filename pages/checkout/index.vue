@@ -58,8 +58,8 @@
                 </ul>
     
             <!-- Sub total -->
-            <div class="md:w-1/3 h-full">
-                <details class="sm:mt-0 mt-5">
+            <div class="md:w-1/3 h-full">    
+                <!-- <details class="sm:mt-0 mt-5">
                     <summary class="p-3 rounded-lg cursor-pointer shadow bg-[#0074FF]">
                         <span class="font-bold text-[#112D4E]">Coupon</span>
                     </summary>
@@ -81,7 +81,7 @@
                             </div>
                         </div>
                     </div>
-                </details>
+                </details> -->
 
                 <details class="sm:mt-0 ">
                     <summary class="p-3 mt-5 rounded-lg cursor-pointer shadow bg-[#0074FF]">
@@ -136,8 +136,18 @@
                         </button>
                     </div>
                     <hr class="my-4"/>
+                    <div v-if="user_address.length === 0">
+                        <p class="text-red-500">Please enter your address.</p>
+                    </div>
+                    <div v-else>
+                        <select @click="selectAddress(addr)" v-model="address" v-for="addr in user_address" name="" id="">
+                            <option :value="addr.detail_address">
+                                {{ addr.detail_address }} {{ addr.country }}
+                            </option>
+                        </select>
+                    </div>
                     <p class="">
-                        I am a boy I am a boy I am a boy I am a boy
+                        {{ address.detail_address }}, {{ address.province }}, {{ address.country }}, {{ address.zip_code }}
                     </p>
                 </div>
                 <div class="p-6">
@@ -152,7 +162,7 @@
                         <p class="mb-1 text-lg font-bold">{{ amout }} ฿</p>
                         </div>
                     </div>
-                    <button @click.pervent="submit()" class="mt-6 mr-5 w-full rounded-md bg-[#0075FF] py-1.5 font-medium text-blue-50 hover:bg-blue-600">Check out</button>          
+                    <button @click="confirmBuy()" type="button" class="mt-6 mr-5 w-full rounded-md bg-[#0075FF] py-1.5 font-medium text-blue-50 hover:bg-blue-600">Check out</button>          
                 </div>
             </div>
           </div>
@@ -167,7 +177,7 @@
     import Swal from 'sweetalert2'
 
     const auth = authStore();
-    const { carts , remove , payment , clear } = apiCheckout();
+    const { carts , remove , payment , clear , reduceStock } = apiCheckout();
     let { getListCard , purchase } = apiPayment();
 
     let creditList = await getListCard(auth.user.user.customer_omise_id);
@@ -176,31 +186,55 @@
     // console.log(amout)
 
     const amout = payment();
-    let selected = ref("");
+    console.log(amout);
+    const auth = authStore();
+    console.log(auth.user.user.customer_omise_id)
+
     function selectCard(card:any){
         selected = card;
         // console.log(selected)
         // console.log(card.name)
     }
-
-    async function submit(){
+    
+    function buy(){
+        if (carts.length === 0) {
+            Swal.fire({
+                title: "You don't have any product in cart.",
+                confirmButtonText: 'OK'
+            })
+        } else {
+            if (address.value === "") {
+                Swal.fire({
+                    title: "Please enter your address!",
+                    confirmButtonText: 'OK'
+                })
+            } else {
+                if(auth.user) {
+                    paymentProduct(auth.user.user.customer_omise_id,);
+                    reduceStock(address.value)
+                }
+            }
+        }
+    }
+    function confirmBuy() {
         Swal.fire({
-            confirmButtonText: 'Purchase',
+            title: 'Checkout?',
             icon: 'question',
             iconHtml: '?',
+            confirmButtonText: 'Buy',
             cancelButtonText: 'Cancel',
             showCancelButton: true,
             showCloseButton: true,
-        }).then(async (result) => {
-            if(result.isConfirmed){
+        }).then( async (result) => {
+            if (result.isConfirmed) {
+                buy();
                 await purchase(selected.id,auth.user.user.customer_omise_id,amout);
                 clear();
                 navigateTo("/")
             }
         })
-        // console.log(selected.id,auth.user.user.customer_omise_id,amout)
-
     }
+
 
     function removeOrder(item:any) {
         remove(item);
