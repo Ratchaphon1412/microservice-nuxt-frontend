@@ -110,11 +110,13 @@ export const apiPayment = defineStore('apiPayment',() => {
                 'Content-Type': 'application/json',
             }
         })
-        if(data != null){
+        if(data.value != null){
             console.log(data)
+            return data.value;
         }
         else{
             console.log(error)
+            return data.value;
         }
 
 

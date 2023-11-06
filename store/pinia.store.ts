@@ -110,23 +110,12 @@ export const apiCheckout = defineStore('apiCheckout', () => {
             method: "POST",
             body: formData
         })
-
+        console.log(data)
         if (data.value !== null) {
-            Swal.fire({
-                confirmButtonText: 'OK',
-                icon : `success`,
-                title : "success"
-            }).then((result) => {
-                if(result.isConfirmed){
-                    navigateTo("/")
-                }
-            })
-            console.log(data.value)
+            return true;
         } else {
-            Swal.fire({
-                title: "Error!",
-                confirmButtonText: 'OK'
-            })
+            
+            return false;
         }
         // let user_id
         // const {data: }
