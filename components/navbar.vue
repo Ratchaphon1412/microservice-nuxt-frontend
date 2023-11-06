@@ -33,10 +33,10 @@
         <NuxtLink 
           to="/cart"
           type="button"
-          class="text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none py-2 px-4 focus:ring-blue-300 font-medium rounded-lg text-sm text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 space-x-2"
+          class="text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none py-2 px-4 focus:ring-blue-300 font-medium rounded-lg text-center mr-5 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 space-x-2"
         >
           <i class="bi bi-bag"></i>
-          <span> Cart </span>
+          <span class="text-center"> Cart </span>
         </NuxtLink>
         <NuxtLink v-if="isLogin()" @click="whenLogout()"
           to="/"

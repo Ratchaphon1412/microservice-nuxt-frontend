@@ -5,7 +5,7 @@
 
       
     <div class="carousel carousel-center p-4 w-full space-x-4 bg-neutral">
-        <div class="carousel-item" v-for="product in products">
+        <div class="carousel-item" v-for="(product, index) in products.slice(0, 15)" :key="index">
             <SectionsCard class="w-80 "
             :id="product.id" 
             :name="product.name" 
