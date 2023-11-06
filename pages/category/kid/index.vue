@@ -27,6 +27,7 @@
                 </ul> 
            </div>
            
+           
           <SectionsCarousel/>
 
            <!-- Filter -->
