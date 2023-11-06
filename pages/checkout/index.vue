@@ -58,8 +58,8 @@
                 </ul>
     
             <!-- Sub total -->
-            <div class="md:w-1/3 h-full">
-                <details class="sm:mt-0 mt-5">
+            <div class="md:w-1/3 h-full">    
+                <!-- <details class="sm:mt-0 mt-5">
                     <summary class="p-3 rounded-lg cursor-pointer shadow bg-[#0074FF]">
                         <span class="font-bold text-[#112D4E]">Coupon</span>
                     </summary>
@@ -81,7 +81,7 @@
                             </div>
                         </div>
                     </div>
-                </details>
+                </details> -->
     
                 <div class="rounded-lg bg-white p-6 mb-5 shadow-md">
                     <div class="flex items-center">
@@ -93,18 +93,24 @@
                         </button>
                     </div>
                     <hr class="my-4"/>
+                    <div v-if="user_address.length === 0">
+                        <p class="text-red-500">Please enter your address.</p>
+                    </div>
+                    <div v-else>
+                        <select @click="selectAddress(addr)" v-model="address" v-for="addr in user_address" name="" id="">
+                            <option :value="addr.detail_address">
+                                {{ addr.detail_address }} {{ addr.country }}
+                            </option>
+                        </select>
+                    </div>
                     <p class="">
-                        I am a boy I am a boy I am a boy I am a boy
+                        {{ address.detail_address }}, {{ address.province }}, {{ address.country }}, {{ address.zip_code }}
                     </p>
                 </div>
                 <div class="p-6">
                     <div class="mb-2 flex justify-between">
                         <p class="text-gray-700">Subtotal</p>
                         <p class="text-gray-700">{{ amout }}฿</p>
-                    </div>
-                    <div class="flex justify-between">
-                        <p class="text-gray-700">Discount</p>
-                        <p class="text-gray-700">$4.99</p>
                     </div>
                     <hr class="my-4" />
                     <div class="flex justify-between">
@@ -113,7 +119,7 @@
                         <p class="mb-1 text-lg font-bold">{{ amout }} ฿</p>
                         </div>
                     </div>
-                    <button class="mt-6 mr-5 w-full rounded-md bg-[#0075FF] py-1.5 font-medium text-blue-50 hover:bg-blue-600">Check out</button>          
+                    <button @click="confirmBuy()" type="button" class="mt-6 mr-5 w-full rounded-md bg-[#0075FF] py-1.5 font-medium text-blue-50 hover:bg-blue-600">Check out</button>          
                 </div>
             </div>
           </div>
@@ -124,12 +130,12 @@
     <script setup lang="ts">
 
 
-
     import { authStore } from '~/store/auth.store'
     import { apiCheckout } from '~/store/pinia.store'
-    import { apiPayment } from '~/store/pinia.store'
+    import { apiPayment } from '~/store/payment.store'
+    import Swal from 'sweetalert2';
 
-    const { carts , remove , payment } = apiCheckout();
+    const { carts , remove , payment, reduceStock } = apiCheckout();
     const { paymentProduct } = apiPayment();
 
     const amout = payment();
@@ -137,13 +143,50 @@
     const auth = authStore();
     console.log(auth.user.user.customer_omise_id)
 
+    const user_address = auth.address.address
+    const address = ref("")
+    
     function buy(){
-        if(auth.user){
-            paymentProduct(auth.user.user.customer_omise_id,);
+        if (carts.length === 0) {
+            Swal.fire({
+                title: "You don't have any product in cart.",
+                confirmButtonText: 'OK'
+            })
+        } else {
+            if (address.value === "") {
+                Swal.fire({
+                    title: "Please enter your address!",
+                    confirmButtonText: 'OK'
+                })
+            } else {
+                if(auth.user) {
+                    paymentProduct(auth.user.user.customer_omise_id,);
+                    reduceStock(address.value)
+                }
+            }
         }
-        
     }
 
+    function confirmBuy() {
+        Swal.fire({
+            title: 'Checkout?',
+            icon: 'question',
+            iconHtml: '?',
+            confirmButtonText: 'Buy',
+            cancelButtonText: 'Cancel',
+            showCancelButton: true,
+            showCloseButton: true,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                buy();
+            }
+        })
+    }
+
+    function selectAddress(selectedAddress:any) {
+        address.value = selectedAddress
+        console.log(address.value)
+    }
 
 
     function removeOrder(item:any) {
