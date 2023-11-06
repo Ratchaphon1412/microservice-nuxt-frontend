@@ -19,7 +19,7 @@
             </div>
          </div>     
  <!-- start -->
- <div v-for="index in creditList.listCard" :key="index" class="grid grid-cols-6 gap-6 w-full h-96">
+ <div v-if="creditList.listCard.length !== 0" v-for="index in creditList.listCard" :key="index" class="grid grid-cols-6 gap-6 w-full h-96">
     <div class="col-span-1"></div>
             <div class="col-span-3 w-5/6 h-3/4 m-auto bg-red-100 rounded-xl relative text-white shadow-2xl transition-transform transform hover:scale-110">
                 

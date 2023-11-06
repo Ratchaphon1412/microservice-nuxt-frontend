@@ -134,7 +134,7 @@
                               /> -->
                           </DisclosureButton>
                           <DisclosurePanel class="px-4 pt-4 pb-2 text-sm text-gray-500">
-                            <span class="text-xl text-gray-900">{{ product.Materials }}</span>
+                            <span class="text-xl text-gray-900">{{ product.material }}</span>
                               <!-- <span v-for="Materials in product.Materials" :key="Materials" class="text-black">
                                   <p class="text-lg text-gray-900">{{ Materials }}</p>
                               </span> -->
@@ -357,7 +357,7 @@ const route = useRoute();
 const colorChoose = ref();
 const { data: product, error } = await baseFetch<any>(`product/${route.params.id}`, {})
 const { data: products } = await baseFetch<any>("product/format", {})
-console.log(product.value.id)
+console.log(product.value)
 
 const previewImage = useState<string>(undefined)
 previewImage.value = product.value.image_products[0].image_path
