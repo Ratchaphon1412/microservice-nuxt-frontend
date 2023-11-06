@@ -7,11 +7,11 @@
                
                <ul v-for="gender in AllGender" class="border-2 border-gray-900 hidden text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg shadow sm:flex dark:divide-gray-700 dark:text-gray-400">
                     
-                    <li class="w-full bg-gray-800" >
-                        <button @click="chooseGender(gender)" type="button" class="relative inline-flex items-center justify-center w-full h-full overflow-hidden font-mono font-medium tracking-tighter text-white  rounded-l-lg border-white group w-56 h-56 text-black hover:text-white">
-                            
-                            <span class="relative  text-white text-xl">{{gender}}</span>
-               
+                    <li class="w-full " >
+                        <button @click="chooseGender(gender)" type="button" class="relative inline-flex items-center justify-center w-full h-full overflow-hidden font-mono font-medium tracking-tighter text-black  rounded-l-lg border-white hover:text-white group w-56 h-56 text-black hover:text-white">
+                            <li class="w-full">
+                            <span class="relative text-black text-xl">{{gender}}</span>
+                            </li>
                         </button>
                     </li>
                     <!-- <li class="w-full">
