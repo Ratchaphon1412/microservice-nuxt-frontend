@@ -21,6 +21,14 @@ export const apiPayment = defineStore('apiPayment',() => {
         credits.value.push(credit);
     }
 
+    function count(){
+        return credits.value.length;
+    }
+
+    function updateCredit(item:any){
+        
+    }
+
 
     return { credits ,get, addCredit }
 },{
