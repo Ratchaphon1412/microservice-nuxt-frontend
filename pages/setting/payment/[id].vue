@@ -2,7 +2,7 @@
     <div class="animate-fade-down flex-col w-full p-2">
       <!-- title1 -->
       <div class="flex-shrink max-w-full px-4 w-full">
-        <p class="text-3xl font-poppin mt-3 mb-5">Create credit</p>
+        <p class="text-3xl font-poppin mt-3 mb-5">Update credit</p>
       </div>
       <!-- start -->
   
@@ -23,6 +23,7 @@
                   name="name"
                   id="name"
                   v-model="name"
+
                 />
               </div>
               <div class="col-span-6 sm:col-span-3">
@@ -124,7 +125,7 @@
               <div
                 class="col-span-6 sm:col-span-2 flex justify-end"
               >
-                <button type="submit" class="btn btn-outline btn-accent w-full">Accent</button>
+                <button type="submit" class="btn btn-outline btn-accent w-full">Save</button>
               </div>
   
               <div class="col-span-6 mt-4">
@@ -149,20 +150,26 @@
   
 <script setup lang="ts">
     import { apiPayment } from '~/store/payment.store'
+    const route = useRoute();
+    console.log(route.params.id);
+    const id = route.params.id;
     
-    let { credits, addCredit } = apiPayment();
+    let { credits, updateCredit, get } = apiPayment();
+    let oldCredit = get()[id]
+    console.log(oldCredit)
+    
 
-    let name = ref("");
-    let number = ref("");
-    let expiration_month = ref("");
-    let expiration_year = ref("");
-    let city = ref("");
-    let postal = ref("");
-    let security = ref("")
+    let name = ref(oldCredit.name);
+    let number = ref(oldCredit.number);
+    let expiration_month = ref(oldCredit.expiration_month);
+    let expiration_year = ref(oldCredit.expiration_year);
+    let city = ref(oldCredit.city);
+    let postal = ref(oldCredit.postal);
+    let security = ref(oldCredit.security);
 
     function save() {
         if(name.value != "" && number.value != "" && expiration_month.value != "" && expiration_year.value != "" && city.value != "" && postal.value != "" && security.value != ""){
-            addCredit(name.value,number.value,expiration_month.value,expiration_year.value,city.value,postal.value,security.value);
+           updateCredit(oldCredit,name.value,number.value,expiration_month.value,expiration_year.value,city.value,postal.value,security.value);
         }
     }
 </script>
