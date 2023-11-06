@@ -129,7 +129,7 @@
     import { apiCheckout } from '~/store/pinia.store'
     import { apiPayment } from '~/store/pinia.store'
 
-    const { carts, remove , payment , } = apiCheckout();
+    const { carts , remove , payment } = apiCheckout();
     const { paymentProduct } = apiPayment();
 
     const amout = payment();
