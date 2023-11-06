@@ -186,7 +186,9 @@
     // console.log(amout)
 
     const amout = payment();
+    const passingAmount = `${amout}00`
     console.log(amout);
+    console.log(passingAmount);
     const address = ref("");
     const user_address = ref(auth.address.address);
     console.log(user_address.value)
@@ -207,7 +209,7 @@
             } else {
                 if(auth.user) {
                     const address_str = address.value.detail_address + ", " + address.value.province + ", " + address.value.country + ", " + address.value.zip_code
-                    let check = await purchase(selected.id,auth.user.user.customer_omise_id,amout);
+                    let check = await purchase(selected.id,auth.user.user.customer_omise_id,passingAmount);
                     let check2 = await reduceStock(address_str)
                     // console.log(check,check2)
                     if(check != null && check2){
@@ -277,4 +279,5 @@
             color: ['#f6cda8', '#d89d94', '#dd6b6c', '#875d71', '#5b5b5b'] 
         },
     ])
+    
     </script>
