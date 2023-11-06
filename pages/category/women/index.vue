@@ -3,21 +3,22 @@
        <!-- content card -->
        <nav>
            <h1 class="p-6 text-6xl font-bold">{{ selectGenderCategory.gender }}</h1>
-           <div class="p-6">
+           <!-- <div class="p-6">
                
                <ul v-for="gender in AllGender" class="border-2 border-gray-900 hidden text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg shadow sm:flex dark:divide-gray-700 dark:text-gray-400">
                     
                     <li class="w-full " >
-                        <button @click="chooseGender(gender)" type="button" class="relative inline-flex items-center justify-center w-full h-full overflow-hidden font-mono font-medium tracking-tighter text-black  rounded-l-lg border-white hover:text-white group w-56 h-56 text-black hover:text-white">
+                        <button @click="chooseGender(gender)" type="button" class="relative inline-flex items-center justify-center w-full h-full overflow-hidden font-mono font-medium tracking-tighter text-white bg-white border-white border-2 group group-hover:w-56 group-hover:h-56 text-black hover:text-white">
                             <li class="w-full">
-                            <span class="relative text-black text-xl">{{gender}}</span>
+                                <span class="absolute w-0 h-0 transition-all duration-500 ease-out bg-gray-800 rounded-full group-hover:w-full group-hover:h-96"></span>
+                            <span class="relative text-black group-hover:text-white text-xl">{{gender}}</span>
                             </li>
                         </button>
                     </li>
-                    <!-- <li class="w-full">
-                        <button @click="chooseGender('Men')" type="button" class="relative inline-flex items-center justify-center w-full h-full overflow-hidden font-mono font-medium tracking-tighter text-white bg-white border-white border-2 group group-hover:w-56 group-hover:h-56 text-black hover:text-white">
+                    <li class="w-full">
+                        <button @click="chooseGender(gender)" type="button" class="relative inline-flex items-center justify-center w-full h-full overflow-hidden font-mono font-medium tracking-tighter text-white bg-white border-white border-2 group group-hover:w-56 group-hover:h-56 text-black hover:text-white">
                             <span class="absolute w-0 h-0 transition-all duration-500 ease-out bg-gray-800 rounded-full group-hover:w-full group-hover:h-96"></span>
-                            <span class="relative text-black group-hover:text-white text-xl">Men</span>
+                            <span class="relative text-black group-hover:text-white text-xl">{{gender}}</span>
                         </button>                    
                     </li>
                     <li class="w-full">
@@ -25,9 +26,33 @@
                             <span class="absolute w-0 h-0 transition-all duration-500 ease-out bg-gray-800 rounded-full group-hover:w-full group-hover:h-96"></span>
                             <span class="relative text-black group-hover:text-white text-xl">Kid</span>
                         </button>   
-                    </li> -->
+                    </li>
                 </ul> 
-           </div>
+           </div> -->
+           <div class="p-6">
+                
+                <ul class="hidden text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg shadow sm:flex dark:divide-gray-700 dark:text-gray-400">
+                    
+                    <li class="w-full" >
+                        <button @click="chooseGender('Women')" class="relative inline-flex items-center justify-center w-full h-full overflow-hidden font-mono font-medium tracking-tighter text-white bg-white rounded-l-lg border-white border-2 group group-hover:w-56 group-hover:h-56 text-black hover:text-white">
+                            <span class="absolute w-0 h-0 transition-all duration-500 ease-out bg-gray-800 rounded-full group-hover:w-full group-hover:h-96"></span>
+                            <span class="relative text-black group-hover:text-white text-xl">Women</span>
+                        </button>
+                    </li>
+                    <li class="w-full">
+                        <button @click="chooseGender('Men')" class="relative inline-flex items-center justify-center w-full h-full overflow-hidden font-mono font-medium tracking-tighter text-white bg-white border-white border-2 group group-hover:w-56 group-hover:h-56 text-black hover:text-white">
+                            <span class="absolute w-0 h-0 transition-all duration-500 ease-out bg-gray-800 rounded-full group-hover:w-full group-hover:h-96"></span>
+                            <span class="relative text-black group-hover:text-white text-xl">Men</span>
+                        </button>                    
+                    </li>
+                    <li class="w-full">
+                        <button @click="chooseGender('Kids')" class="relative inline-flex items-center justify-center w-full h-12 overflow-hidden font-mono font-medium tracking-tighter text-white bg-white rounded-r-lg border-white border-2 group group-hover:w-56 group-hover:h-56 text-black hover:text-white">
+                            <span class="absolute w-0 h-0 transition-all duration-500 ease-out bg-gray-800 rounded-full group-hover:w-full group-hover:h-96"></span>
+                            <span class="relative text-black group-hover:text-white text-xl">Kid</span>
+                        </button>   
+                    </li>
+                </ul> 
+            </div>
            
            <SectionsCarousel/>
            <!-- Filter -->

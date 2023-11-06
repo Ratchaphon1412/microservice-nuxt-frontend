@@ -92,7 +92,35 @@
                         <div v-for="index in creditList.listCard" >
                             <div class="flex justify-between items-center p-5 bg-white rounded-lg shadow-md">
                                 <div class="">
-                                    <div @click.prevent="selectCard(index)" class="col-span-3 w-5/6 h-3/4 m-auto bg-red-100 rounded-xl relative text-white shadow-2xl transition-transform transform hover:scale-110">
+                                    <div @click.prevent="selectCard(index)" v-if="index == selected " class="col-span-3 w-5/6 h-3/4 m-auto bg-red-100 rounded-xl relative text-white shadow-2xl transition-transform transform hover:scale-110">
+                                        <ul>
+                                            <li>
+                                                <img class="relative object-cover w-full h-full rounded-xl" src="https://i.imgur.com/Zi6v09P.png">
+                                                <div class="w-full px-8 absolute top-8">
+                                                    <div class="flex justify-between">
+                                                        <div class="">
+                                                            <p class="font-light">
+                                                                Name
+                                                            </p>
+                                                            <p name="name" id="name" class="font-medium tracking-widest">
+                                                                {{ index.name }}
+                                                            </p>
+                                                        </div>
+                                                        <img class="w-14 h-14" src="https://i.imgur.com/bbPHJVe.png"/>
+                                                    </div>
+                                                    <div class="pt-1">
+                                                        <p class="font-light">
+                                                            Card Number
+                                                        </p>
+                                                        <p class="font-medium tracking-more-wider">
+                                                            {{ index.id }}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>    
+                                    </div>
+                                    <div @click.prevent="selectCard(index)" v-else class="col-span-3 w-5/6 h-3/4 m-auto bg-red-100 rounded-xl relative text-white shadow-2xl transition-transform transform hover:scale-110">
                                         <ul>
                                             <li>
                                                 <img class="relative object-cover w-full h-full rounded-xl" src="https://i.imgur.com/Zi6v09P.png">
