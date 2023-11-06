@@ -1,3 +1,4 @@
+import Swal from "sweetalert2";
 import baseFetch from "../composables/baseFetch"
 
 export const apiStore = defineStore('apiStore',() => {
@@ -70,13 +71,68 @@ export const apiCheckout = defineStore('apiCheckout', () => {
         carts.value = arraytmp;
         console.log(carts)
     }
+    function clear(){
+        carts.value = [];
+    }
 
     function add(item:any){
         console.log(item)
         carts.value.push(item);
     }
 
-    return { carts, payment, remove, add, get, length, getCart }
+    // return { carts, clear, payment, remove, add, get, length, getCart }
+    async function reduceStock(address_str:string) {
+        const product = []
+        for (let i=0; i < carts.value.length; i++) {
+            product.push({
+                id: carts.value[i].id,
+                name: carts.value[i].name,
+                price: carts.value[i].price,
+                color: carts.value[i].color,
+                size: carts.value[i].size,
+                quantity: carts.value[i].quantity,
+            })
+            console.log(product)
+        //     product_list.values[i].name = carts.value[i].name
+        //     console.log(carts.value)
+        }
+        const auth = useAuthStore()
+        console.log(address_str)
+        const formData = reactive({
+            user_id: auth.user.user.id,
+            fullname: auth.user.user.fullname,
+            address: address_str,
+            product_list: product
+        })
+        console.log(formData)
+        
+        const { data } = await baseFetch<any>("invoice", {
+            method: "POST",
+            body: formData
+        })
+
+        if (data.value !== null) {
+            Swal.fire({
+                confirmButtonText: 'OK',
+                icon : `success`,
+                title : "success"
+            }).then((result) => {
+                if(result.isConfirmed){
+                    navigateTo("/")
+                }
+            })
+            console.log(data.value)
+        } else {
+            Swal.fire({
+                title: "Error!",
+                confirmButtonText: 'OK'
+            })
+        }
+        // let user_id
+        // const {data: }
+    }
+
+    return { carts, payment, remove, add, get, length, getCart, reduceStock ,clear}
 },{
     persist: true
 })

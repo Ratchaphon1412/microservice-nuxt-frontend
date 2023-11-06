@@ -235,9 +235,6 @@ async function deleteAccount() {
     }
   }
 
-  async function addCard(){
-
-  }
 
   function getUser(){
     return user.value
@@ -261,7 +258,6 @@ async function deleteAccount() {
   function getRole(){
     return user.value.user.groups[0].name
   }
-
 
   return { register, login ,isLogin, authorize, getUser, logout ,resendEmail, deleteAccount , verifyEmail ,
     getAccessToken , refreshToken,accesstoken,user,refreshtoken 

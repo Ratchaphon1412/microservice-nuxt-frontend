@@ -148,11 +148,15 @@
   </template>
   
 <script setup lang="ts">
-    import { apiPayment } from '~/store/payment.store'
+    import { apiPayment } from '@/store/payment.store'
     import Swal from 'sweetalert2'
+    import { authStore } from "@/store/auth.store";
 
-    
     let { credits, addCredit } = apiPayment();
+    const auth = authStore();
+    console.log(auth.user.user.customer_omise_id)
+    // console.log(auth.user.user.customer_omise_id)
+
 
     let name = ref("");
     let number = ref("");
@@ -164,8 +168,17 @@
 
     async function submit() {
         if(name.value != "" && number.value != "" && expiration_month.value != "" && expiration_year.value != "" && city.value != "" && postal.value != "" && security.value != ""){
-            await addCredit(name.value,number.value,expiration_month.value,expiration_year.value,city.value,postal.value,security.value);
-        }
+            Swal.fire({
+            confirmButtonText: 'OK',
+            icon : `success`,
+            title : "success"
+        }).then(async (result) => {
+            if(result.isConfirmed){
+              await addCredit(name.value,number.value,expiration_month.value,expiration_year.value,city.value,postal.value,security.value,auth.user.user.customer_omise_id);
+              navigateTo("/setting/payment/creditCard")
+            }
+        })
+          }
         else{
             Swal.fire({
             confirmButtonText: 'OK',
@@ -175,6 +188,6 @@
         }
     }
     function back(){
-        navigateTo("/setting")
+        navigateTo("/setting/payment/creditCard")
     }
 </script>

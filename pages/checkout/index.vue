@@ -12,7 +12,7 @@
                 <ul class="h-screen rounded-lg md:w-2/3 p-5 bg-[#DBE2EF] sm:mr-5 overflow-auto">
                     <!--Order Item-->
                     <li class="w-full sm:h-52 items-center justify-between mb-6 rounded-lg bg-white p-6 shadow-md sm:flex"
-                        v-for="item in carts" :key="item.id">
+                        v-if="carts!=null" v-for="item in carts" :key="item.id">
                         <div class="flex justify-center items-center m-5">
                             <!-- <input class="w-7 h-7 mr-5 rounded-lg border-2 border-[#112D4E] "
                                 type="checkbox" v-model="item.isOrder" :value="item"/> -->
@@ -58,8 +58,8 @@
                 </ul>
     
             <!-- Sub total -->
-            <div class="md:w-1/3 h-full">
-                <details class="sm:mt-0 mt-5">
+            <div class="md:w-1/3 h-full">    
+                <!-- <details class="sm:mt-0 mt-5">
                     <summary class="p-3 rounded-lg cursor-pointer shadow bg-[#0074FF]">
                         <span class="font-bold text-[#112D4E]">Coupon</span>
                     </summary>
@@ -81,9 +81,52 @@
                             </div>
                         </div>
                     </div>
+                </details> -->
+
+                <details class="sm:mt-0 ">
+                    <summary class="p-3 mt-5 rounded-lg cursor-pointer shadow bg-[#0074FF]">
+                        <span class="font-bold text-[#112D4E]">Your Card</span>
+                    </summary>
+                    <div class="rounded-lg p-3 mt-3">
+                        <hr class="my-4"/>
+                        <div v-for="index in creditList.listCard" >
+                            <div class="flex justify-between items-center p-5 bg-white rounded-lg shadow-md">
+                                <div class="">
+                                    <div @click.prevent="selectCard(index)" class="col-span-3 w-5/6 h-3/4 m-auto bg-red-100 rounded-xl relative text-white shadow-2xl transition-transform transform hover:scale-110">
+                                        <ul>
+                                            <li>
+                                                <img class="relative object-cover w-full h-full rounded-xl" src="https://i.imgur.com/Zi6v09P.png">
+                                                <div class="w-full px-8 absolute top-8">
+                                                    <div class="flex justify-between">
+                                                        <div class="">
+                                                            <p class="font-light">
+                                                                Name
+                                                            </p>
+                                                            <p name="name" id="name" class="font-medium tracking-widest">
+                                                                {{ index.name }}
+                                                            </p>
+                                                        </div>
+                                                        <img class="w-14 h-14" src="https://i.imgur.com/bbPHJVe.png"/>
+                                                    </div>
+                                                    <div class="pt-1">
+                                                        <p class="font-light">
+                                                            Card Number
+                                                        </p>
+                                                        <p class="font-medium tracking-more-wider">
+                                                            {{ index.id }}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>    
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </details>
     
-                <div class="rounded-lg bg-white p-6 mb-5 shadow-md">
+                <div class="rounded-lg mt-5 bg-white p-6 mb-5 shadow-md">
                     <div class="flex items-center">
                         <p class="text-lg text-[#0074FF] font-bold mr-2">Address</p>
                         <button>
@@ -93,27 +136,33 @@
                         </button>
                     </div>
                     <hr class="my-4"/>
-                    <p class="">
-                        I am a boy I am a boy I am a boy I am a boy
+                    <div v-if="user_address.value != null">
+                        <p class="text-red-500">Please enter your address.</p>
+                    </div>
+                    <div v-else>
+                        <select @click="selectAddress(addr)" v-model="address" v-for="addr in user_address" name="" id="">
+                            <option :value="addr.detail_address">
+                                {{ addr.detail_address }} {{ addr.country }}
+                            </option>
+                        </select>
+                    </div>
+                    <p class="" v-if="address != ''">
+                        {{ address.detail_address }}, {{ address.province }}, {{ address.country }}, {{ address.zip_code }}
                     </p>
                 </div>
                 <div class="p-6">
                     <div class="mb-2 flex justify-between">
                         <p class="text-gray-700">Subtotal</p>
-                        <p class="text-gray-700">{{ amout }}฿</p>
-                    </div>
-                    <div class="flex justify-between">
-                        <p class="text-gray-700">Discount</p>
-                        <p class="text-gray-700">$4.99</p>
+                        <p class="text-gray-700">{{ amout }} ฿</p>
                     </div>
                     <hr class="my-4" />
                     <div class="flex justify-between">
                         <p class="text-lg font-bold">Total</p>
                         <div class="">
-                        <p class="mb-1 text-lg font-bold">{{ amout }}฿</p>
+                        <p class="mb-1 text-lg font-bold">{{ amout }} ฿</p>
                         </div>
                     </div>
-                    <button class="mt-6 mr-5 w-full rounded-md bg-[#0075FF] py-1.5 font-medium text-blue-50 hover:bg-blue-600">Check out</button>          
+                    <button @click="confirmBuy()" type="button" class="mt-6 mr-5 w-full rounded-md bg-[#0075FF] py-1.5 font-medium text-blue-50 hover:bg-blue-600">Check out</button>          
                 </div>
             </div>
           </div>
@@ -122,29 +171,74 @@
     </template>
     
     <script setup lang="ts">
+    import { authStore } from '@/store/auth.store'
+    import { apiCheckout } from '@/store/pinia.store'
+    import { apiPayment } from '~/store/payment.store';
+    import Swal from 'sweetalert2'
 
+    const auth = authStore();
+    const { carts , remove , payment , clear , reduceStock } = apiCheckout();
+    let { getListCard , purchase } = apiPayment();
 
-
-    import { authStore } from '~/store/auth.store'
-    import { apiCheckout } from '~/store/pinia.store'
-    import { apiPayment } from '~/store/pinia.store'
-
-    const { carts , remove , payment } = apiCheckout();
-    const { paymentProduct } = apiPayment();
+    let creditList = await getListCard(auth.user.user.customer_omise_id);
+    console.log(creditList)
+    // console.log(auth.user.user.customer_omise_id)
+    // console.log(amout)
 
     const amout = payment();
     console.log(amout);
-    const auth = authStore();
-    console.log(auth.user.user.customer_omise_id)
+    const address = ref("");
+    const user_address = ref(auth.address.address);
+    console.log(user_address.value)
+    let selected = "";
 
-    function buy(){
-        if(auth.user){
-            paymentProduct(auth.user.user.customer_omise_id,);
+    async function buy(){
+        if (carts.length === 0) {
+            Swal.fire({
+                title: "You don't have any product in cart.",
+                confirmButtonText: 'OK'
+            })
+        } else {
+            if (address.value === "") {
+                Swal.fire({
+                    title: "Please enter your address!",
+                    confirmButtonText: 'OK'
+                })
+            } else {
+                if(auth.user) {
+                    const address_str = address.value.detail_address + ", " + address.value.province + ", " + address.value.country + ", " + address.value.zip_code
+                    await purchase(selected.id,auth.user.user.customer_omise_id,amout);
+                    reduceStock(address_str)
+                    clear();
+                }
+            }
         }
-        
+    }
+    function confirmBuy() {
+        Swal.fire({
+            title: 'Checkout?',
+            icon: 'question',
+            iconHtml: '?',
+            confirmButtonText: 'Buy',
+            cancelButtonText: 'Cancel',
+            showCancelButton: true,
+            showCloseButton: true,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                buy();
+            }
+        })
     }
 
+    function selectAddress(selectedAddress:any) {
+        address.value = selectedAddress
+        console.log(address.value)
+    }
 
+    function selectCard(selectedCard:any) {
+        selected = selectedCard
+        console.log(selected)
+    }
 
     function removeOrder(item:any) {
         remove(item);
