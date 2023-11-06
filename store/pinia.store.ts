@@ -120,7 +120,6 @@ export const apiCheckout = defineStore('apiCheckout', () => {
         // let user_id
         // const {data: }
     }
-
     return { carts, payment, remove, add, get, length, getCart, reduceStock ,clear}
 },{
     persist: true
