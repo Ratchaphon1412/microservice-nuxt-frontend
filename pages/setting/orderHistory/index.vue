@@ -71,7 +71,7 @@
   import { authStore } from '~/store/auth.store';
   import Swal from 'sweetalert2'
   const auth = authStore();
-  // const products = ref([])
+
   let { invoiceList } = apiPayment();
 
   const products = await invoiceList(auth.user.user.id)
