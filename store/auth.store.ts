@@ -16,17 +16,12 @@ export const authStore = defineStore('authStore', () => {
       "password": password
     }
 
-   
-    
-
-    let { data } = await baseFetch(URL+"/api/v1/user/login/",{
+    let { data } = await authBaseFetch(URL+"/api/v1/user/login/",{
        // 'cors' by default
       method : "POST",
       body: JSON.stringify(payload),
       headers: {
         'Content-Type': 'application/json',
-        
-        
       }
     })
     
@@ -36,7 +31,6 @@ export const authStore = defineStore('authStore', () => {
     }
     
      
-    
     return data
     
 
@@ -48,7 +42,7 @@ export const authStore = defineStore('authStore', () => {
   }
 
   async function refreshToken(){
-    const {data} = await baseFetch(URL+"/api/v1/user/refresh/",{
+    const {data} = await authBaseFetch(URL+"/api/v1/user/refresh/",{
       method: "POST",
       body: JSON.stringify({
         "refresh": refreshtoken.value
@@ -61,7 +55,7 @@ export const authStore = defineStore('authStore', () => {
   }
 
   async function addressUser(){
-    const {data ,error} = await baseFetch(URL+"/api/v1/user/address/",{
+    const {data ,error} = await authBaseFetch(URL+"/api/v1/user/address/",{
       method: "GET",
     })
     
@@ -74,7 +68,7 @@ export const authStore = defineStore('authStore', () => {
     
     if(error.value?.statusCode == 401){
       await refreshToken()
-      const {data ,error} = await baseFetch(URL+"/api/v1/user/address/",{
+      const {data ,error} = await authBaseFetch(URL+"/api/v1/user/address/",{
         method: "GET",
       })
      
@@ -85,11 +79,6 @@ export const authStore = defineStore('authStore', () => {
       }
       
     }
-
-
-
-      
-   
     return []
   
   }
@@ -97,14 +86,13 @@ export const authStore = defineStore('authStore', () => {
   
  
   async function authorize(){
-    const {data} = await baseFetch(URL+"/api/v1/user/",{
+    const {data} = await authBaseFetch(URL+"/api/v1/user/",{
       method: "GET",
     })
 
     if(data){
       user.value = data.value
       await addressUser()
-
       return true
     }
 
@@ -115,7 +103,7 @@ export const authStore = defineStore('authStore', () => {
 
   async function updateProfile(fullname:string,email:string,phone:string,gender:string,password:string){
 
-     const response = await baseFetch(URL+"/api/v1/user/update/",{
+     const response = await authBaseFetch(URL+"/api/v1/user/update/",{
       method: "PUT",
       body: JSON.stringify({
         "gender": gender,
@@ -123,20 +111,16 @@ export const authStore = defineStore('authStore', () => {
         "email": email,
         "phone": phone,
         "password": password
-
       }),
         
      })
-
      await authorize()
-     
-     
      return response
 
   }
 
   async function deleteAddress(id:number){
-    await baseFetch(URL+"/api/v1/user/address/",{
+    await authBaseFetch(URL+"/api/v1/user/address/",{
       method: "DELETE",
       body: JSON.stringify({
         "address_id": id
@@ -147,7 +131,7 @@ export const authStore = defineStore('authStore', () => {
   }
 
 async function createAddress(fullname:string,phone:string,detail_address:string,country:string,province:string,zip_code:string ){
-      const {data} = await baseFetch(URL+"/api/v1/user/address/",{
+      const {data} = await authBaseFetch(URL+"/api/v1/user/address/",{
         method: "POST",
         body: JSON.stringify({
           "fullname": fullname,
@@ -166,14 +150,10 @@ async function createAddress(fullname:string,phone:string,detail_address:string,
 }
 
 async function getAddressById(id:string){
-  const {data} = await baseFetch(URL+"/api/v1/user/address/"+id,{
+  const {data} = await authBaseFetch(URL+"/api/v1/user/address/"+id,{
     method: "GET",
   })
-
   console.log(data)
-
-
-
   return data.value.address
 
 
@@ -181,7 +161,7 @@ async function getAddressById(id:string){
 }
 
 async function updateAddress(id:string,fullname:string,phone:string,detail_address:string,country:string,province:string,zip_code:string ){
-  const {data} = await baseFetch(URL+"/api/v1/user/address/",{
+  const {data} = await authBaseFetch(URL+"/api/v1/user/address/",{
     method: "PUT",
     body: JSON.stringify({
       "address_id": id,
@@ -203,7 +183,7 @@ async function updateAddress(id:string,fullname:string,phone:string,detail_addre
 }
 
 async function register(username:string,fullname:string,phone:string,gender:string,email:string,password:string){
-  const {data} = await baseFetch(URL+"/api/v1/user/register/",{
+  const {data} = await authBaseFetch(URL+"/api/v1/user/register/",{
     method: "POST",
     body: JSON.stringify({
       "username": username,
@@ -224,7 +204,7 @@ async function register(username:string,fullname:string,phone:string,gender:stri
 }
 
 async function resendEmail(email:string){
-  const {data} = await baseFetch(URL+"/api/v1/user/re-verify/",{
+  const {data} = await authBaseFetch(URL+"/api/v1/user/re-verify/",{
     method: "POST",
     body: JSON.stringify({
       "email": email,
@@ -236,7 +216,7 @@ async function resendEmail(email:string){
 }
 
 async function deleteAccount() {
-  const {data} = await baseFetch(URL+"/api/v1/user/delete/",{
+  const {data} = await authBaseFetch(URL+"/api/v1/user/delete/",{
     method: "DELETE",
   })
   if(data){
@@ -244,6 +224,17 @@ async function deleteAccount() {
   }
 }
 
+  async function verifyEmail(uid:string,token:string){
+    console.log(uid,token)
+    console.log(URL+"/api/v1/user/verify/" + uid + '/' + token + '/')
+    const {data:message} = await authBaseFetch(URL+"/api/v1/user/verify/" + uid + '/' + token + '/',{
+      method: "GET"
+    })
+    if(message.value !== null){
+      console.log(message.value)
+      navigateTo("/auth/login")
+    }
+  }
 
   function getUser(){
     return user.value
@@ -269,11 +260,12 @@ async function deleteAccount() {
   }
 
 
-  return { register, login ,isLogin, authorize, getUser, logout ,resendEmail, deleteAccount ,
-    getAccessToken , refreshToken,accesstoken,user,refreshtoken
+  return { register, login ,isLogin, authorize, getUser, logout ,resendEmail, deleteAccount , verifyEmail ,
+    getAccessToken , refreshToken,accesstoken,user,refreshtoken 
     ,getRole,getAddress,addressUser,address ,
     updateProfile,deleteAddress,createAddress
-    ,getAddressById,updateAddress}
+    ,getAddressById,updateAddress
+  }
 
 
 },{
