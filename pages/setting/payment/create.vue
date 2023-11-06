@@ -169,7 +169,16 @@
     async function submit() {
         if(name.value != "" && number.value != "" && expiration_month.value != "" && expiration_year.value != "" && city.value != "" && postal.value != "" && security.value != ""){
             await addCredit(name.value,number.value,expiration_month.value,expiration_year.value,city.value,postal.value,security.value,auth.user.user.customer_omise_id);
-        }
+            Swal.fire({
+            confirmButtonText: 'OK',
+            icon : `success`,
+            title : "success"
+        }).then((result) => {
+            if(result.isConfirmed){
+                navigateTo("/setting/payment/creditCard")
+            }
+        })
+          }
         else{
             Swal.fire({
             confirmButtonText: 'OK',
@@ -179,6 +188,6 @@
         }
     }
     function back(){
-        navigateTo("/setting")
+        navigateTo("/setting/payment/creditCard")
     }
 </script>
