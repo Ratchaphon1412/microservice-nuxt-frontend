@@ -235,9 +235,6 @@ async function deleteAccount() {
     }
   }
 
-  async function addCard(){
-
-  }
 
   function getUser(){
     return user.value
