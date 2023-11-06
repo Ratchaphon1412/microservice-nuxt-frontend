@@ -109,7 +109,6 @@
               <div class="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8 lg:pt-6">
                   <h3 class="sr-only">Description</h3>
                   <p class="text-2xl text-black">Description</p>
-                  <p class="text-xl text-gray-900">{{ product.description }}</p>
                   <div class="mx-auto w-full rounded-2xl bg-white p-2">
                       <Disclosure v-slot="{ open }">
                         
@@ -150,7 +149,7 @@
       <section id="Category Related" class="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8 gap-10 justify-center items-center">
         <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-3xl">Related Product</h1>
         <!-- card1 -->
-        <div class="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16">
+        <div class="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 gap-5 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16">
           <SectionsCard v-for="list in products" 
           :id="list.id" 
           :name="list.name" 
