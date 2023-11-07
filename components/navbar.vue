@@ -30,23 +30,24 @@
         <i class="bi bi-box-arrow-in-right"></i>
           Login
         </NuxtLink>
-        <div v-if="auth.isLogin()" class="flex">
-            <NuxtLink v-show="auth.getRole() !== 'admin'"
-            to="/cart"
-            type="button"
-            class="text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none py-2 px-4 focus:ring-blue-300 font-medium rounded-lg text-center mr-5 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 space-x-2"
-          >
-            <i class="bi bi-bag"></i>
-            <span class="text-center"> Cart </span>
-          </NuxtLink>
-          <NuxtLink v-show="auth.getRole() === 'admin'"
+        <div class="flex">
+          <div v-if="auth.isLogin()" class="flex">
+              <NuxtLink v-show="auth.getRole() !== 'admin'"
+              to="/cart"
+              type="button"
+              class="text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none py-2 px-4 focus:ring-blue-300 font-medium rounded-lg text-center mr-5 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 space-x-2"
+            >
+              <i class="bi bi-bag"></i>
+              <span class="text-center"> Cart </span>
+            </NuxtLink>
+            <NuxtLink v-show="auth.getRole() === 'admin'"
             to="/dashboard"
             class="bg-transparent hover:bg-gray-700 text-gray font-semibold hover:text-white py-2 px-4 border border-gray-700 hover:border-transparent rounded"
           >
             <i class="bi bi-person"></i>
             dashboard
           </NuxtLink>
-        
+          </div>
         </div>
         <NuxtLink v-if="isLogin()" @click="whenLogout()"
           to="/"
