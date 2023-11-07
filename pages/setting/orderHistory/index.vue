@@ -70,9 +70,10 @@
   import { apiPayment } from '~/store/payment.store';
   import { authStore } from '~/store/auth.store';
   import Swal from 'sweetalert2'
-  const auth = authStore();
 
+  const auth = authStore();
   let { invoiceList } = apiPayment();
+  
 
   const products = await invoiceList(auth.user.user.id)
   console.log(products.payment)

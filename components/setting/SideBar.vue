@@ -5,8 +5,24 @@
             <SettingSideBarLink to="/setting"> Profile</SettingSideBarLink>
             <SettingSideBarLink to="/setting/editProfile"> Edit Profile</SettingSideBarLink>
             <SettingSideBarLink to="/setting/address"> Address</SettingSideBarLink>
-            <SettingSideBarLink to="/setting/orderHistory"> Orders History</SettingSideBarLink>
-            <SettingSideBarLink to="/setting/payment/creditCard"> My Payment</SettingSideBarLink>
+            <div v-if="auth.isLogin()">
+                <div v-show="auth.getRole() != 'admin'" class="flex flex-col gap-2 p-2 border-r-4">
+                    <SettingSideBarLink to="/setting/orderHistory"> Orders History</SettingSideBarLink>
+                    <SettingSideBarLink to="/setting/payment/creditCard"> My Payment</SettingSideBarLink>
+                </div>
+            </div>
         </div>
     </nav>
 </template>
+
+<script setup lang="ts">
+    import { authStore } from '~/store/auth.store';
+
+    const auth = authStore();
+
+
+
+
+
+
+</script>

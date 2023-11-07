@@ -24,7 +24,7 @@
                         <a href="#" class="text-center dataTable-sorter mx-10">Code</a>
                       </th>
                       <th class="text-center hidden lg:table-cell" data-sortable="" >
-                          <a href="#" class="text-center dataTable-sorter mx-10">repair</a>
+                          <a href="#" class="text-center dataTable-sorter mx-10">Update</a>
                       </th>
                   </tr>
                 </thead>

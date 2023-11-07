@@ -106,7 +106,7 @@
                 <button
                   @click.prevent="submit"
                   class="btn btn-outline btn-accent w-full">
-                  Accent
+                  Accept
                 </button>
               </div>
             </div>
