@@ -21,8 +21,6 @@
       <!-- Image gallery -->
       <div></div>
       <div></div>
-      
-      
       <aside class="col-span-1 h-[900px] lg:w-32">
         <div class="lg:flex lg:items-start overflow-y-scroll h-4/6">
           <div class="mt-2 w-full lg:order-1 lg:w-32 lg:flex-shrink-0">
@@ -36,8 +34,6 @@
           </div>
         </div>
       </aside>
-          
-          
           <div class="col-span-4 ">
             <img :src="previewImage" class="rounded-lg object-none object-center w-[650px] h-[650px]" alt="Preview Image">
           </div>
