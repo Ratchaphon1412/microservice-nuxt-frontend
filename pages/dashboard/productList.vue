@@ -136,7 +136,6 @@
                                 </nuxt-link>
                               </td>
                             </tr>
-                            
                               </tbody>
                         </table></div>
                         </div>
