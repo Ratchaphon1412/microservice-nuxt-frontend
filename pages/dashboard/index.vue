@@ -74,9 +74,6 @@ let balance = info.value.balance / 100
             </div>
             <h2 class="self-center text-3xl">421</h2>
           </div>
-          <div class="px-6 pb-6">
-            <a class="hover:text-indigo-500 text-sm" href="#">View more...</a>
-          </div>
         </div>
       </div>
       <div class="flex-shrink max-w-full px-4 w-full sm:w-1/2 lg:w-1/4 mb-6">
@@ -389,20 +386,6 @@ let balance = info.value.balance / 100
                 >
               </div>
             </div>
-          </div>
-          <div class="relative mx-auto text-center w-full sm:w-2/3 lg:w-full">
-            <canvas
-              class="max-w-100"
-              id="DoughnutChart"
-              style="
-                display: block;
-                box-sizing: border-box;
-                height: 378px;
-                width: 378.5px;
-              "
-              width="757"
-              height="756"
-            ></canvas>
           </div>
         </div>
       </div>

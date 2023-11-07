@@ -238,7 +238,7 @@
                                </div>
                            </div>
                             <div class="col-span-6 sm:col-span-2">
-                               <button type="submit" @click.prevent="confirmDelete()" class="btn btn-outline btn-error w-full">Delete</button>
+                               <button type="submit" @click.prevent="back()" class="btn btn-outline btn-error w-full">Back</button>
                            </div>
 
                            <div class="col-span-6 sm:col-span-2"></div>
@@ -424,6 +424,10 @@ function confirmUpdate() {
     }
   })
 }
+function back(){
+    navigateTo("/dashboard/productList")
+}
+
 async function onSubmit() {
     const productFormData = new FormData()
     productFormData.append("name", formData.name)

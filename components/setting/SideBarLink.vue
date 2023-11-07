@@ -4,7 +4,7 @@
     <slot />
     </NuxtLink>
 </template>
-<script setup land ="ts">
+<script setup land="ts">
     const props = defineProps([
         'to'
     ])

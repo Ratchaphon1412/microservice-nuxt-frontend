@@ -114,6 +114,6 @@ console.log(getUser())
 
 function whenLogout() {
   auth.logout();
-  window.location.reload();
+  navigateTo('/');
 }
 </script>

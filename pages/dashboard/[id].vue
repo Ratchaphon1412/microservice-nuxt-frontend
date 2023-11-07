@@ -11,14 +11,14 @@
                 <option value="process">process</option>
                 <option value="done">done</option>
             </select>
-            <button type="submit" class="border rounded-lg bg-black text-white">save the status</button>
+            <button type="submit" class="border rounded-lg bg-black text-white">save the Status</button>
           </form>
         
     
           <form class="flex flex-col" @submit.prevent="changeCode">
               <label>Code</label>
               <input type="text" v-model="code">
-              <button type="submit" class="border rounded-lg bg-black text-white">save the code </button>
+              <button type="submit" class="border rounded-lg bg-black text-white">save the Postcode </button>
           </form>
           
       </div>
