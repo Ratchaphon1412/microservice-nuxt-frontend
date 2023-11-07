@@ -383,6 +383,7 @@ function removeImage(event:Event ,index: number) {
     // Remove the image at the specified index from the imageList array
     event.preventDefault();
     imageList.value.splice(index, 1);
+    console.log(imageList.value)
 }
 
 const messageError = ref([])
@@ -406,6 +407,7 @@ async function onSubmit() {
     }
     for (let i = 0; i < all_image.value.length; i++) {
         productFormData.append('image_list[]', all_image.value[i]);
+        console.log(productFormData)
     }
     console.log(all_image.value)
 
