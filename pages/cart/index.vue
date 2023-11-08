@@ -11,11 +11,11 @@
     
             <div class="rounded-lg md:w-full p-5 bg-[#DBE2EF]">
                 <!-- Select All -->
-                <div class="flex items-center m-5">
+                <!-- <div class="flex items-center m-5">
                     <input class="w-7 h-7 mr-5 rounded-lg border-2 border-[#112D4E] "
                         type="checkbox" v-model="selectAll" @change="selectAllItems"/>
                     <label for="selectAll" class="text-xl font-bold text-[#112D4E]">Select All</label>
-                </div>
+                </div> -->
                 <!-- <div class="flex items-center m-5">
                     <input class="w-7 h-7 mr-5 rounded-lg border-2 border-[#112D4E] "
                         type="checkbox" v-model="selectAll" @change="selectAllItems"/>

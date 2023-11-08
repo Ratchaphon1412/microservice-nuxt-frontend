@@ -153,6 +153,36 @@
                         </div>
                     </div>
                 </details>
+                <div v-if="CheckCard" class="my-5">
+                    <div class="col-span-3 w-5/6 h-3/4 m-auto bg-red-100 rounded-xl relative text-white shadow-2xl transition-transform transform hover:scale-110">
+                        <ul>
+                            <li>
+                                <img class="relative object-cover w-full h-full rounded-xl" src="https://i.imgur.com/Zi6v09P.png">
+                                <div class="w-full px-8 absolute top-8">
+                                    <div class="flex justify-between">
+                                        <div class="">
+                                            <p class="font-light">
+                                                Name
+                                            </p>
+                                            <p name="name" id="name" class="font-medium tracking-widest">
+                                                {{ selected.name }}
+                                            </p>
+                                        </div>
+                                        <img class="w-14 h-14" src="https://i.imgur.com/bbPHJVe.png"/>
+                                    </div>
+                                    <div class="pt-1">
+                                        <p class="font-light">
+                                            Card Number
+                                        </p>
+                                        <p class="font-medium tracking-more-wider">
+                                            {{ selected.id }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>    
+                    </div>  
+                </div>
     
                 <div class="rounded-lg mt-5 bg-white p-6 mb-5 shadow-md">
                     <div class="flex items-center">
@@ -168,15 +198,12 @@
                         <p class="text-red-500">Please enter your address.</p>
                     </div>
                     <div v-else>
-                        <select @click="selectAddress(addr)" v-model="address" v-for="addr in user_address" name="" id="">
-                            <option :value="addr.detail_address">
+                        <select v-model="address">
+                            <option :value="addr.detail_address" v-for="addr in user_address" selected>
                                 {{ addr.detail_address }} {{ addr.country }}
                             </option>
                         </select>
                     </div>
-                    <p class="" v-if="address != ''">
-                        {{ address.detail_address }}, {{ address.province }}, {{ address.country }}, {{ address.zip_code }}
-                    </p>
                 </div>
                 <div class="p-6">
                     <div class="mb-2 flex justify-between">
@@ -220,7 +247,8 @@
     const address = ref("");
     const user_address = ref(auth.address.address);
     console.log(user_address.value)
-    let selected = "";
+    let CheckCard = ref(false);
+    let selected = ref({});
 
     async function buy(){
         if (carts.length === 0) {
@@ -247,7 +275,7 @@
                             title : "success"
                         }).then((result) => {
                             if(result.isConfirmed){
-                                navigateTo('/')  
+                                navigateTo('/setting/orderHistory')  
                             }
                         })
                         clear();
@@ -284,13 +312,9 @@
         })
     }
 
-    function selectAddress(selectedAddress:any) {
-        address.value = selectedAddress
-        console.log(address.value)
-    }
-
     function selectCard(selectedCard:any) {
-        selected = selectedCard
+        selected.value = selectedCard
+        CheckCard.value = true;
         console.log(selected)
     }
 

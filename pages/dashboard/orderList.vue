@@ -34,9 +34,9 @@
                     <td class="text-center hidden lg:table-cell">
                       {{ payment.amount }}
                     </td>
-                    <td class="text-center hidden lg:table-cell">
+                    <td class="text-center hidden lg:table-cell hover:underline hover:underline-offset-1">
                       <a :href="payment.pdf" target="_blank">
-                        Link
+                        click to view recipet
                       </a>
                     </td>
                     <td class="text-center hidden lg:table-cell">

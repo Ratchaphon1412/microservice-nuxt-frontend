@@ -43,10 +43,12 @@
                     <div class="w-full mb-6 overflow-x-auto ">
                       <form action="">
                        
-                          <div class="dataTable-top flex flex-row justify-between m-5 "><div class="dataTable-dropdown ">
+                          <div class="dataTable-top flex flex-row justify-between m-5 ">
+                            <!-- <div class="dataTable-dropdown ">
                             
-                          </div><div class="dataTable-search">
-                            <input class="dataTable-input rounded bg-gray-100 border border-gray-200 overflow-x-auto" placeholder="Search..." type="text"></div>
+                          </div> -->
+                          <!-- <div class="dataTable-search">
+                            <input class="dataTable-input rounded bg-gray-100 border border-gray-200 overflow-x-auto" placeholder="Search..." type="text"></div> -->
                           </div>
                       
                         <div class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns rounded ">

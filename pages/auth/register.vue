@@ -188,12 +188,12 @@ watch(
               <label for="underline_select" class="sr-only"
                 >Underline select</label
               >
+              <p class="mb-3 text-gray-500">gender</p>
               <select
                 id="underline_select"
                 v-model="gender"
                 class="block w-full text-sm text-gray-500 bg-transparent rounded-lg border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-gray-200 bg-gray-200 peer"
               >
-                <option selected class="hidden">Gender</option>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
               </select>
