@@ -114,3 +114,12 @@ npm run dev
 - add the credit card
 - delete the credit card
 - purchase product by credit card
+
+## Account Tests
+
+To run tests, run the following command
+
+| account                  | password | role  |
+|--------------------------|-------|-------|
+| Ratchaphon.h111@gmail.com | Nueng111 | admin |
+| wongkum55@gmail.com       | password | user  |
