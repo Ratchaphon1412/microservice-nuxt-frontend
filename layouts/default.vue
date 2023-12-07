@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <main class="bg-white">
     <navbar />
     <slot />
     <footer />

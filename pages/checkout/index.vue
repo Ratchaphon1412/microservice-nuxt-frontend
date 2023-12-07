@@ -1,65 +1,107 @@
 <template>
-    <div class="pb-20">
-        <div class="mx-auto max-w-7xl justify-center px-6 md:space-x-6 xl:px-0">
-            <!-- title page -->
-            <div class="flex items-center p-5">
-                <svg class="w-6 h-6 text-gray-800 dark:text-white mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 19 20">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 15a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm0 0h8m-8 0-1-4m9 4a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm1-4H5m0 0L3 4m0 0h5.501M3 4l-.792-3H1m11 3h6m-3 3V1"/>
-                </svg>
-                <h1 class="text-2xl text-[#112D4E] font-bold">Checkout</h1>
-            </div>
-            <div class="sm:flex">
-                <ul class="h-screen rounded-lg md:w-2/3 p-5 bg-[#DBE2EF] sm:mr-5 overflow-auto">
-                    <!--Order Item-->
-                    <li class="w-full sm:h-52 items-center justify-between mb-6 rounded-lg bg-white p-6 shadow-md sm:flex"
-                        v-if="carts!=null" v-for="item in carts" :key="item.id">
-                        <div class="flex justify-center items-center m-5">
-                            <!-- <input class="w-7 h-7 mr-5 rounded-lg border-2 border-[#112D4E] "
+  <div class="pb-20">
+    <div class="mx-auto max-w-7xl justify-center px-6 md:space-x-6 xl:px-0">
+      <!-- title page -->
+      <div class="flex items-center p-5">
+        <svg
+          class="w-6 h-6 text-gray-800 dark:text-white mr-3"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 19 20"
+        >
+          <path
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M6 15a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm0 0h8m-8 0-1-4m9 4a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm1-4H5m0 0L3 4m0 0h5.501M3 4l-.792-3H1m11 3h6m-3 3V1"
+          />
+        </svg>
+        <h1 class="text-2xl text-[#112D4E] font-bold">Checkout</h1>
+      </div>
+      <div class="sm:flex">
+        <ul
+          class="h-screen rounded-lg md:w-2/3 p-5 bg-[#DBE2EF] sm:mr-5 overflow-auto"
+        >
+          <!--Order Item-->
+          <li
+            class="w-full sm:h-52 items-center justify-between mb-6 rounded-lg bg-white p-6 shadow-md sm:flex"
+            v-if="carts != null"
+            v-for="item in carts"
+            :key="item.id"
+          >
+            <div class="flex justify-center items-center m-5">
+              <!-- <input class="w-7 h-7 mr-5 rounded-lg border-2 border-[#112D4E] "
                                 type="checkbox" v-model="item.isOrder" :value="item"/> -->
-                            <img class="w-96 rounded-lg sm:w-40 sm:h-40" :src="item.image" alt="product-image"/>
-                        </div>
-                        <div class="ml-10 mr-5 mt-5 sm:mt-0 sm:w-full">
-                            <div class="flex justify-between">
-                                <h2 class="text-lg font-bold text-[#112D4E] mb-5">{{ item.name }}</h2>
-                                <button @click="removeOrder(item)">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 cursor-pointer duration-150 hover:text-red-500">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                                    </svg>
-                                </button>
-                            </div>
-                            <p class="mb-12">{{ item.description }}</p>
-                            <div class="sm:flex justify-between items-center border-gray-100">
-                                <div class="flex w-2/3 items-center">
-                                    <div class="flex items-center justify-center mr-3 border-2 border-gray-400 p-3 rounded-lg">
-                                        <!-- <Counter :counter="item.counter" @update-counter="updateCounter(item, $event)"></Counter> -->
-                                        <span>{{ item.quantity }} items</span>
-                                    </div>
-                                    <div class="mr-3 border-gray-400 text-[#0074FF] rounded-lg border-2 p-2">
-                                        <img class="h-8 w-8 rounded-full" :style="{ backgroundColor: item.color }" />
-                                    </div>
-                                    <div class="border-gray-400 border-2 rounded-lg p-3">
-                                        size {{ item.size }}
-                                    </div>
-                                    <!-- <select name="" id="" class="mr-3 border-[#DBE2EF] text-[#0074FF] rounded-lg">
+              <img
+                class="w-96 rounded-lg sm:w-40 sm:h-40"
+                :src="item.image"
+                alt="product-image"
+              />
+            </div>
+            <div class="ml-10 mr-5 mt-5 sm:mt-0 sm:w-full">
+              <div class="flex justify-between">
+                <h2 class="text-lg font-bold text-[#112D4E] mb-5">
+                  {{ item.name }}
+                </h2>
+                <button @click="removeOrder(item)">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="h-5 w-5 cursor-pointer duration-150 hover:text-red-500"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                </button>
+              </div>
+              <p class="mb-12">{{ item.description }}</p>
+              <div class="sm:flex justify-between items-center border-gray-100">
+                <div class="flex w-2/3 items-center">
+                  <div
+                    class="flex items-center justify-center mr-3 border-2 border-gray-400 p-3 rounded-lg"
+                  >
+                    <!-- <Counter :counter="item.counter" @update-counter="updateCounter(item, $event)"></Counter> -->
+                    <span>{{ item.quantity }} items</span>
+                  </div>
+                  <div
+                    class="mr-3 border-gray-400 text-[#0074FF] rounded-lg border-2 p-2"
+                  >
+                    <img
+                      class="h-8 w-8 rounded-full"
+                      :style="{ backgroundColor: item.color }"
+                    />
+                  </div>
+                  <div class="border-gray-400 border-2 rounded-lg p-3">
+                    size {{ item.size }}
+                  </div>
+                  <!-- <select name="" id="" class="mr-3 border-[#DBE2EF] text-[#0074FF] rounded-lg">
                                         <option value="" selected disabled>Color</option>
                                     </select>
                                     <select name="" id="" class="border-[#DBE2EF] text-[#0074FF] rounded-lg">
                                         <option value="" selected disabled>Size</option>
                                     </select> -->
-                                    
-                                </div>
-                                <div class="sm:mt-0 mt-5">
-                                    <p class="text-sm text-[#112D4E]">{{ item.price * item.quantity }} Bath</p>
-                                </div>
-                            </div>
-                        </div>
-    
-                    </li>
-                </ul>
-    
-            <!-- Sub total -->
-            <div class="md:w-1/3 h-full">    
-                <!-- <details class="sm:mt-0 mt-5">
+                </div>
+                <div class="sm:mt-0 mt-5">
+                  <p class="text-sm text-[#112D4E]">
+                    {{ item.price * item.quantity }} Bath
+                  </p>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+
+        <!-- Sub total -->
+        <div class="md:w-1/3 h-full">
+          <!-- <details class="sm:mt-0 mt-5">
                     <summary class="p-3 rounded-lg cursor-pointer shadow bg-[#0074FF]">
                         <span class="font-bold text-[#112D4E]">Coupon</span>
                     </summary>
@@ -83,253 +125,324 @@
                     </div>
                 </details> -->
 
-                <details class="sm:mt-0 ">
-                    <summary class="p-3 mt-5 rounded-lg cursor-pointer shadow bg-[#0074FF]">
-                        <span class="font-bold text-[#112D4E]">Your Card</span>
-                    </summary>
-                    <div class="rounded-lg p-3 mt-3">
-                        <hr class="my-4"/>
-                        <div v-for="index in creditList.listCard" >
-                            <div class="flex justify-between items-center p-5 bg-white rounded-lg shadow-md">
-                                <div class="">
-                                    <div @click.prevent="selectCard(index)" v-if="index == selected " class="col-span-3 w-5/6 h-3/4 m-auto bg-red-100 rounded-xl relative text-white shadow-2xl transition-transform transform hover:scale-110">
-                                        <ul>
-                                            <li>
-                                                <img class="relative object-cover w-full h-full rounded-xl" src="https://i.imgur.com/Zi6v09P.png">
-                                                <div class="w-full px-8 absolute top-8">
-                                                    <div class="flex justify-between">
-                                                        <div class="">
-                                                            <p class="font-light">
-                                                                Name
-                                                            </p>
-                                                            <p name="name" id="name" class="font-medium tracking-widest">
-                                                                {{ index.name }}
-                                                            </p>
-                                                        </div>
-                                                        <img class="w-14 h-14" src="https://i.imgur.com/bbPHJVe.png"/>
-                                                    </div>
-                                                    <div class="pt-1">
-                                                        <p class="font-light">
-                                                            Card Number
-                                                        </p>
-                                                        <p class="font-medium tracking-more-wider">
-                                                            {{ index.id }}
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ul>    
-                                    </div>
-                                    <div @click.prevent="selectCard(index)" v-else class="col-span-3 w-5/6 h-3/4 m-auto bg-red-100 rounded-xl relative text-white shadow-2xl transition-transform transform hover:scale-110">
-                                        <ul>
-                                            <li>
-                                                <img class="relative object-cover w-full h-full rounded-xl" src="https://i.imgur.com/Zi6v09P.png">
-                                                <div class="w-full px-8 absolute top-8">
-                                                    <div class="flex justify-between">
-                                                        <div class="">
-                                                            <p class="font-light">
-                                                                Name
-                                                            </p>
-                                                            <p name="name" id="name" class="font-medium tracking-widest">
-                                                                {{ index.name }}
-                                                            </p>
-                                                        </div>
-                                                        <img class="w-14 h-14" src="https://i.imgur.com/bbPHJVe.png"/>
-                                                    </div>
-                                                    <div class="pt-1">
-                                                        <p class="font-light">
-                                                            Card Number
-                                                        </p>
-                                                        <p class="font-medium tracking-more-wider">
-                                                            {{ index.id }}
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ul>    
-                                    </div>
-                                </div>
+          <details class="sm:mt-0">
+            <summary
+              class="p-3 mt-5 rounded-lg cursor-pointer shadow bg-[#0074FF]"
+            >
+              <span class="font-bold text-[#112D4E]">Your Card</span>
+            </summary>
+            <div class="rounded-lg p-3 mt-3">
+              <hr class="my-4" />
+              <div v-for="index in creditList.listCard">
+                <div
+                  class="flex justify-between items-center p-5 bg-white rounded-lg shadow-md"
+                >
+                  <div class="">
+                    <div
+                      @click.prevent="selectCard(index)"
+                      v-if="index == selected"
+                      class="col-span-3 w-5/6 h-3/4 m-auto bg-red-100 rounded-xl relative text-white shadow-2xl transition-transform transform hover:scale-110"
+                    >
+                      <ul>
+                        <li>
+                          <img
+                            class="relative object-cover w-full h-full rounded-xl"
+                            src="https://i.imgur.com/Zi6v09P.png"
+                          />
+                          <div class="w-full px-8 absolute top-8">
+                            <div class="flex justify-between">
+                              <div class="">
+                                <p class="font-light">Name</p>
+                                <p
+                                  name="name"
+                                  id="name"
+                                  class="font-medium tracking-widest"
+                                >
+                                  {{ index.name }}
+                                </p>
+                              </div>
+                              <img
+                                class="w-14 h-14"
+                                src="https://i.imgur.com/bbPHJVe.png"
+                              />
                             </div>
-                        </div>
+                            <div class="pt-1">
+                              <p class="font-light">Card Number</p>
+                              <p class="font-medium tracking-more-wider">
+                                {{ index.id }}
+                              </p>
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
                     </div>
-                </details>
-                <div v-if="CheckCard" class="my-5">
-                    <div class="col-span-3 w-5/6 h-3/4 m-auto bg-red-100 rounded-xl relative text-white shadow-2xl transition-transform transform hover:scale-110">
-                        <ul>
-                            <li>
-                                <img class="relative object-cover w-full h-full rounded-xl" src="https://i.imgur.com/Zi6v09P.png">
-                                <div class="w-full px-8 absolute top-8">
-                                    <div class="flex justify-between">
-                                        <div class="">
-                                            <p class="font-light">
-                                                Name
-                                            </p>
-                                            <p name="name" id="name" class="font-medium tracking-widest">
-                                                {{ selected.name }}
-                                            </p>
-                                        </div>
-                                        <img class="w-14 h-14" src="https://i.imgur.com/bbPHJVe.png"/>
-                                    </div>
-                                    <div class="pt-1">
-                                        <p class="font-light">
-                                            Card Number
-                                        </p>
-                                        <p class="font-medium tracking-more-wider">
-                                            {{ selected.id }}
-                                        </p>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>    
-                    </div>  
+                    <div
+                      @click.prevent="selectCard(index)"
+                      v-else
+                      class="col-span-3 w-5/6 h-3/4 m-auto bg-red-100 rounded-xl relative text-white shadow-2xl transition-transform transform hover:scale-110"
+                    >
+                      <ul>
+                        <li>
+                          <img
+                            class="relative object-cover w-full h-full rounded-xl"
+                            src="https://i.imgur.com/Zi6v09P.png"
+                          />
+                          <div class="w-full px-8 absolute top-8">
+                            <div class="flex justify-between">
+                              <div class="">
+                                <p class="font-light">Name</p>
+                                <p
+                                  name="name"
+                                  id="name"
+                                  class="font-medium tracking-widest"
+                                >
+                                  {{ index.name }}
+                                </p>
+                              </div>
+                              <img
+                                class="w-14 h-14"
+                                src="https://i.imgur.com/bbPHJVe.png"
+                              />
+                            </div>
+                            <div class="pt-1">
+                              <p class="font-light">Card Number</p>
+                              <p class="font-medium tracking-more-wider">
+                                {{ index.id }}
+                              </p>
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
                 </div>
-    
-                <div class="rounded-lg mt-5 bg-white p-6 mb-5 shadow-md">
-                    <div class="flex items-center">
-                        <p class="text-lg text-[#0074FF] font-bold mr-2">Address</p>
-                        <button>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="text-gray-700" fill="currentColor" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/>
-                                <path d="M9.243 19H21v2H3v-4.243l9.9-9.9 4.242 4.244L9.242 19zm5.07-13.556l2.122-2.122a1 1 0 0 1 1.414 0l2.829 2.829a1 1 0 0 1 0 1.414l-2.122 2.121-4.242-4.242z"/>
-                            </svg>
-                        </button>
-                    </div>
-                    <hr class="my-4"/>
-                    <div v-if="user_address.value != null">
-                        <p class="text-red-500">Please enter your address.</p>
-                    </div>
-                    <div v-else>
-                        <select v-model="address">
-                            <option :value="addr.detail_address" v-for="addr in user_address" selected>
-                                {{ addr.detail_address }} {{ addr.country }}
-                            </option>
-                        </select>
-                    </div>
-                </div>
-                <div class="p-6">
-                    <div class="mb-2 flex justify-between">
-                        <p class="text-gray-700">Subtotal</p>
-                        <p class="text-gray-700">{{ amout }} ฿</p>
-                    </div>
-                    <hr class="my-4" />
+              </div>
+            </div>
+          </details>
+          <div v-if="CheckCard" class="my-5">
+            <div
+              class="col-span-3 w-5/6 h-3/4 m-auto bg-red-100 rounded-xl relative text-white shadow-2xl transition-transform transform hover:scale-110"
+            >
+              <ul>
+                <li>
+                  <img
+                    class="relative object-cover w-full h-full rounded-xl"
+                    src="https://i.imgur.com/Zi6v09P.png"
+                  />
+                  <div class="w-full px-8 absolute top-8">
                     <div class="flex justify-between">
-                        <p class="text-lg font-bold">Total</p>
-                        <div class="">
-                        <p class="mb-1 text-lg font-bold">{{ amout }} ฿</p>
-                        </div>
+                      <div class="">
+                        <p class="font-light">Name</p>
+                        <p
+                          name="name"
+                          id="name"
+                          class="font-medium tracking-widest"
+                        >
+                          {{ selected.name }}
+                        </p>
+                      </div>
+                      <img
+                        class="w-14 h-14"
+                        src="https://i.imgur.com/bbPHJVe.png"
+                      />
                     </div>
-                    <button @click="confirmBuy()" type="button" class="mt-6 mr-5 w-full rounded-md bg-[#0075FF] py-1.5 font-medium text-blue-50 hover:bg-blue-600">Check out</button>          
-                </div>
+                    <div class="pt-1">
+                      <p class="font-light">Card Number</p>
+                      <p class="font-medium tracking-more-wider">
+                        {{ selected.id }}
+                      </p>
+                    </div>
+                  </div>
+                </li>
+              </ul>
             </div>
           </div>
+
+          <div class="rounded-lg mt-5 bg-white p-6 mb-5 shadow-md">
+            <div class="flex items-center">
+              <p class="text-lg text-[#0074FF] font-bold mr-2">Address</p>
+              <button>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="text-gray-700"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                  width="24"
+                  height="24"
+                >
+                  <path fill="none" d="M0 0h24v24H0z" />
+                  <path
+                    d="M9.243 19H21v2H3v-4.243l9.9-9.9 4.242 4.244L9.242 19zm5.07-13.556l2.122-2.122a1 1 0 0 1 1.414 0l2.829 2.829a1 1 0 0 1 0 1.414l-2.122 2.121-4.242-4.242z"
+                  />
+                </svg>
+              </button>
+            </div>
+            <hr class="my-4" />
+            <div v-if="user_address.value != null">
+              <p class="text-red-500">Please enter your address.</p>
+            </div>
+            <div v-else>
+              <select v-model="address">
+                <option
+                  :value="addr.detail_address"
+                  v-for="addr in user_address"
+                  selected
+                >
+                  {{ addr.detail_address }} {{ addr.country }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="p-6">
+            <div class="mb-2 flex justify-between">
+              <p class="text-gray-700">Subtotal</p>
+              <p class="text-gray-700">{{ amout }} ฿</p>
+            </div>
+            <hr class="my-4" />
+            <div class="flex justify-between">
+              <p class="text-lg font-bold">Total</p>
+              <div class="">
+                <p class="mb-1 text-lg font-bold">{{ amout }} ฿</p>
+              </div>
+            </div>
+            <button
+              @click="confirmBuy()"
+              type="button"
+              class="mt-6 mr-5 w-full rounded-md bg-[#0075FF] py-1.5 font-medium text-blue-50 hover:bg-blue-600"
+            >
+              Check out
+            </button>
+          </div>
         </div>
+      </div>
     </div>
-    </template>
-    
-    <script setup lang="ts">
-    import { authStore } from '@/store/auth.store'
-    import { apiCheckout } from '@/store/pinia.store'
-    import { apiPayment } from '~/store/payment.store';
-    import Swal from 'sweetalert2'
+  </div>
+</template>
 
-    const auth = authStore();
-    const { carts , remove , payment , clear , reduceStock } = apiCheckout();
-    let { getListCard , purchase } = apiPayment();
+<script setup lang="ts">
+import { authStore } from "@/store/auth.store";
+import { apiCheckout } from "@/store/pinia.store";
+import { apiPayment } from "~/store/payment.store";
+import Swal from "sweetalert2";
 
-    let creditList = await getListCard(auth.user.user.customer_omise_id);
-    console.log(creditList)
-    // console.log(auth.user.user.customer_omise_id)
-    // console.log(amout)
+const auth = authStore();
+const { carts, remove, payment, clear, reduceStock } = apiCheckout();
+let { getListCard, purchase } = apiPayment();
 
-    const amout = payment();
-    const passingAmount = `${amout}00`
-    console.log(amout);
-    console.log(passingAmount);
-    const address = ref("");
-    const user_address = ref(auth.address.address);
-    console.log(user_address.value)
-    let CheckCard = ref(false);
-    let selected = ref({});
+let creditList = await getListCard(auth.user.user.customer_omise_id);
+console.log(creditList);
+// console.log(auth.user.user.customer_omise_id)
+// console.log(amout)
 
-    async function buy(){
-        if (carts.length === 0) {
-            Swal.fire({
-                title: "You don't have any product in cart.",
-                confirmButtonText: 'OK'
-            })
-        } else {
-            if (address.value === "") {
-                Swal.fire({
-                    title: "Please enter your address!",
-                    confirmButtonText: 'OK'
-                })
-            } else {
-                if(auth.user) {
-                    const address_str = address.value.detail_address + ", " + address.value.province + ", " + address.value.country + ", " + address.value.zip_code
-                    let check = await purchase(selected.id,auth.user.user.customer_omise_id,passingAmount);
-                    let check2 = await reduceStock(address_str)
-                    // console.log(check,check2)
-                    if(check != null && check2){
-                        Swal.fire({
-                            confirmButtonText: 'OK',
-                            icon : `success`,
-                            title : "success"
-                        }).then((result) => {
-                            if(result.isConfirmed){
-                                navigateTo('/setting/orderHistory')  
-                            }
-                        })
-                        clear();
-                    }
-                    else{
-                        Swal.fire({
-                            confirmButtonText: 'OK',
-                            icon : `error`,
-                            title : "error"
-                        }).then((result) => {
-                            if(result.isConfirmed){
-                                navigateTo('/')  
-                            }
-                        })
-                    }
-                    
-                }
-            }
-        }
-    }
-    function confirmBuy() {
-        Swal.fire({
-            title: 'Checkout?',
-            icon: 'question',
-            iconHtml: '?',
-            confirmButtonText: 'Buy',
-            cancelButtonText: 'Cancel',
-            showCancelButton: true,
-            showCloseButton: true,
-        }).then((result) => {
+const amout = payment();
+const passingAmount = `${amout}00`;
+console.log(amout);
+console.log(passingAmount);
+const address = ref("");
+const user_address = ref(auth.address.address);
+console.log(user_address.value);
+let CheckCard = ref(false);
+let selected = ref({});
+
+async function buy() {
+  if (carts.length === 0) {
+    Swal.fire({
+      title: "You don't have any product in cart.",
+      confirmButtonText: "OK",
+    });
+  } else {
+    if (address.value === "") {
+      Swal.fire({
+        title: "Please enter your address!",
+        confirmButtonText: "OK",
+      });
+    } else {
+      if (auth.user) {
+        const address_str =
+          address.value.detail_address +
+          ", " +
+          address.value.province +
+          ", " +
+          address.value.country +
+          ", " +
+          address.value.zip_code;
+        let check = await purchase(
+          selected.value.id,
+          auth.user.user.customer_omise_id,
+          passingAmount
+        );
+        let check2 = await reduceStock(address_str);
+        // console.log(check,check2)
+        if (check != null && check2) {
+          Swal.fire({
+            confirmButtonText: "OK",
+            icon: `success`,
+            title: "success",
+          }).then((result) => {
             if (result.isConfirmed) {
-                buy();
+              navigateTo("/setting/orderHistory");
             }
-        })
+          });
+          clear();
+        } else {
+          Swal.fire({
+            confirmButtonText: "OK",
+            icon: `error`,
+            title: "error",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              navigateTo("/");
+            }
+          });
+        }
+      }
     }
+  }
+}
+function confirmBuy() {
+  Swal.fire({
+    title: "Checkout?",
+    icon: "question",
+    iconHtml: "?",
+    confirmButtonText: "Buy",
+    cancelButtonText: "Cancel",
+    showCancelButton: true,
+    showCloseButton: true,
+  }).then((result) => {
+    if (result.isConfirmed) {
+      buy();
+    }
+  });
+}
 
-    function selectCard(selectedCard:any) {
-        selected.value = selectedCard
-        CheckCard.value = true;
-        console.log(selected)
-    }
+function selectCard(selectedCard: any) {
+  selected.value = selectedCard;
+  CheckCard.value = true;
+  console.log(selected);
+}
 
-    function removeOrder(item:any) {
-        remove(item);
-        window.location.reload();
-    }
-    const items = ref([{
-        id:'1', counter: 1, isOrder: false, 
-            color: ['#f6cda8', '#d89d94', '#dd6b6c', '#875d71', '#5b5b5b']
-        }, { id:'2', counter: 1, isOrder: false,
-            color: ['#f6cda8', '#d89d94', '#dd6b6c', '#875d71', '#5b5b5b']
-        }, { id:'3', counter: 1, isOrder: false, 
-            color: ['#f6cda8', '#d89d94', '#dd6b6c', '#875d71', '#5b5b5b'] 
-        },
-    ])
-    
-    </script>
+function removeOrder(item: any) {
+  remove(item);
+  window.location.reload();
+}
+const items = ref([
+  {
+    id: "1",
+    counter: 1,
+    isOrder: false,
+    color: ["#f6cda8", "#d89d94", "#dd6b6c", "#875d71", "#5b5b5b"],
+  },
+  {
+    id: "2",
+    counter: 1,
+    isOrder: false,
+    color: ["#f6cda8", "#d89d94", "#dd6b6c", "#875d71", "#5b5b5b"],
+  },
+  {
+    id: "3",
+    counter: 1,
+    isOrder: false,
+    color: ["#f6cda8", "#d89d94", "#dd6b6c", "#875d71", "#5b5b5b"],
+  },
+]);
+</script>
